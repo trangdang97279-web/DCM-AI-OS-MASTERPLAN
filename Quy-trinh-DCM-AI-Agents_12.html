@@ -12,7 +12,7 @@
     --text:#eaf0fb;--muted:#8d99b3;--faint:#5d6884;
     --blue:#4d9fff;--violet:#a78bfa;--emerald:#34d399;--amber:#fbbf24;--rose:#fb7185;--red:#f4475e;
     --radius:18px;
-    --cols:1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr;
+    --cols:1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr;
     font-family:'Manrope',system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -40,10 +40,10 @@
   .flow-scroll{overflow-x:auto;padding:6px 2px 4px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
   .flow-scroll::-webkit-scrollbar{height:6px}
   .flow-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px}
-  .flow-inner{min-width:1000px}
+  .flow-inner{min-width:1320px}
   .grid{display:grid;grid-template-columns:var(--cols);align-items:stretch}
 
-  .node{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 12px;cursor:pointer;text-align:center;
+  .node{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 14px;cursor:pointer;text-align:center;
     transition:transform .26s cubic-bezier(.2,.7,.3,1),border-color .22s,background .22s,box-shadow .3s;
     position:relative;opacity:0;transform:translateY(14px);animation:rise .5s forwards}
   @keyframes rise{to{opacity:1;transform:translateY(0)}}
@@ -64,8 +64,8 @@
   .rail-head-mid .line{flex:1;height:1px;background:var(--line)}
 
   /* Painpoint boxes — kích thước = workflow phase box, thẳng cột */
-  .ppnode{border-radius:14px;padding:13px 12px;cursor:pointer;text-align:left;border:1px solid var(--line-strong);background:var(--surface);position:relative;
-    transition:transform .26s cubic-bezier(.2,.7,.3,1),border-color .22s,background .22s,box-shadow .3s;opacity:0;transform:translateY(14px);animation:rise .5s forwards;min-height:120px;display:flex;flex-direction:column;gap:7px}
+  .ppnode{border-radius:14px;padding:15px 14px;cursor:pointer;text-align:left;border:1px solid var(--line-strong);background:var(--surface);position:relative;
+    transition:transform .26s cubic-bezier(.2,.7,.3,1),border-color .22s,background .22s,box-shadow .3s;opacity:0;transform:translateY(14px);animation:rise .5s forwards;min-height:140px;display:flex;flex-direction:column;gap:8px}
   .ppnode:hover{transform:translateY(-3px);background:var(--surface-2)}
   .ppnode.active{border-color:rgba(251,113,133,.55);background:linear-gradient(180deg,rgba(251,113,133,.10),rgba(251,113,133,.04));box-shadow:0 14px 38px -16px rgba(251,113,133,.5)}
   .ppnode .pp-head{display:flex;align-items:center;gap:7px;justify-content:space-between}
@@ -85,7 +85,7 @@
   .agent-head .line{flex:1;height:1px;background:var(--line)}
 
   .acell{display:flex;flex-direction:column;gap:7px;justify-content:flex-start}
-  .agent{position:relative;min-height:90px;border-radius:13px;padding:13px 10px 12px;cursor:pointer;text-align:center;
+  .agent{position:relative;min-height:100px;border-radius:13px;padding:15px 12px 14px;cursor:pointer;text-align:center;
     border:1px solid var(--line-strong);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
     transition:transform .24s,border-color .22s,background .22s,box-shadow .3s}
   .agent .aic{font-size:21px;line-height:1}
@@ -235,6 +235,14 @@
   .mp-chip.kb-screen .mp-chip-tag{background:#4d9fff}
   .mp-chip.kb-tvl{background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.40);border-style:dashed}
   .mp-chip.kb-tvl .mp-chip-tag{background:#a78bfa}
+  .mp-chip.kb-tcph{background:rgba(244,71,94,.10);border-color:rgba(244,71,94,.40)}
+  .mp-chip.kb-tcph .mp-chip-tag{background:#f4475e}
+  .mp-chip.kb-industry{background:rgba(99,102,241,.10);border-color:rgba(99,102,241,.40)}
+  .mp-chip.kb-industry .mp-chip-tag{background:#6366f1}
+  .mp-chip.kb-stake{background:rgba(236,72,153,.10);border-color:rgba(236,72,153,.40)}
+  .mp-chip.kb-stake .mp-chip-tag{background:#ec4899}
+  .mp-chip.kb-schema{background:rgba(20,184,166,.10);border-color:rgba(20,184,166,.40)}
+  .mp-chip.kb-schema .mp-chip-tag{background:#14b8a6}
   .mp-foot-note{font-size:11px;color:#bcd8ff;line-height:1.5;padding:7px 11px;background:rgba(255,255,255,.04);border-radius:7px;border-left:2px solid var(--violet);margin-top:2px}
   .mp-foot-note b{color:#d7c9ff}
   .mp-star{font-size:13px;filter:drop-shadow(0 0 5px #ffd86b);margin-right:3px}
@@ -415,7 +423,7 @@ const steps=[
      inp:'DD Memo + data model deal (từ Document Intelligence) + đánh giá FS (từ Financial Data Extraction) + tham số: kỳ hạn · lãi suất · mệnh giá · TSBĐ · đối tượng phân phối',
      out:'Draft term sheet (VI / EN) + đề xuất cấu trúc giao dịch + bảng so sánh 3-5 deal tương tự',
      kv:[['Phụ thuộc','Cần Document Intelligence trước'],['Lộ trình','Tuần 2']]},
-   phase:1,star:false,
+   phase:1,star:true,
    subs:[
      {id:'e4',n:3,name:'Deal Structure',pain:'high',sev:'Cao',
       painTxt:'Định giá TSBĐ và tính LTV chuẩn xác là yếu tố quyết định mức độ bảo đảm của trái phiếu — dễ sai nếu làm thủ công. Định giá chuẩn ảnh hưởng trực tiếp đến cấu trúc bond + coupon premium.',
@@ -516,16 +524,20 @@ const multiPhaseEngines=[
    ],
    utilityBar:{tag:'e3.5', name:'VBPL Monitoring — utility cross-phase (auto-called by e3.1-e3.4/6/7/8 + cross-engine)', cls:'utility'},
    linkSubId:'e3-multi'},
-  {id:'e15',code:'E15',ic:'🗂️',name:'Knowledge Base Foundation',star:false,
-   startCol:1,endCol:14,phaseTag:'Cross-all-phase foundation',color:'mp-deep-violet',layout:'inline',
+  {id:'e15',code:'E15',ic:'🗂️',name:'Knowledge Base Foundation',star:true,
+   startCol:1,endCol:14,phaseTag:'Cross-all-phase foundation · ⭐ chủ lực',color:'mp-deep-violet',layout:'inline',
    chips:[
-     {tag:'e15.1', name:'Pháp luật KB',cls:'kb-legal',desc:'NĐ65/08/153/245 + Luật CK + TCTD + DN + ĐĐ-NƠ-KDBĐS + 4 KB chuyên ngành'},
-     {tag:'e15.2', name:'Template KB',cls:'kb-template',desc:'TnC/PAPH/CBTT/OC/HĐ AMA/BSA/SMA/CA — chuẩn DCM (DRAFT chờ Pháp chế approve v1.0)'},
-     {tag:'e15.3', name:'Deal history KB',cls:'kb-deal',desc:'Deal lịch sử cùng TCPH/nhóm (VVIP1-10 + TCTD-A/B/C canonical) — precedent + giả định + benchmark'},
-     {tag:'e15.4', name:'Sàng lọc KB',cls:'kb-screen',desc:'Blacklist + truy nã + xử phạt UBCKNN + tin xấu + auditor scope (KB_Auditor_UBCKNN)'},
-     {tag:'e15.5', name:'YK-TVL KB',cls:'kb-tvl',desc:'Thư YK-TVL deal lịch sử (VILAF/PTN/LegalMax/YKVN) — PLACEHOLDER chờ PM approval Legal+TVL'}
+     {tag:'e15.1', name:'Pháp luật KB',cls:'kb-legal',desc:'NĐ65/08/153/245 + Luật CK + TCTD + DN + ĐĐ-NƠ-KDBĐS + 4 KB chuyên ngành (CQĐP/NHTM/PP/BĐS) + GP-01 Industry License + KB_Auditor_UBCKNN + compliance_check_matrix + cap_phe_duyet_co_quan_qlnn + cap_phe_duyet_noi_bo_tcph + Index VBPL 73 unique'},
+     {tag:'e15.2', name:'TCPH KB',cls:'kb-tcph',desc:'NEW — Hồ sơ TCPH lịch sử (Điều lệ + ĐKKD + GP NHNN/UBCKNN/BTC + BCTC kiểm toán + ATTC + BCTN + Báo cáo phát hành lịch sử + structured profile per TCPH). Reuse cross-deal cho cùng TCPH + nhóm TCPH'},
+     {tag:'e15.3', name:'Industry KB',cls:'kb-industry',desc:'NEW — Benchmark ngành (TCTD/BĐS/Infra/Manufacturing/Services) + giả định cơ sở per ngành (revenue/cost/CAPEX/timeline) + cty định giá per ngành (Savills/CBRE/JLL/Cushman&Wakefield/PwC/EY/KPMG/Deloitte) + chỉ số sức khoẻ benchmark 6 nhóm'},
+     {tag:'e15.4', name:'Template KB',cls:'kb-template',desc:'TnC/PAPH/CBTT/OC/HĐ AMA/BSA/SMA/CA — chuẩn DCM (DRAFT chờ Pháp chế approve v1.0) + FS model template 3-statement + DCF model template 10-year + sensitivity_analysis_methodology'},
+     {tag:'e15.5', name:'Deal history KB',cls:'kb-deal',desc:'Deal lịch sử cùng TCPH/nhóm (VVIP1-10 + TCTD-A/B/C canonical) + deal_lich_su_TCB/VIN/MAS + comparable_deals_history (cho định giá) + precedent_termsheet_dcm (cho audit termsheet e3.4)'},
+     {tag:'e15.6', name:'Stakeholder KB',cls:'kb-stake',desc:'NEW từ E6 — Danh mục stakeholders deal (TCPH/BBĐ/CRA/TVL/TCBS-A.Ops/Pháp chế/Auditor) + thẩm quyền ký từng loại hồ sơ + dieu_le_thresholds (ngưỡng giá trị ĐHĐCĐ/HĐQT/BGĐ) + role matrix'},
+     {tag:'e15.7', name:'Workflow & Schema KB',cls:'kb-schema',desc:'NEW từ E1 — K1 115 mã canonical + K2 117 doc IO + K3 Folder Schema 9 nhóm + K4 Pattern→Required_folders mapping + DMS Schema W1-W9/X1-X4 + Data Model 6 nhóm A-F + EXT (~105 field) + Deal Pattern Matrix + Naming Convention D062'},
+     {tag:'e15.8', name:'Sàng lọc KB',cls:'kb-screen',desc:'Blacklist + truy nã + xử phạt UBCKNN + tin xấu + auditor scope (KB_Auditor_UBCKNN) — feed E1 Customer Screening + e3.1 doc validity'},
+     {tag:'e15.9', name:'YK-TVL KB',cls:'kb-tvl',desc:'Thư YK-TVL deal lịch sử (VILAF/PTN/LegalMax/YKVN) + gray_area_legal_flags + valuation_red_flags + quality_of_earnings_red_flags — PLACEHOLDER chờ PM approval Legal+TVL'}
    ],
-   note:'<b>MVP1</b>: Claude Project (không tốn token tiền) → <b>V2</b>: KB RAG (vector search + caching) khi scale'}
+   note:'<b>MVP1</b>: Claude Project (không tốn token tiền) → <b>V2</b>: KB RAG (vector search + caching) khi scale. KB foundation feed mọi engine — e15.* mặc định auto-loaded khi engine kích hoạt.'}
 ];
 
 const CODE={s0:'E14',s1:'E1',fs:'E2',e3:'E3',e4:'E4',s2:'E5',e6:'E6',e10:'E10',e11:'E11',s3:'E7',e8:'E8',e9:'E9',s4:'E13',s5:'E16'};
