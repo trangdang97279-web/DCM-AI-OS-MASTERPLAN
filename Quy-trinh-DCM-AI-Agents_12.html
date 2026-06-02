@@ -285,11 +285,11 @@
 
   <div class="legend">
     <div class="lg-group">
-      <span class="gl">Mức độ pain</span>
-      <span class="lg"><span class="sw" style="background:var(--emerald)"></span>Thấp</span>
+      <span class="gl">AI priority (theo painpoint)</span>
+      <span class="lg"><span class="sw" style="background:var(--emerald)"></span>Thấp · chất xám + kinh nghiệm</span>
       <span class="lg"><span class="sw" style="background:var(--amber)"></span>Trung bình</span>
-      <span class="lg"><span class="sw" style="background:var(--rose)"></span>Cao</span>
-      <span class="lg"><span class="sw" style="background:var(--red)"></span>Rất cao</span>
+      <span class="lg"><span class="sw" style="background:var(--rose)"></span>Cao · thủ công lặp lại</span>
+      <span class="lg"><span class="sw" style="background:var(--red)"></span>Rất cao · cần AI nhất</span>
     </div>
     <div class="lg-group">
       <span class="gl">Agent</span>
@@ -301,7 +301,11 @@
     </div>
   </div>
 
-  <p class="hint">Chạm vào stage hoặc Agent · dùng phím <kbd>←</kbd> <kbd>→</kbd> để chuyển điểm chạm khi present</p>
+  <p class="hint" style="margin-top:14px;color:#bcd8ff;font-size:11.5px;line-height:1.55;text-align:left;max-width:900px;padding:10px 14px;border-radius:8px;background:rgba(77,159,255,.06);border-left:3px solid var(--blue)">
+<b style="color:#fff">Rationale ưu tiên AI</b>: Phase priority <b style="color:#fda4b4">cao</b> = nhiều công việc thủ công, lặp đi lặp lại, mất thời gian, dễ sai sót → AI giải phóng team nhiều nhất.
+Phase priority <b style="color:#6ee7b7">thấp</b> = tập trung chất xám + kinh nghiệm + am hiểu chuyên sâu — đây là kỹ năng team cần phát triển sau khi AI hỗ trợ phần thủ công. <b>Value added ở các P thấp lại là cao nhất</b>.
+</p>
+<p class="hint">Chạm vào stage hoặc Agent · dùng phím <kbd>←</kbd> <kbd>→</kbd> để chuyển điểm chạm khi present</p>
 </div>
 
 <script>
@@ -390,7 +394,7 @@ const steps=[
         next:'Cycle build sau khi PM finalize: (a) review Coverage Audit Report → ratify 19 field gap → extend Workflow Sheet 0.4 v2.8.2 → cycle sau full build e2.2; (b) crowdsource KB e2.3 (giả định ngành + deal lịch sử) + e2.4 (knowledge cty định giá) qua deal thực tế; (c) implement scripts/parse_bctc.py + ratios_*.py + compliance_check.py + tests/test_ratios.py. Pending downstream sync: e1.4-tham-dinh Module C TCTD + E5 Deal Structuring + E11 Risk read JSON path đổi (xem MIGRATION.md).'},
       phase:1,star:true,isSub:true},
    ]},
-  {n:3,name:'Deal Structure',pain:'high',sev:'Cao',
+  {n:3,name:'Deal Structure',pain:'low',sev:'Thấp',
    painTxt:'Vừa cấu trúc giao dịch (loại TP · kỳ hạn · lãi suất · thẩm quyền) vừa là điểm chốt "GO": rà soát tuân thủ NĐ65/08/153/155 và đánh giá rủi ro trước khi sang execution.',
    tool:{ic:'📝',name:'Deal Structuring',type:'Claude Skill · Automation',
      desc:'Nhận DD Memo + thông tin deal, đề xuất cấu trúc giao dịch phù hợp và so sánh với 3-5 deal tương tự gần đây.',
@@ -432,7 +436,7 @@ const steps=[
         kv:[['Loại','Skill + Webapp'],['Lộ trình','Tuần 2']]},
       phase:1,star:false,isSub:true}
    ]},
-  {n:5,name:'Execution',pain:'med',sev:'Trung bình',
+  {n:5,name:'Execution',pain:'high',sev:'Cao',
    painTxt:'Soạn và ráp bộ hồ sơ phát hành (hợp đồng đại lý, biên bản, nghị quyết), upload lên cổng thông tin. Nhiều thao tác tay, dễ sai sót định dạng.',
    tool:{ic:'🔧',name:'Doc Assembler',type:'Claude Skill → gộp Webapp · Phase 2',
      desc:'Tự ráp bộ hồ sơ phát hành từ template chuẩn và dữ liệu của deal, kiểm tra tính nhất quán giữa các văn bản.',
@@ -458,7 +462,7 @@ const steps=[
         kv:[['Loại','Claude Skill'],['Lộ trình','Tuần 2']]},
       phase:1,star:false,isSub:true}
    ]},
-  {n:6,name:'Executed',pain:'low',sev:'Thấp',
+  {n:6,name:'Executed',pain:'med',sev:'Trung bình',
    painTxt:'Phát hành trái phiếu chính thức và thực hiện công bố thông tin đúng thời hạn quy định — chủ yếu là tuân thủ deadline.',
    tool:{ic:'📢',name:'Auto Disclosure',type:'Webapp · Phase 2',
      desc:'Tự soạn nội dung công bố thông tin và nhắc lịch các mốc công bố bắt buộc theo quy định.',
