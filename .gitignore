@@ -1,0 +1,11 @@
+# OneDrive temp files
+.DS_Store
+Thumbs.db
+*.tmp
+*.lock
+
+# Backups Agent tạo khi edit
+*.bak_*
+
+# Junk file leftover từ test write (OneDrive permission không cho delete via sandbox)
+.gitignore_test
