@@ -203,7 +203,9 @@
   .mp-header-desc{font-size:11.5px;color:#bcd8ff;line-height:1.5;padding:6px 10px;background:rgba(255,255,255,.04);border-radius:7px;border-left:2px solid var(--violet)}
   .mp-chip-grid{display:grid;grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr;gap:4px;align-items:start;margin-top:4px}
   .mp-phase-col{display:flex;flex-direction:column;gap:6px}
-  .mp-chip{background:rgba(77,159,255,.14);border:1px solid rgba(77,159,255,.4);border-radius:8px;padding:7px 9px;cursor:pointer;display:flex;flex-direction:column;gap:2px;transition:transform .2s,border-color .2s,background .2s}
+  .mp-chip{background:rgba(77,159,255,.14);border:1px solid rgba(77,159,255,.4);border-radius:8px;padding:7px 9px;cursor:pointer;display:flex;flex-direction:column;gap:3px;transition:transform .2s,border-color .2s,background .2s;width:100%;min-width:0;box-sizing:border-box;overflow:hidden}
+  .mp-chip .mp-chip-name{word-break:break-word;overflow-wrap:anywhere;hyphens:auto}
+  .mp-phase-col{min-width:0}
   .mp-chip:hover{transform:translateY(-2px);background:rgba(77,159,255,.22);border-color:rgba(77,159,255,.7)}
   .mp-chip.scaffold{background:rgba(251,191,36,.10);border-color:rgba(251,191,36,.45)}
   .mp-chip.scaffold:hover{background:rgba(251,191,36,.18);border-color:rgba(251,191,36,.7)}
@@ -217,6 +219,25 @@
   .mp-io-note{font-size:10.5px;color:#cdd6e8;line-height:1.55;padding:8px 11px;background:rgba(255,255,255,.03);border-radius:7px;border-top:1px solid var(--line);margin-top:2px}
   .mp-io-note b{color:#fcd34d;font-weight:700}
   .mp-bar.mp-violet{background:linear-gradient(95deg,rgba(167,139,250,.22),rgba(77,159,255,.18));border:1px dashed rgba(167,139,250,.55)}
+  .mp-bar.mp-deep-violet{background:linear-gradient(95deg,rgba(167,139,250,.35),rgba(99,102,241,.20));border:1px solid rgba(167,139,250,.65)}
+  .mp-bar.mp-deep-violet:hover{border-color:rgba(167,139,250,.95);background:linear-gradient(95deg,rgba(167,139,250,.45),rgba(99,102,241,.30));transform:translateY(-2px);box-shadow:0 14px 36px -14px rgba(167,139,250,.6)}
+  .mp-bar.mp-deep-violet .mp-code{background:#d7c9ff;color:#06101f}
+  .mp-bar.mp-deep-violet::after{color:#d7c9ff;border-color:rgba(167,139,250,.55);content:"🗂️ KB foundation"}
+  .mp-chip-inline{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
+  .mp-chip-inline .mp-chip{flex:1 1 0;min-width:140px;max-width:240px}
+  .mp-chip.kb-legal{background:rgba(251,113,133,.10);border-color:rgba(251,113,133,.40)}
+  .mp-chip.kb-legal .mp-chip-tag{background:#fb7185}
+  .mp-chip.kb-template{background:rgba(52,211,153,.10);border-color:rgba(52,211,153,.40)}
+  .mp-chip.kb-template .mp-chip-tag{background:#34d399}
+  .mp-chip.kb-deal{background:rgba(251,191,36,.10);border-color:rgba(251,191,36,.40)}
+  .mp-chip.kb-deal .mp-chip-tag{background:#fbbf24}
+  .mp-chip.kb-screen{background:rgba(77,159,255,.10);border-color:rgba(77,159,255,.40)}
+  .mp-chip.kb-screen .mp-chip-tag{background:#4d9fff}
+  .mp-chip.kb-tvl{background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.40);border-style:dashed}
+  .mp-chip.kb-tvl .mp-chip-tag{background:#a78bfa}
+  .mp-foot-note{font-size:11px;color:#bcd8ff;line-height:1.5;padding:7px 11px;background:rgba(255,255,255,.04);border-radius:7px;border-left:2px solid var(--violet);margin-top:2px}
+  .mp-foot-note b{color:#d7c9ff}
+  .mp-star{font-size:13px;filter:drop-shadow(0 0 5px #ffd86b);margin-right:3px}
   .mp-bar.mp-violet:hover{border-color:rgba(167,139,250,.85);background:linear-gradient(95deg,rgba(167,139,250,.32),rgba(77,159,255,.26));transform:translateY(-2px);box-shadow:0 12px 30px -14px rgba(167,139,250,.5)}
   .mp-bar.mp-violet.active{border-color:rgba(167,139,250,.95);background:linear-gradient(95deg,rgba(167,139,250,.42),rgba(77,159,255,.32));box-shadow:0 14px 38px -14px rgba(167,139,250,.7), inset 0 0 0 1px rgba(167,139,250,.35);transform:translateY(-2px)}
   .mp-bar .mp-code{font-size:11px;font-weight:800;color:#06101f;background:var(--violet);padding:3px 8px;border-radius:5px;letter-spacing:.02em;flex:none}
@@ -251,7 +272,7 @@
   <header>
     <span class="kicker"><span class="dot"></span>DCM · Tư vấn phát hành trái phiếu</span>
     <h1>DCM — <span class="accent">PP origination E2E process × AI OS (16 engines±)</span></h1>
-    <p class="sub">6 phases — main painpoints analysis along DCM's journey. Mỗi agent giữ tên cũ + gắn mã Engine (E1–E16). E15 là nền tri thức xuyên suốt. Chạm vào từng box (Painpoint / Phase / Agent) để xem detail.</p>
+    <p class="sub">6 phases — main painpoints analysis along DCM's journey. Mỗi agent giữ tên cũ + gắn mã Engine (E1–E16). E3 multi-phase Bước 2→6, E15 KB foundation cross-all-phase. ⭐ = engine chủ lực (E1, E2, E3, E4, E6, E7, E8, E9). Chạm vào từng box để xem detail.</p>
   </header>
 
   <div class="rail-head">
@@ -270,14 +291,7 @@
       <div class="grid" id="agents"></div>
       <div class="mp-section" id="mpSection"></div>
       <div class="grid band-up" id="bandup"></div>
-      <div class="foundation">
-        <span class="fic">🗂️</span>
-        <div class="ft">
-          <b><span style="background:#a78bfa;color:#06101f;border-radius:5px;padding:0 6px;font-size:13px;margin-right:7px">E15</span>Knowledge Base — nền tảng tri thức của TẤT CẢ Engine phía trên</b>
-          <p>Pháp luật (NĐ65 · NĐ08 · Luật Chứng khoán 2019) · Template hồ sơ · Deal history · Danh mục sàng lọc. Mọi Agent đều tra cứu / dựa vào lớp nền này (mũi tên ▲). <b style="color:#d7c9ff">MVP1:</b> Claude Project (không tốn token ra tiền) → <b style="color:#d7c9ff">V2:</b> KB RAG (vector search + caching) khi scale.</p>
-        </div>
-        <span class="fbadge">Nền tảng · MVP1 Project → V2 RAG</span>
-      </div>
+
     </div>
   </div>
 
@@ -405,20 +419,20 @@ const steps=[
    subs:[
      {id:'e4',n:3,name:'Deal Structure',pain:'high',sev:'Cao',
       painTxt:'Định giá TSBĐ và tính LTV chuẩn xác là yếu tố quyết định mức độ bảo đảm của trái phiếu — dễ sai nếu làm thủ công. Định giá chuẩn ảnh hưởng trực tiếp đến cấu trúc bond + coupon premium.',
-      tool:{ic:'🏛️',name:'Collateral Intelligence',type:'Claude Skill · Định giá TSBĐ + LTV (chuyển từ Phase 2 → Phase 3 Deal Structuring per paradigm shift PM 02/06/2026)',
+      tool:{ic:'🏛️',name:'Collateral Framework',type:'Claude Skill · Khung TSBĐ + định giá + LTV (Phase 3 Deal Structuring)',
         desc:'Định giá TSBĐ + tính LTV + đọc chứng thư thẩm định giá + cơ chế khung 6 thành phần + đăng ký GDBĐ NRAT. Cycle này simple — cycle sau có thể tách multi-phase (Phase 3 valuation + Phase 4 NRAT đăng ký + Phase 5 collateral topup/topdown monitoring).',
         inp:'Hồ sơ TSBĐ + chứng thư thẩm định giá + thông tin term sheet draft từ E5',
         out:'Định giá TSBĐ + LTV + đánh giá khung 6 thành phần + NRAT registration ready',
         kv:[['Loại','Claude Skill'],['Phase chuyển','Phase 2 → Phase 3 (paradigm shift)'],['Lộ trình','Tuần 2']]},
-      phase:1,star:false,isSub:true},
+      phase:1,star:true,isSub:true},
      {id:'e6',n:3,name:'Deal Structure',pain:'med',sev:'Trung bình',
       painTxt:'Xác định đúng cấp thẩm quyền phê duyệt (HĐQT / BGĐ / ĐHĐCĐ) theo Điều lệ là điều kiện để hồ sơ phát hành hợp lệ.',
-      tool:{ic:'🏷️',name:'Corporate Authority KB',type:'KB / Claude Project',
-        desc:'KB lookup quyền hạn HĐQT / BGĐ / ĐHĐCĐ theo Điều lệ TCPH.',
+      tool:{ic:'🏷️',name:'Stakeholders Management',type:'KB / Claude Project · Quản trị stakeholders + thẩm quyền',
+        desc:'Quản lý + lookup thẩm quyền ĐHĐCĐ/HĐQT/BGĐ theo Điều lệ TCPH + danh mục stakeholders deal (TCPH, BBĐ, CRA, TVL, TCBS-A.Ops, Pháp chế, Auditor) + thẩm quyền ký từng loại hồ sơ.',
         inp:'Câu hỏi về thẩm quyền + Điều lệ TCPH',
         out:'Kết luận quyền hạn HĐQT / BGĐ / ĐHĐCĐ + trích dẫn Điều lệ',
         kv:[['Loại','KB / Project'],['Lộ trình','Tuần 1-2']]},
-      phase:1,star:false,isSub:true},
+      phase:1,star:true,isSub:true},
      {id:'e10',n:3,name:'Deal Structure',pain:'high',sev:'Cao',
       painTxt:'Điểm rủi ro pháp lý cao nhất và là chốt "GO" của deal. Sai một điều kiện theo NĐ65 / NĐ08 / Luật CK 2019 có thể khiến deal bị UBCKNN xử phạt.',
       tool:{ic:'✅',name:'Compliance Validator',type:'Webapp nội bộ · Có audit trail',
@@ -426,7 +440,7 @@ const steps=[
         inp:'Thông tin deal nhập qua form: loại TP · đối tượng PH · mục đích SD vốn · TSBĐ · kỳ hạn · kênh phân phối (kèm DD Memo, term sheet)',
         out:'Bảng checklist Pass / Fail / Cần kiểm tra theo từng điều kiện + trích dẫn điều khoản + ghi chú khắc phục + log audit',
         kv:[['Build','5-7 ngày (webapp)'],['Lộ trình','Tuần 2']]},
-      phase:1,star:true,isSub:true},
+      phase:1,star:false,isSub:true},
      {id:'e11',n:3,name:'Deal Structure',pain:'high',sev:'Cao',
       painTxt:'Đánh giá rủi ro tổng thể (tài chính · thị trường · covenant) và theo dõi liên tục — quyết định điều kiện, cấu trúc và pricing cuối cùng.',
       tool:{ic:'📉',name:'Risk Assessment',type:'Claude Skill + Webapp (monitor)',
@@ -443,7 +457,7 @@ const steps=[
      inp:'Term sheet đã chốt + data model deal + template chuẩn (HĐ đại lý PH · biên bản · nghị quyết · bản CBTT)',
      out:'Bộ hồ sơ phát hành draft đầy đủ + báo cáo kiểm tra tính nhất quán giữa các văn bản',
      kv:[['Lộ trình','Phase 2 (sau 2 tuần)']]},
-   phase:2,star:false,
+   phase:2,star:true,
    subs:[
      {id:'e8',n:5,name:'Execution',pain:'med',sev:'Trung bình',
       painTxt:'Soạn hồ sơ cần dùng đúng phiên bản điều khoản và tuân thủ bộ quy tắc — sai version điều khoản gây rủi ro pháp lý.',
@@ -452,7 +466,7 @@ const steps=[
         inp:'Kho template + điều khoản + bộ quy tắc',
         out:'Điều khoản tái sử dụng đúng version + map Sheet 0.6 Quy tắc 93 rule',
         kv:[['Loại','Skill + Webapp'],['Lộ trình','Phase 2']]},
-      phase:2,star:false,isSub:true},
+      phase:2,star:true,isSub:true},
      {id:'e9',n:5,name:'Execution',pain:'med',sev:'Trung bình',
       painTxt:'Một bộ hồ sơ phát hành có 30+ văn bản; số liệu / định nghĩa / ngày tháng lệch nhau giữa các văn bản là lỗi phổ biến và rủi ro — rà soát ngay khi ráp hồ sơ.',
       tool:{ic:'🔗',name:'Consistency Check',type:'Claude Skill',
@@ -460,7 +474,7 @@ const steps=[
         inp:'30+ docs của deal',
         out:'Báo cáo mâu thuẫn số liệu / định nghĩa / ngày tháng giữa các văn bản',
         kv:[['Loại','Claude Skill'],['Lộ trình','Tuần 2']]},
-      phase:1,star:false,isSub:true}
+      phase:1,star:true,isSub:true}
    ]},
   {n:6,name:'Executed',pain:'med',sev:'Trung bình',
    painTxt:'Phát hành trái phiếu chính thức và thực hiện công bố thông tin đúng thời hạn quy định — chủ yếu là tuân thủ deadline.',
@@ -489,19 +503,29 @@ const handoff=['KH đạt sàng lọc','DD Memo','Hồ sơ đã duyệt','Bộ h
 // Main grid 13 cols: Phase1=col1, Phase2=col3, Phase3=col5, Phase4=col7, Phase5=col9, Phase6=col11
 // Inside box (spanning col 3→12), 9 inner sub-cols: subC1=Phase2, subC3=Phase3, subC5=Phase4, subC7=Phase5, subC9=Phase6
 const multiPhaseEngines=[
-  {id:'e3',code:'E3',ic:'⚖️',name:'Legal Entity Intelligence',
-   startCol:3,endCol:14,phaseTag:'Bước 2 → 6 (multi-phase)',color:'mp-violet',
+  {id:'e3',code:'E3',ic:'⚖️',name:'Legal Entity Intelligence',star:true,
+   startCol:3,endCol:14,phaseTag:'Bước 2 → 6 (multi-phase)',color:'mp-violet',layout:'phase-grid',
    chips:[
      {subCol:1, tag:'e3.1', name:'Hợp lệ hồ sơ',cls:''},
-     {subCol:1, tag:'e3.2', name:'ĐK PH phi-tài chính',cls:''},
-     {subCol:1, tag:'e3.3', name:'ĐK PH tài chính',cls:''},
+     {subCol:1, tag:'e3.2', name:'ĐK phi-TC',cls:''},
+     {subCol:1, tag:'e3.3', name:'ĐK tài chính',cls:''},
      {subCol:3, tag:'e3.4', name:'Audit termsheet',cls:'scaffold'},
-     {subCol:5, tag:'e3.6', name:'Rà dẫn chiếu pháp lý (post-E7)',cls:''},
-     {subCol:5, tag:'e3.7', name:'Rà wording 3 nhánh',cls:''},
-     {subCol:9, tag:'e3.8', name:'State-change trigger (TBD)',cls:'scaffold'}
+     {subCol:5, tag:'e3.6', name:'Rà dẫn chiếu PL',cls:''},
+     {subCol:5, tag:'e3.7', name:'Rà wording',cls:''},
+     {subCol:9, tag:'e3.8', name:'State trigger',cls:'scaffold'}
    ],
    utilityBar:{tag:'e3.5', name:'VBPL Monitoring — utility cross-phase (auto-called by e3.1-e3.4/6/7/8 + cross-engine)', cls:'utility'},
-   linkSubId:'e3-multi'}
+   linkSubId:'e3-multi'},
+  {id:'e15',code:'E15',ic:'🗂️',name:'Knowledge Base Foundation',star:false,
+   startCol:1,endCol:14,phaseTag:'Cross-all-phase foundation',color:'mp-deep-violet',layout:'inline',
+   chips:[
+     {tag:'e15.1', name:'Pháp luật KB',cls:'kb-legal',desc:'NĐ65/08/153/245 + Luật CK + TCTD + DN + ĐĐ-NƠ-KDBĐS + 4 KB chuyên ngành'},
+     {tag:'e15.2', name:'Template KB',cls:'kb-template',desc:'TnC/PAPH/CBTT/OC/HĐ AMA/BSA/SMA/CA — chuẩn DCM (DRAFT chờ Pháp chế approve v1.0)'},
+     {tag:'e15.3', name:'Deal history KB',cls:'kb-deal',desc:'Deal lịch sử cùng TCPH/nhóm (VVIP1-10 + TCTD-A/B/C canonical) — precedent + giả định + benchmark'},
+     {tag:'e15.4', name:'Sàng lọc KB',cls:'kb-screen',desc:'Blacklist + truy nã + xử phạt UBCKNN + tin xấu + auditor scope (KB_Auditor_UBCKNN)'},
+     {tag:'e15.5', name:'YK-TVL KB',cls:'kb-tvl',desc:'Thư YK-TVL deal lịch sử (VILAF/PTN/LegalMax/YKVN) — PLACEHOLDER chờ PM approval Legal+TVL'}
+   ],
+   note:'<b>MVP1</b>: Claude Project (không tốn token tiền) → <b>V2</b>: KB RAG (vector search + caching) khi scale'}
 ];
 
 const CODE={s0:'E14',s1:'E1',fs:'E2',e3:'E3',e4:'E4',s2:'E5',e6:'E6',e10:'E10',e11:'E11',s3:'E7',e8:'E8',e9:'E9',s4:'E13',s5:'E16'};
@@ -640,25 +664,37 @@ if(multiPhaseEngines.length){
     const bar=document.createElement('div');bar.className='mp-bar '+mp.color;
     bar.dataset.mpid=mp.id;
     bar.style.gridColumn=mp.startCol+' / '+mp.endCol;
-    // Build inner content
-    const chipsByCol={};
-    mp.chips.forEach(ch=>{
-      if(!chipsByCol[ch.subCol])chipsByCol[ch.subCol]=[];
-      chipsByCol[ch.subCol].push(ch);
-    });
-    let chipGridHtml='<div class="mp-chip-grid">';
-    [1,3,5,7,9].forEach(col=>{
-      const list=chipsByCol[col]||[];
-      chipGridHtml+=`<div class="mp-phase-col" style="grid-column:${col}">`;
-      list.forEach(ch=>{
-        chipGridHtml+=`<div class="mp-chip ${ch.cls}"><span class="mp-chip-tag">${ch.tag}</span><span class="mp-chip-name">${ch.name}</span></div>`;
+    // Build chips HTML based on layout type
+    let chipGridHtml='';
+    if(mp.layout==='inline'){
+      // Inline flex layout — chips spread horizontally
+      chipGridHtml='<div class="mp-chip-inline">'+mp.chips.map(ch=>
+        `<div class="mp-chip ${ch.cls}" title="${ch.desc||''}"><span class="mp-chip-tag">${ch.tag}</span><span class="mp-chip-name">${ch.name}</span></div>`
+      ).join('')+'</div>';
+    }else{
+      // Phase-grid layout — chips aligned with phase sub-cols
+      const chipsByCol={};
+      mp.chips.forEach(ch=>{
+        if(!chipsByCol[ch.subCol])chipsByCol[ch.subCol]=[];
+        chipsByCol[ch.subCol].push(ch);
+      });
+      chipGridHtml='<div class="mp-chip-grid">';
+      [1,3,5,7,9].forEach(col=>{
+        const list=chipsByCol[col]||[];
+        chipGridHtml+=`<div class="mp-phase-col" style="grid-column:${col}">`;
+        list.forEach(ch=>{
+          chipGridHtml+=`<div class="mp-chip ${ch.cls}"><span class="mp-chip-tag">${ch.tag}</span><span class="mp-chip-name">${ch.name}</span></div>`;
+        });
+        chipGridHtml+='</div>';
       });
       chipGridHtml+='</div>';
-    });
-    chipGridHtml+='</div>';
+    }
     const utilityHtml=mp.utilityBar?`<div class="mp-utility-bar ${mp.utilityBar.cls}"><span class="mp-chip-tag">${mp.utilityBar.tag}</span><span>${mp.utilityBar.name}</span></div>`:'';
+    const noteHtml=mp.note?`<div class="mp-foot-note">${mp.note}</div>`:'';
+    const starHtml=mp.star?'<span class="mp-star">⭐</span>':'';
     bar.innerHTML=`
       <div class="mp-header">
+        ${starHtml}
         <span class="mp-code">${mp.code}</span>
         <span class="mp-ic">${mp.ic}</span>
         <span class="mp-name">${mp.name}</span>
@@ -666,6 +702,7 @@ if(multiPhaseEngines.length){
       </div>
       ${chipGridHtml}
       ${utilityHtml}
+      ${noteHtml}
     `;
     bar.onclick=(e)=>{if(mp.linkSubId&&!e.target.closest('.mp-chip')){active=mp.linkSubId;render()}};
     track.appendChild(bar);
