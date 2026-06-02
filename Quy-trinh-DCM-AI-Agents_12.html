@@ -464,16 +464,17 @@ const handoff=['KH đạt sàng lọc','DD Memo','Hồ sơ đã duyệt','Bộ h
 const multiPhaseEngines=[
   {id:'e3',code:'E3',ic:'⚖️',name:'Legal Entity Intelligence',
    startCol:3,endCol:14,phaseTag:'Bước 2 → 6 (multi-phase)',color:'mp-violet',
-   headerDesc:'Phase 2 DD: rà soát hợp lý/hợp lệ hồ sơ + điều kiện PH tài chính + phi-tài chính · Phase 3+: audit termsheet + utility VBPL monitoring',
    chips:[
      {subCol:1, tag:'e3.1', name:'Hợp lệ hồ sơ',cls:''},
      {subCol:1, tag:'e3.2', name:'ĐK PH phi-tài chính',cls:''},
      {subCol:1, tag:'e3.3', name:'ĐK PH tài chính',cls:''},
-     {subCol:3, tag:'e3.4', name:'Audit termsheet',cls:'scaffold'}
+     {subCol:3, tag:'e3.4', name:'Audit termsheet',cls:'scaffold'},
+     {subCol:5, tag:'e3.6', name:'Rà dẫn chiếu pháp lý (post-E7)',cls:''},
+     {subCol:5, tag:'e3.7', name:'Rà wording 3 nhánh',cls:''},
+     {subCol:9, tag:'e3.8', name:'State-change trigger (TBD)',cls:'scaffold'}
    ],
-   utilityBar:{tag:'e3.5', name:'VBPL Monitoring — utility cross-phase (auto-called by e3.1-e3.4 + cross-engine)', cls:'utility'},
-   linkSubId:'e3-multi',
-   ioNote:'<b>Phase 2 Input</b>: outputs từ E1 (folder + checklist + Deal Model) + E2 (computed ratios). <b>Phase 2 Output</b>: (a) bổ sung 1 cột "đánh giá hợp lệ + citation" vào checklist E1 (file Excel E1 mở rộng) · (b) 1 sheet eligibility gap analysis (chưa rõ có JSON hay chỉ Excel user rà tay) · (c) 1 sheet audit legal bổ sung vào file Excel output E2'}
+   utilityBar:{tag:'e3.5', name:'VBPL Monitoring — utility cross-phase (auto-called by e3.1-e3.4/6/7/8 + cross-engine)', cls:'utility'},
+   linkSubId:'e3-multi'}
 ];
 
 const CODE={s0:'E14',s1:'E1',fs:'E2',e3:'E3',e4:'E4',s2:'E5',e6:'E6',e10:'E10',e11:'E11',s3:'E7',e8:'E8',e9:'E9',s4:'E13',s5:'E16'};
@@ -520,7 +521,25 @@ units['e3-multi']={_idx:1,name:'Legal Entity Intelligence (E3 multi-phase)',pain
        input:'VBPL ID/citation cần verify hoặc scheduled scan period',
        output:'JSON <deal>_e3.5_verify + 07_Outputs/legal_cache/ (cross-deal: realtime fetch + Layer 2 scan)',
        kb:'tieu-chuan.md (CARRY E3 v0.1 — 51 VBPL taxonomy + Source Priority + Cache layer schema)',
-       note:'<b>AUTO-CALLED</b> by e3.1-e3.4 + cross-engine (E1.x, E5, E7, E9, E10, E11). Anti-fabrication VBPL guard D102.'}
+       note:'<b>AUTO-CALLED</b> by e3.1-e3.4/6/7/8 + cross-engine (E1.x, E5, E7, E9, E10, E11). Anti-fabrication VBPL guard D102.'},
+      {tag:'e3.6-ra-dan-chieu-phap-ly',name:'Rà dẫn chiếu pháp lý post-E7 (Phase 4 Execution)',ic:'🔗',
+       desc:'<b>Phase 4 Execution — NEW</b>. Sau khi E7 gen docs (TnC/PAPH/CBTT/OC/HĐ phụ trợ) → rà từng dẫn chiếu VBPL trong doc → check còn hiệu lực không. Lý do: E7 gen từ template/doc lịch sử → VBPL cite có thể đã bị thay thế/sửa đổi (Out-Of-Date risk). Auto-call e3.5 verify realtime per VBPL ID. Nếu có thay đổi → highlight diff.',
+       input:'Docs từ E7 (TnC/PAPH/CBTT/OC/HĐ AMA/BSA/SMA/CA) + Index VBPL realtime (qua e3.5)',
+       output:'<b>OPEN — PM defer quyết format</b>: Option (a) report file DOCX riêng list VBPL OOD + suggested replacement; Option (b) track-change comment trực tiếp vào từng doc highlight section bị ảnh hưởng',
+       kb:'Index VBPL 73 unique + e3.5 cache layer + KB diff VBPL (lịch sử sửa đổi)',
+       note:'PM defer output format quyết định cycle sau (DOCX report vs track-change inline).'},
+      {tag:'e3.7-ra-wording-3-nhanh',name:'Rà wording compliance 3 nhánh (Phase 4 Execution)',ic:'📐',
+       desc:'<b>Phase 4 Execution — NEW</b>. Rà wording trong docs sau E7 gen, 3 nhánh check: <b>(a) Wording đúng QPL hướng dẫn</b> (vd Luật DN quy định loại hình "CTCP/CTCN/TNHH" — nếu doc điền "NHTMCP" là sai; QPL yêu cầu liệt kê đầy đủ ngành nghề, doc chỉ liệt kê chính là sai). <b>(b) Chặt chẽ pháp lý giữa các điều khoản trong cùng 1 doc</b> (cross-clause consistency, dựa KB YK-TVL sẽ xây). <b>(c) Check comment các bên</b> nếu có (TCPH/TVL/Pháp chế DCM track-change) → đối chiếu QPL làm rationale cho user quyết accept/reject (chỉ vấn đề pháp lý, không phải nghiệp vụ).',
+       input:'Docs từ E7 (đã có comment các bên review) + KB QPL hướng dẫn wording + KB YK-TVL (chờ approval) + KB precedent doc TCBS',
+       output:'<b>Excel/JSON 3 sheet</b>: (1) Sheet "Wording vs QPL" (mismatch list + cite QPL); (2) Sheet "Cross-clause consistency" (mâu thuẫn nội bộ doc); (3) Sheet "Comment review rationale" (per comment: pháp lý analysis + recommendation accept/reject)',
+       kb:'KB QPL wording (Luật DN 76/2025 + Luật CK + Luật TCTD + Luật DDDT...) + KB YK-TVL (chờ approval) + KB precedent doc TCBS',
+       note:'Quan trọng — bridge giữa engine sinh docs (E7) và việc gửi KH/Legal review. Phụ thuộc KB YK-TVL PM xin approval song song.'},
+      {tag:'e3.8-state-change-trigger',name:'State-change trigger (Phase 6 Sau phát hành — TBD)',ic:'🔁',
+       desc:'<b>Phase 6 Sau phát hành — SCAFFOLD chưa define rõ</b>. E3 kích hoạt theo các trường hợp: (a) Thực hiện quyền (call/put/conversion option); (b) Luồng phát sinh thay đổi trạng thái bond (defer payment, restructure); (c) Thay đổi khối lượng tài sản (TSBĐ topup/topdown). Mỗi trigger có check QPL riêng (vd call sớm vốn cấp 2 TCTD cần báo cáo NHNN TT 41/2016 Phụ lục 1 mục 16).',
+       input:'TBD — phụ thuộc loại trigger (call/put exercise notice + redemption schedule + collateral mgmt event)',
+       output:'TBD — defer finetune cycle sau',
+       kb:'TBD — placeholder, mapping trigger × QPL áp dụng',
+       note:'<b>PM defer finetune cycle sau</b>. Tạm thời SCAFFOLD ghi nhận E3 có touchpoint Phase 6, define chi tiết khi có deal lịch sử thực hiện quyền.'}
     ],
     next:'Cycle sau: (a) PM review Coverage Audit Report E2 → extend Workflow Sheet 0.4 → build e2.2 + e3.3 full; (b) PM nhận YK-TVL approval → extend e3.4 full; (c) ratify Decision Log + MasterPlan + downstream MIGRATION (E5/E6/E7/E9/E10/E11 đọc e3.x thay e1.4 + e2.2); (d) PM quyết Sheet Eligibility Gap có JSON hay Excel-only; (e) HTML iterate full multi-phase grid layout cho engine khác (E4 Phase 3, E14/E15/E16 cross-phase).'}};
 
@@ -601,10 +620,8 @@ if(multiPhaseEngines.length){
         <span class="mp-name">${mp.name}</span>
         <span class="mp-phase-tag">${mp.phaseTag}</span>
       </div>
-      ${mp.headerDesc?`<div class="mp-header-desc">${mp.headerDesc}</div>`:''}
       ${chipGridHtml}
       ${utilityHtml}
-      ${mp.ioNote?`<div class="mp-io-note"><b>I/O Phase 2:</b> ${mp.ioNote}</div>`:''}
     `;
     bar.onclick=(e)=>{if(mp.linkSubId&&!e.target.closest('.mp-chip')){active=mp.linkSubId;render()}};
     track.appendChild(bar);
