@@ -17,12 +17,12 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-  body{min-height:100vh;padding:42px 32px 56px;position:relative;
+  body{min-height:100vh;padding:32px 24px 48px;position:relative;
     background:radial-gradient(900px 500px at 78% -8%, rgba(77,159,255,.14), transparent 60%),
       radial-gradient(700px 500px at 8% 12%, rgba(167,139,250,.10), transparent 55%),var(--bg)}
   body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;
     background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);background-size:3px 3px}
-  .wrap{max-width:1280px;margin:0 auto;position:relative}
+  .wrap{max-width:min(1800px, calc(100vw - 48px));margin:0 auto;position:relative}
 
   header{margin-bottom:26px}
   .kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.22em;
@@ -40,7 +40,7 @@
   .flow-scroll{overflow-x:auto;padding:6px 2px 4px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
   .flow-scroll::-webkit-scrollbar{height:6px}
   .flow-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px}
-  .flow-inner{min-width:1320px}
+  .flow-inner{min-width:1700px}
   .grid{display:grid;grid-template-columns:var(--cols);align-items:stretch}
 
   .node{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 14px;cursor:pointer;text-align:center;
@@ -84,13 +84,13 @@
   .agent-head .ttl{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
   .agent-head .line{flex:1;height:1px;background:var(--line)}
 
-  .acell{display:flex;flex-direction:column;gap:7px;justify-content:flex-start}
-  .agent{position:relative;min-height:100px;border-radius:13px;padding:15px 12px 14px;cursor:pointer;text-align:center;
+  .acell{display:flex;flex-direction:column;gap:14px;justify-content:flex-start;min-width:0}
+  .agent{position:relative;min-height:100px;border-radius:13px;padding:15px 12px 14px;cursor:pointer;text-align:center;width:100%;box-sizing:border-box;
     border:1px solid var(--line-strong);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
     transition:transform .24s,border-color .22s,background .22s,box-shadow .3s}
   .agent .aic{font-size:21px;line-height:1}
   .agent .anm{font-weight:700;font-size:12.5px;line-height:1.16;letter-spacing:-.01em}
-  .agent .ast{position:absolute;top:7px;right:8px;font-size:10px;filter:drop-shadow(0 0 5px #ffd86b)}
+  .agent .ast{position:absolute;top:6px;right:7px;font-size:11px;filter:drop-shadow(0 0 5px #ffd86b);z-index:2}
   .ecode{display:inline-block;font-size:9px;font-weight:800;color:#06101f;background:var(--blue);border-radius:5px;padding:0 5px;vertical-align:middle;margin-right:4px}
   .agent.sub .ecode{background:#8ec5ff}
   .ecode-lg{font-size:12px;font-weight:800;color:#06101f;background:var(--blue);border-radius:6px;padding:2px 8px;margin-left:8px;vertical-align:middle}
@@ -98,9 +98,9 @@
   .agent.p1{border-color:rgba(77,159,255,.42);background:rgba(77,159,255,.07)}
   .agent.p1 .anm{color:#cfe2ff}.agent.p1 .pdot{background:var(--blue)}
   .agent.p2{background:var(--surface)}.agent.p2 .anm{color:var(--muted)}.agent.p2 .pdot{background:var(--faint)}
-  .agent.sub{min-height:0;padding:9px 9px;flex-direction:row;gap:7px;border-style:dashed;border-color:rgba(77,159,255,.5);background:rgba(77,159,255,.05)}
+  .agent.sub{min-height:0;padding:9px 26px 9px 12px;flex-direction:row;gap:8px;border-style:dashed;border-color:rgba(77,159,255,.5);background:rgba(77,159,255,.05);width:100%;box-sizing:border-box}
   .agent.sub .aic{font-size:15px}
-  .agent.sub .anm{font-size:10.5px;color:#bcd8ff}
+  .agent.sub .anm{font-size:10.5px;color:#bcd8ff;word-break:break-word;line-height:1.3;flex:1;min-width:0}
   .agent.sub::before{content:"↳";position:absolute;left:-13px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:12px}
   .agent:hover{transform:translateY(-3px)}
   .agent.active{box-shadow:0 14px 34px -16px rgba(77,159,255,.6), inset 0 0 0 1px rgba(77,159,255,.35);border-color:rgba(77,159,255,.7);transform:translateY(-3px)}
@@ -194,14 +194,14 @@
   @media(max-width:760px){.fcard-io{grid-template-columns:1fr}}
 
   /* Multi-phase engine track (paradigm shift PM 02/06/2026) */
-  .mp-section{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+  .mp-section{margin-top:28px;padding-top:20px;border-top:1px dashed var(--line)}
   .mp-section-lbl{display:flex;align-items:center;gap:10px;margin:0 0 12px 0;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
   .mp-section-lbl .line{flex:1;height:1px;background:var(--line)}
-  .mp-track{display:grid;grid-template-columns:var(--cols);align-items:center;margin-bottom:8px}
-  .mp-bar{position:relative;border-radius:13px;padding:14px 18px 14px 18px;cursor:pointer;display:flex;flex-direction:column;gap:11px;transition:transform .24s,border-color .22s,background .22s,box-shadow .3s}
-  .mp-header{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
-  .mp-header-desc{font-size:11.5px;color:#bcd8ff;line-height:1.5;padding:6px 10px;background:rgba(255,255,255,.04);border-radius:7px;border-left:2px solid var(--violet)}
-  .mp-chip-grid{display:grid;grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr;gap:4px;align-items:start;margin-top:4px}
+  .mp-track{display:grid;grid-template-columns:var(--cols);align-items:center;margin-bottom:32px}
+  .mp-bar{position:relative;border-radius:13px;padding:20px 0;cursor:pointer;display:flex;flex-direction:column;gap:14px;transition:transform .24s,border-color .22s,background .22s,box-shadow .3s;overflow:hidden}
+  .mp-header{display:flex;align-items:center;gap:11px;flex-wrap:wrap;padding:0 18px}
+  .mp-header-desc{font-size:11.5px;color:#bcd8ff;line-height:1.5;padding:6px 10px;background:rgba(255,255,255,.04);border-radius:7px;border-left:2px solid var(--violet);margin:0 18px}
+  .mp-chip-grid{display:grid;grid-template-columns:1fr 50px 1fr 50px 1fr 50px 1fr 50px 1fr;gap:0;align-items:start;margin-top:8px}
   .mp-phase-col{display:flex;flex-direction:column;gap:6px}
   .mp-chip{background:rgba(77,159,255,.14);border:1px solid rgba(77,159,255,.4);border-radius:8px;padding:7px 9px;cursor:pointer;display:flex;flex-direction:column;gap:3px;transition:transform .2s,border-color .2s,background .2s;width:100%;min-width:0;box-sizing:border-box;overflow:hidden}
   .mp-chip .mp-chip-name{word-break:break-word;overflow-wrap:anywhere;hyphens:auto}
@@ -212,7 +212,7 @@
   .mp-chip .mp-chip-tag{font-size:9px;font-weight:800;color:#06101f;background:#8ec5ff;border-radius:4px;padding:1px 6px;letter-spacing:.02em;align-self:flex-start}
   .mp-chip.scaffold .mp-chip-tag{background:var(--amber)}
   .mp-chip .mp-chip-name{font-size:10.5px;font-weight:700;color:#eaf0fb;letter-spacing:-.01em;line-height:1.25}
-  .mp-utility-bar{display:flex;align-items:center;gap:9px;background:linear-gradient(95deg,rgba(52,211,153,.16),rgba(167,139,250,.12));border:1px dashed rgba(52,211,153,.45);border-radius:8px;padding:8px 12px;cursor:pointer;transition:all .2s}
+  .mp-utility-bar{display:flex;align-items:center;gap:9px;background:linear-gradient(95deg,rgba(52,211,153,.16),rgba(167,139,250,.12));border:1px dashed rgba(52,211,153,.45);border-radius:8px;padding:8px 12px;cursor:pointer;transition:all .2s;margin:0 18px}
   .mp-utility-bar:hover{border-color:rgba(52,211,153,.7);background:linear-gradient(95deg,rgba(52,211,153,.24),rgba(167,139,250,.18))}
   .mp-utility-bar .mp-chip-tag{background:var(--emerald);font-size:9px;font-weight:800;color:#06101f;border-radius:4px;padding:1px 6px;letter-spacing:.02em}
   .mp-utility-bar span:last-child{font-size:11px;font-weight:600;color:#6ee7b7;letter-spacing:.01em}
@@ -222,9 +222,9 @@
   .mp-bar.mp-deep-violet{background:linear-gradient(95deg,rgba(167,139,250,.35),rgba(99,102,241,.20));border:1px solid rgba(167,139,250,.65)}
   .mp-bar.mp-deep-violet:hover{border-color:rgba(167,139,250,.95);background:linear-gradient(95deg,rgba(167,139,250,.45),rgba(99,102,241,.30));transform:translateY(-2px);box-shadow:0 14px 36px -14px rgba(167,139,250,.6)}
   .mp-bar.mp-deep-violet .mp-code{background:#d7c9ff;color:#06101f}
-  .mp-bar.mp-deep-violet::after{color:#d7c9ff;border-color:rgba(167,139,250,.55);content:"🗂️ KB foundation"}
-  .mp-chip-inline{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
-  .mp-chip-inline .mp-chip{flex:1 1 0;min-width:140px;max-width:240px}
+  .mp-bar.mp-deep-violet::after{display:none}
+  .mp-chip-inline{display:flex;gap:6px;flex-wrap:nowrap;align-items:stretch;padding:0 18px;overflow-x:auto}
+  .mp-chip-inline .mp-chip{flex:1 1 0;min-width:0;max-width:none}
   .mp-chip.kb-legal{background:rgba(251,113,133,.10);border-color:rgba(251,113,133,.40)}
   .mp-chip.kb-legal .mp-chip-tag{background:#fb7185}
   .mp-chip.kb-template{background:rgba(52,211,153,.10);border-color:rgba(52,211,153,.40)}
@@ -243,7 +243,7 @@
   .mp-chip.kb-stake .mp-chip-tag{background:#ec4899}
   .mp-chip.kb-schema{background:rgba(20,184,166,.10);border-color:rgba(20,184,166,.40)}
   .mp-chip.kb-schema .mp-chip-tag{background:#14b8a6}
-  .mp-foot-note{font-size:11px;color:#bcd8ff;line-height:1.5;padding:7px 11px;background:rgba(255,255,255,.04);border-radius:7px;border-left:2px solid var(--violet);margin-top:2px}
+  .mp-foot-note{font-size:11px;color:#bcd8ff;line-height:1.5;padding:7px 11px;background:rgba(255,255,255,.04);border-radius:7px;border-left:2px solid var(--violet);margin:2px 18px 0 18px}
   .mp-foot-note b{color:#d7c9ff}
   .mp-star{font-size:13px;filter:drop-shadow(0 0 5px #ffd86b);margin-right:3px}
   .mp-bar.mp-violet:hover{border-color:rgba(167,139,250,.85);background:linear-gradient(95deg,rgba(167,139,250,.32),rgba(77,159,255,.26));transform:translateY(-2px);box-shadow:0 12px 30px -14px rgba(167,139,250,.5)}
@@ -256,7 +256,7 @@
   .mp-bar .mp-ft{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:#bcd8ff}
   .mp-bar .mp-ft.scaffold{color:#fcd34d;border-color:rgba(251,191,36,.4);background:rgba(251,191,36,.08)}
   .mp-bar .mp-ft.utility{color:#6ee7b7;border-color:rgba(52,211,153,.4);background:rgba(52,211,153,.08)}
-  .mp-bar::after{content:"⇆ multi-phase";position:absolute;top:-9px;right:14px;font-size:9px;font-weight:700;color:#c4b1ff;background:#080c18;padding:0 7px;border-radius:5px;border:1px solid rgba(167,139,250,.4);letter-spacing:.06em}
+  .mp-bar::after{display:none}
   @media(max-width:760px){.mp-bar{flex-direction:column;align-items:flex-start;gap:6px}.mp-bar .mp-features{margin-left:0}}
 
   .legend{display:flex;gap:26px;flex-wrap:wrap;margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
@@ -337,13 +337,13 @@ const SEVTX={low:'#6ee7b7',med:'#fcd34d',high:'#fda4b4',crit:'#ff8a9c'};
 
 const steps=[
   {n:1,name:'Nhu cầu KH',pain:'high',sev:'Cao',
-   painTxt:'Mất thời gian tìm KH + liên hệ kết nối · Cơ hội mis-match khi xác định không đúng nhu cầu / phù hợp deal · Thiếu insights + know-how DCM để priority KH tiềm năng → cơ hội lỡ deal hoặc onboard deal không feasible.',
-   tool:{ic:'🎯',name:'Customer Origination & Screening',type:'Claude Skill · E0 — NA owner · TBD chờ lắp ghép vào luồng DCM AI OS',
-     desc:'<b>E0 = NA owner skill</b> (rename từ E14). NA team build mirror frame từ <b>ECM origination</b> + DCM input insights + know-hows để hoàn thiện. Flow 3-step: <b>longlist</b> (từ RM/đáo hạn/public/exclusion) → <b>shortlist</b> (DCM insights + know-how) → <b>priority + gợi ý Offering</b> (soft screening điều kiện PH high level). Sau khi NA done → lắp ghép vào luồng DCM AI OS làm Phase 1 entry.',
-     inp:'Từ <b>RM</b> (đề xuất KH tiềm năng) + <b>danh sách KH đáo hạn</b> (bond maturity refinance candidates) + <b>thông tin public</b> (CBTT/báo chí/website TCPH) + <b>exclusion criteria</b> (blacklist + truy nã + xử phạt UBCKNN + tin xấu — leverage e15.8 Sàng lọc KB)',
-     out:'<b>Longlist KH</b> (raw từ 4 nguồn input) → <b>Shortlist</b> (lọc qua DCM insights + know-how + Industry KB) → <b>Priority list</b> (soft screening theo điều kiện phát hành high level: capital adequacy + leverage + sector) + <b>Gợi ý Offering</b> (pattern bond suggest per TCPH profile: PP/PO + tenor + structure)',
-     kv:[['Loại','Claude Skill (NA owner)'],['Status','TBD — chờ NA done + DCM lắp ghép'],['Build probability','Cao (mirror frame ECM origination)'],['Tái sử dụng','Sàng lọc truy nã + xử phạt UBCKNN + e15.8 Exclusion KB'],['DCM input','Insights + know-how cycle finetune']],
-     next:'<b>Next step</b>: NA team complete skill build → DCM integrate vào luồng AI OS Phase 1. Sau integration: hookup e15.8 Sàng lọc KB (exclusion criteria) + e15.2 TCPH KB (profile lookup) + e15.3 Industry KB (priority + Offering recommendation). Cycle finetune liên tục theo DCM insights mới.'},
+   painTxt:'Mất thời gian tìm KH + liên hệ kết nối (177 DN watchlist × 22 ngành) · Cơ hội mis-match khi xác định không đúng nhu cầu (DN captive ecosystem khép kín NH+CTCK nội bộ → lãng phí origination effort) · Thiếu insights + know-how DCM để priority theo lead time 6-18 tháng → cơ hội lỡ deal trong cửa sổ refi 2026-2027 (~210 nghìn tỷ TPDN đáo hạn). TCBS thị phần ~45,8% nửa đầu 2025 (VBMA) — cần engine systematic.',
+   tool:{ic:'🎯',name:'DCM Bond Engine — Customer Origination & Screening',type:'Claude Skill · E0 — NA (Chị Ngọc Anh, Senior Expert DCM TCBS) owner · Framework + cấu trúc xong, chờ data thực M2-M5',
+     desc:'<b>E0 = DCM Bond Engine</b> do Chị Ngọc Anh (Senior Expert DCM TCBS) build trong Cowork 01-02/06/2026. Methodology canonical: <b>2 trục độc lập A × B + Ma trận 2×2</b> (KHÔNG gộp 11 tiêu chí thành 1 điểm — mỗi DN có 2 điểm độc lập). <b>Trục A Propensity & Urgency</b> (6 tiêu chí thang 1-5): A1 áp lực đáo hạn ≤18 tháng (30%) · A2 dư địa cấu trúc vốn + D/E ≤5x NĐ 245 (15%) · A3 pipeline đầu tư (20%) · A4 tín hiệu pháp lý NQ HĐQT/ĐHĐCĐ/XHTN (20%) · A5 khoảng trống CFO (10%) · A6 chu kỳ ngành (5%). <b>Trục B Winnability</b> (5 tiêu chí): <b>B1 Captive Ecosystem 35% (CHẤM NGƯỢC — factor CRITICAL nhất)</b> · B2 Quan hệ TCBS/TCB (20%) · B3 Chất lượng + đủ ĐK PH (20%) · B4 Phù hợp quy mô + tệp NĐT TCBS (15%) · B5 Tiếp cận CFO/Chủ tịch (10%). <b>4 ô ma trận</b>: ① Tấn công ngay (A≥3+B≥3) · ② Nuôi quan hệ (A<3+B≥3) · ③ Theo dõi captive - chờ cơ hội (A≥3+B<3) · ④ Bỏ qua (A<3+B<3). <b>Logic ngược ECM</b>: tín hiệu càng sớm điểm càng cao (DCM lead time 6-18 tháng vs ECM 24-72h). <b>Cadence Weekly</b> (không daily — chu kỳ PH dài 3-6 tháng).',
+     inp:'<b>4 nguồn input chính</b>: (1) RM đề xuất KH tiềm năng; (2) Watchlist 177 DN × 22 ngành (BĐS nhà ở/nghỉ dưỡng/KCN · NLTT · Hạ tầng BOT · FMCG · Bán lẻ · Y tế · Holding chưa NY...); (3) Lịch đáo hạn TPDN 6-18 tháng (HNX cbonds — chỉ tranche ≥6 tháng, <6 tháng quá muộn); (4) Tín hiệu công khai (NQ HĐQT/ĐHĐCĐ, QĐ duyệt dự án ≥1.000 tỷ Cổng Chính phủ, ký HĐ XHTN, CBTT HOSE/HNX). <b>Tools</b>: <b>TCBS TCAnalysis MCP (44 tools)</b> — getCompanyOverview · getBalanceSheet · getCashFlowAnalyze · getFinancialRatio · getKeyOfficers · getLargeShareHolders · getGeneralRating · getTickerActivityNews · getTickerEventNews + HNX cbonds (TPDN lịch đáo hạn + tổ chức tư vấn) + FiinRatings/VIS (XHTN) + VBMA (chu kỳ ngành) + Cổng Chính phủ. <b>Exclusion criteria</b>: leverage e15.8 Sàng lọc KB + <b>Drop_List</b> DN nhạy cảm uy tín TCBS (Novaland, R&H, Helios, BOT Ninh Thuận, BCG Land, Saigon Glory, Hưng Thịnh, Tân Hoàng Minh, cụm Trung Nam). <b>Captive_Ecosystem_Map</b> (B1 critical input): 18 ecosystem NH-CTCK (SHB-SHS/VPB-VPBankS/MB-MBS/TPB-TPS/CTG-CTS/BIDV-BSC/VCB-VCBS/ACB-ACBS/HDBank-HDS/ABBank-ABS) → DN trục chính = captive (B1=1, ô ③ Theo dõi).',
+     out:'<b>3 deliverables chính</b>: <b>(1) Watchlist Excel 10 sheets</b> — README + Dashboard (ma trận 2×2 4 ô action) + Watchlist_Main 177 DN × cột Điểm A + Điểm B + Ô ma trận + Bond_Issuers_2024_2026 (chia Hạng I/II/III/Loại trừ) + Bond_Maturity_2026_2027 + Large_Projects_2026_2028 + Priority_Matrix (output chính) + Captive_Ecosystem_Map + Drop_List + Sources. <b>(2) Weekly Brief 7 sections</b> cadence hàng tuần: Tóm tắt điều hành + Top 5 Tấn công + Top 5 Nuôi quan hệ + Tín hiệu tuần + Lịch đáo hạn 6-18T + Dự án mới phê duyệt + XHTN update + Tin tức ngành. <b>(3) Pitch memo Việt 5 sections</b> per deal: context + value prop TCBS + vai trò (Joint Bookrunner/Tư vấn chính/Đại lý) + lợi ích DN (fee saving + tệp NĐT VN + time-to-market) + next step (Chairman-to-Chairman meeting + term sheet timeline). <b>Status</b>: framework + cấu trúc xong, đã reconcile 185 DN từ 8 file Deep Research (M1 done). Chờ M2-M5 chấm điểm thực tế 30-40 DN trọng tâm → Production.',
+     kv:[['Owner','Chị Ngọc Anh (NA) — Senior Expert DCM TCBS'],['Methodology','2 trục A×B + Ma trận 2×2 + 11 tiêu chí (6+5)'],['Cadence','Weekly Brief (không daily — chu kỳ PH 3-6 tháng)'],['Lead time','6-18 tháng (logic ngược ECM 24-72h)'],['Build probability','Cao — framework + 10 sheets + 185 DN reconciled M1 ✅'],['Tái sử dụng','TCA MCP 44 tools + HNX cbonds + e15.8 Exclusion KB + 18 ecosystem Captive Map'],['Status hiện tại','Framework xong · M1 done · M2-M5 pending'],['Reference docs','PROJECT_JOURNEY.md + DCM_Engine_Methodology.md + DCM_Watchlist.xlsx + DCM_Weekly_Brief_Mockup_2026-06-02.docx + 8 Deep Research files'],['Nguyên tắc cứng','Chỉ DN lành mạnh · Source-grounded có cite VBPL · Việt hoá thuật ngữ · Mọi tín hiệu phải gắn DN cụ thể']],
+     next:'<b>5 Milestones còn lại</b>: <b>M2</b> Captive Ecosystem mapping qua TCA getLargeShareHolders (30-40 DN trọng tâm) — verify 18 ecosystem NH-CTCK · <b>M3</b> Chấm Trục A (A1-A6) thang 1-5 + tính Điểm A weighted · <b>M4</b> Chấm Trục B (B1-B5; B2/B5 = TBD chờ CRM TCBS) + tính Điểm B · <b>M5</b> Phân bổ vào 4 ô + update Watchlist_Main + Priority_Matrix + Dashboard + Weekly Brief. <b>Lắp ghép DCM AI OS Phase 1</b> sau M5: hookup e15.8 Sàng lọc + e15.2 TCPH KB (profile lookup TCA) + e15.3 Industry KB (Offering recommendation) + handoff E1 Document Intelligence (Phase 2 DD pipeline) + handoff E5 Deal Structuring. <b>Automation</b>: Scheduled Task chạy 1 lần/tuần thứ Hai 07:30 — cần engineer build pipeline + tích hợp CRM TCBS cho B2/B5. <b>CAN DO Cowork ngay sau M5</b>: pitch memo cho 5 DN ô Tấn công ngay (VHM, BCM, HPG, IDC, DGC) + memo VIC Vienna MTF Đợt 2 350tr USD + memo BCM tái cấu trúc 5.066 tỷ + Board TCBS report phương pháp luận.'},
    phase:1,star:false},
   {n:2,name:'Due Diligence',pain:'crit',sev:'Rất cao',
    painTxt:'Đọc 20-50 tài liệu mỗi deal: điều lệ, BCTC 3 năm, hồ sơ dự án, phương án sử dụng vốn, hồ sơ TSBĐ. Ngốn 40-60% thời gian deal và dễ bỏ sót cờ đỏ pháp lý / tài chính.',
@@ -516,7 +516,7 @@ const handoff=['KH đạt sàng lọc','DD Memo','Hồ sơ đã duyệt','Bộ h
 // Inside box (spanning col 3→12), 9 inner sub-cols: subC1=Phase2, subC3=Phase3, subC5=Phase4, subC7=Phase5, subC9=Phase6
 const multiPhaseEngines=[
   {id:'e3',code:'E3',ic:'⚖️',name:'Legal Entity Intelligence',star:true,
-   startCol:3,endCol:14,phaseTag:'Bước 2 → 6 (multi-phase)',color:'mp-violet',layout:'phase-grid',
+   startCol:3,endCol:12,phaseTag:'Bước 2 → 6 (multi-phase)',color:'mp-violet',layout:'phase-grid',
    chips:[
      {subCol:1, tag:'e3.1', name:'Hợp lệ hồ sơ',cls:''},
      {subCol:1, tag:'e3.2', name:'ĐK phi-TC',cls:''},
@@ -530,7 +530,7 @@ const multiPhaseEngines=[
    utilityBar:{tag:'e3.5', name:'VBPL Monitoring + MCP KTNB (xử phạt/vi phạm/blacklist/warning) — utility cross-phase (auto-called by e3.1-e3.9 + cross-engine)', cls:'utility'},
    linkSubId:'e3-multi'},
   {id:'e15',code:'E15',ic:'🗂️',name:'Knowledge Base Foundation',star:true,
-   startCol:1,endCol:14,phaseTag:'Cross-all-phase foundation · ⭐ chủ lực',color:'mp-deep-violet',layout:'inline',
+   startCol:1,endCol:12,phaseTag:'Cross-all-phase foundation · ⭐ chủ lực',color:'mp-deep-violet',layout:'inline',
    chips:[
      {tag:'e15.1', name:'Pháp luật KB',cls:'kb-legal',desc:'NĐ65/08/153/245 + Luật CK + TCTD + DN + ĐĐ-NƠ-KDBĐS + 4 KB chuyên ngành (CQĐP/NHTM/PP/BĐS) + GP-01 Industry License + KB_Auditor_UBCKNN + compliance_check_matrix + cap_phe_duyet_co_quan_qlnn + cap_phe_duyet_noi_bo_tcph + Index VBPL 73 unique'},
      {tag:'e15.2', name:'TCPH KB',cls:'kb-tcph',desc:'NEW — Hồ sơ TCPH lịch sử (Điều lệ + ĐKKD + GP NHNN/UBCKNN/BTC + BCTC kiểm toán + ATTC + BCTN + Báo cáo phát hành lịch sử + structured profile per TCPH). Reuse cross-deal cho cùng TCPH + nhóm TCPH'},
