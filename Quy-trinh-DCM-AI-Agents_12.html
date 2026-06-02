@@ -57,6 +57,26 @@
   .chev{display:grid;place-items:center;color:var(--faint);font-size:15px;align-self:center;user-select:none}
 
   .band{height:30px}
+  .band-pp{height:20px}
+  .band-pp::after{}
+  .rail-head-mid{display:flex;align-items:center;gap:10px;margin:18px 0 12px}
+  .rail-head-mid .lbl{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+  .rail-head-mid .line{flex:1;height:1px;background:var(--line)}
+
+  /* Painpoint boxes — kích thước = workflow phase box, thẳng cột */
+  .ppnode{border-radius:14px;padding:13px 12px;cursor:pointer;text-align:left;border:1px solid var(--line-strong);background:var(--surface);position:relative;
+    transition:transform .26s cubic-bezier(.2,.7,.3,1),border-color .22s,background .22s,box-shadow .3s;opacity:0;transform:translateY(14px);animation:rise .5s forwards;min-height:120px;display:flex;flex-direction:column;gap:7px}
+  .ppnode:hover{transform:translateY(-3px);background:var(--surface-2)}
+  .ppnode.active{border-color:rgba(251,113,133,.55);background:linear-gradient(180deg,rgba(251,113,133,.10),rgba(251,113,133,.04));box-shadow:0 14px 38px -16px rgba(251,113,133,.5)}
+  .ppnode .pp-head{display:flex;align-items:center;gap:7px;justify-content:space-between}
+  .ppnode .pp-sev{font-size:9.5px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.04em}
+  .ppnode.pp-low .pp-sev{background:rgba(52,211,153,.16);color:#6ee7b7}
+  .ppnode.pp-med .pp-sev{background:rgba(251,191,36,.16);color:#fcd34d}
+  .ppnode.pp-high .pp-sev{background:rgba(251,113,133,.18);color:#fda4b4}
+  .ppnode.pp-crit .pp-sev{background:rgba(244,71,94,.20);color:#ff8a9c}
+  .ppnode .pp-num{font-family:'Bricolage Grotesque';font-weight:800;font-size:13px;color:var(--faint)}
+  .ppnode .pp-txt{font-size:11.5px;line-height:1.45;color:#cdd6e8;overflow:hidden;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;text-overflow:ellipsis}
+
   .vconn{position:relative}
   .vconn::after{content:"";position:absolute;left:50%;top:2px;bottom:2px;border-left:2px dashed rgba(77,159,255,.32);transform:translateX(-1px)}
 
@@ -230,17 +250,20 @@
 <div class="wrap">
   <header>
     <span class="kicker"><span class="dot"></span>DCM · Tư vấn phát hành trái phiếu</span>
-    <h1>Quy trình <span class="accent">end-to-end × 16 AI Engines</span></h1>
-    <p class="sub">7 điểm chạm nghiệp vụ — mỗi agent giữ tên cũ và được gắn mã Engine (E1–E16). Các Engine còn thiếu được thêm dưới mỗi bước (chip nét đứt). E15 là nền tri thức xuyên suốt. Chạm vào từng Engine để xem Input → Output.</p>
+    <h1>DCM — <span class="accent">PP origination E2E process × AI OS (16 engines±)</span></h1>
+    <p class="sub">6 phases — main painpoints analysis along DCM's journey. Mỗi agent giữ tên cũ + gắn mã Engine (E1–E16). E15 là nền tri thức xuyên suốt. Chạm vào từng box (Painpoint / Phase / Agent) để xem detail.</p>
   </header>
 
   <div class="rail-head">
-    <span class="lbl">Dòng chảy nghiệp vụ</span>
+    <span class="lbl">Painpoints</span>
     <span class="counter">Bước <b id="cIdx">2</b> / 6</span>
   </div>
 
   <div class="flow-scroll">
     <div class="flow-inner">
+      <div class="grid" id="painrail"></div>
+      <div class="grid band-pp" id="bandPP"></div>
+      <div class="rail-head rail-head-mid"><span class="lbl">Workflow Main Phase</span><span class="line"></span></div>
       <div class="grid" id="rail"></div>
       <div class="grid band" id="band"></div>
       <div class="agent-head"><span class="ttl">Lớp AI Agent — nối theo thứ tự xử lý</span><span class="line"></span></div>
@@ -550,6 +573,23 @@ const bandEl=document.getElementById('band');
 const agentsEl=document.getElementById('agents');
 const bandupEl=document.getElementById('bandup');
 
+const painrailEl=document.getElementById('painrail');
+const bandPPEl=document.getElementById('bandPP');
+// Render Painpoint boxes (same grid cols, aligned with workflow phases)
+steps.forEach((s,i)=>{
+  if(i>0){const ch=document.createElement('div');ch.className='chev';ch.style.visibility='hidden';painrailEl.appendChild(ch);}
+  const pp=document.createElement('div');
+  pp.className='ppnode pp-'+s.pain;pp.style.animationDelay=(i*55)+'ms';pp.dataset.i=i;
+  pp.innerHTML=`<div class="pp-head"><span class="pp-num">P${i+1}</span><span class="pp-sev">● ${s.sev}</span></div><p class="pp-txt">${s.painTxt}</p>`;
+  pp.onclick=()=>{active='s'+i;render()};
+  painrailEl.appendChild(pp);
+});
+// Small connector band between painpoint row and workflow row
+steps.forEach((s,i)=>{
+  if(i>0){bandPPEl.appendChild(document.createElement('div'));}
+  const v=document.createElement('div');v.className='vconn';bandPPEl.appendChild(v);
+});
+
 steps.forEach((s,i)=>{
   if(i>0){const ch=document.createElement('div');ch.className='chev';ch.textContent='›';railEl.appendChild(ch);}
   const el=document.createElement('div');
@@ -632,6 +672,7 @@ if(multiPhaseEngines.length){
 function render(){
   const u=units[active];
   document.querySelectorAll('.node').forEach(n=>n.classList.toggle('active',+n.dataset.i===u._idx));
+  document.querySelectorAll('.ppnode').forEach(n=>n.classList.toggle('active',+n.dataset.i===u._idx));
   document.querySelectorAll('.agent').forEach(n=>n.classList.toggle('active',n.dataset.id===active));
   document.getElementById('cIdx').textContent=u._idx+1;
   const meta=[];
