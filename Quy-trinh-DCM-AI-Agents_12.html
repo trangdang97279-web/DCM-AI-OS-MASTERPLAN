@@ -280,7 +280,7 @@
   <header>
     <span class="kicker"><span class="dot"></span>DCM · Tư vấn phát hành trái phiếu</span>
     <h1>DCM — <span class="accent">PP origination E2E process × AI OS (16 engines±)</span></h1>
-    <p class="sub">6 phases — main painpoints analysis along DCM's journey. Mỗi agent giữ tên cũ + gắn mã Engine (E1–E16). E3 multi-phase Bước 2→6, E15 KB foundation cross-all-phase. ⭐ = engine chủ lực (E1, E2, E3, E4, E6, E7, E8, E9). Chạm vào từng box để xem detail.</p>
+    <p class="sub">6 phases — main painpoints analysis along DCM's journey. Mỗi agent giữ tên cũ + gắn mã Engine (E0/E1–E16). E0 = NA owner skill (Phase 1 entry, TBD chờ lắp ghép). E3 multi-phase Bước 2→6, E15 KB foundation cross-all-phase. ⭐ = engine chủ lực (E1, E2, E3, E4, E5, E6, E7, E8, E9, E15). Chạm vào từng box để xem detail.</p>
   </header>
 
   <div class="rail-head">
@@ -336,13 +336,14 @@ const SEVBG={low:'rgba(52,211,153,.14)',med:'rgba(251,191,36,.14)',high:'rgba(25
 const SEVTX={low:'#6ee7b7',med:'#fcd34d',high:'#fda4b4',crit:'#ff8a9c'};
 
 const steps=[
-  {n:1,name:'Nhu cầu KH',pain:'low',sev:'Thấp',
-   painTxt:'Khi có khách hàng mới, cần nhanh chóng sàng lọc rủi ro và đánh giá sơ bộ khả năng đáp ứng điều kiện phát hành trước khi quyết định nhận deal — tránh tốn công DD cho hồ sơ không khả thi.',
-   tool:{ic:'🔍',name:'Customer Screening',type:'Claude Skill · Sàng lọc KH mới',
-     desc:'Scan khách hàng mới: tra cứu thông tin doanh nghiệp, sàng lọc rủi ro sơ bộ (danh sách đen · truy nã · lịch sử xử phạt UBCKNN · tin tức tiêu cực) và đánh giá nhanh Go/No-go. Tái sử dụng được các skill nội bộ sẵn có: sàng lọc truy nã, tra cứu xử phạt UBCKNN.',
-     inp:'Tên / MST khách hàng mới + thông tin sơ bộ về nhu cầu phát hành',
-     out:'Hồ sơ sàng lọc KH: company profile + cờ rủi ro (blacklist · truy nã · xử phạt · tin xấu) + đánh giá sơ bộ Go / No-go',
-     kv:[['Loại','Claude Skill (MVP)'],['Tái sử dụng','Skill sàng lọc truy nã + xử phạt UBCKNN'],['Lộ trình','Tuần 1-2']]},
+  {n:1,name:'Nhu cầu KH',pain:'high',sev:'Cao',
+   painTxt:'Mất thời gian tìm KH + liên hệ kết nối · Cơ hội mis-match khi xác định không đúng nhu cầu / phù hợp deal · Thiếu insights + know-how DCM để priority KH tiềm năng → cơ hội lỡ deal hoặc onboard deal không feasible.',
+   tool:{ic:'🎯',name:'Customer Origination & Screening',type:'Claude Skill · E0 — NA owner · TBD chờ lắp ghép vào luồng DCM AI OS',
+     desc:'<b>E0 = NA owner skill</b> (rename từ E14). NA team build mirror frame từ <b>ECM origination</b> + DCM input insights + know-hows để hoàn thiện. Flow 3-step: <b>longlist</b> (từ RM/đáo hạn/public/exclusion) → <b>shortlist</b> (DCM insights + know-how) → <b>priority + gợi ý Offering</b> (soft screening điều kiện PH high level). Sau khi NA done → lắp ghép vào luồng DCM AI OS làm Phase 1 entry.',
+     inp:'Từ <b>RM</b> (đề xuất KH tiềm năng) + <b>danh sách KH đáo hạn</b> (bond maturity refinance candidates) + <b>thông tin public</b> (CBTT/báo chí/website TCPH) + <b>exclusion criteria</b> (blacklist + truy nã + xử phạt UBCKNN + tin xấu — leverage e15.8 Sàng lọc KB)',
+     out:'<b>Longlist KH</b> (raw từ 4 nguồn input) → <b>Shortlist</b> (lọc qua DCM insights + know-how + Industry KB) → <b>Priority list</b> (soft screening theo điều kiện phát hành high level: capital adequacy + leverage + sector) + <b>Gợi ý Offering</b> (pattern bond suggest per TCPH profile: PP/PO + tenor + structure)',
+     kv:[['Loại','Claude Skill (NA owner)'],['Status','TBD — chờ NA done + DCM lắp ghép'],['Build probability','Cao (mirror frame ECM origination)'],['Tái sử dụng','Sàng lọc truy nã + xử phạt UBCKNN + e15.8 Exclusion KB'],['DCM input','Insights + know-how cycle finetune']],
+     next:'<b>Next step</b>: NA team complete skill build → DCM integrate vào luồng AI OS Phase 1. Sau integration: hookup e15.8 Sàng lọc KB (exclusion criteria) + e15.2 TCPH KB (profile lookup) + e15.3 Industry KB (priority + Offering recommendation). Cycle finetune liên tục theo DCM insights mới.'},
    phase:1,star:false},
   {n:2,name:'Due Diligence',pain:'crit',sev:'Rất cao',
    painTxt:'Đọc 20-50 tài liệu mỗi deal: điều lệ, BCTC 3 năm, hồ sơ dự án, phương án sử dụng vốn, hồ sơ TSBĐ. Ngốn 40-60% thời gian deal và dễ bỏ sót cờ đỏ pháp lý / tài chính.',
@@ -540,7 +541,7 @@ const multiPhaseEngines=[
    note:'<b>MVP1</b>: Claude Project (không tốn token tiền) → <b>V2</b>: KB RAG (vector search + caching) khi scale. KB foundation feed mọi engine — e15.* mặc định auto-loaded khi engine kích hoạt.'}
 ];
 
-const CODE={s0:'E14',s1:'E1',fs:'E2',e3:'E3',e4:'E4',s2:'E5',e6:'E6',e10:'E10',e11:'E11',s3:'E7',e8:'E8',e9:'E9',s4:'E13',s5:'E16'};
+const CODE={s0:'E0',s1:'E1',fs:'E2',e3:'E3',e4:'E4',s2:'E5',e6:'E6',e10:'E10',e11:'E11',s3:'E7',e8:'E8',e9:'E9',s4:'E13',s5:'E16'};
 
 const units={};
 steps.forEach((s,i)=>{units['s'+i]=Object.assign({},s,{_idx:i});
