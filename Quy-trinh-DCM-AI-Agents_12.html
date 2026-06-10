@@ -279,8 +279,8 @@
 <div class="wrap">
   <header>
     <span class="kicker"><span class="dot"></span>DCM · Tư vấn phát hành trái phiếu</span>
-    <h1>DCM — <span class="accent">PP origination E2E process × AI OS (16 engines±)</span></h1>
-    <p class="sub">6 phases — main painpoints analysis along DCM's journey. Mỗi agent giữ tên cũ + gắn mã Engine (E0/E1–E16). E0 = NA owner skill (Phase 1 entry, TBD chờ lắp ghép). E3 multi-phase Bước 2→6, E15 KB foundation cross-all-phase. ⭐ = engine chủ lực (E1, E2, E3, E4, E5, E6, E7, E8, E9, E15). Chạm vào từng box để xem detail.</p>
+    <h1>DCM — <span class="accent">PP origination E2E process × AI OS (16 engines)</span></h1>
+    <p class="sub">6 phases — main painpoints analysis along DCM's journey. Mỗi agent giữ tên cũ + gắn mã Engine (E0/E1–E16). E0 = NA owner skill (Phase 1 entry, TBD chờ lắp ghép). E3 multi-phase Bước 2→6; E14 deal orchestration + E15 KB foundation cross-all-phase; E12 reconciliation đa bên ở Execution. ⭐ = engine chủ lực (E1, E2, E3, E4, E5, E6, E7, E8, E9, E15). Chạm vào từng box để xem detail.</p>
   </header>
 
   <div class="rail-head">
@@ -479,7 +479,15 @@ const steps=[
         inp:'30+ docs của deal',
         out:'Báo cáo mâu thuẫn số liệu / định nghĩa / ngày tháng giữa các văn bản',
         kv:[['Loại','Claude Skill'],['Lộ trình','Tuần 2']]},
-      phase:1,star:true,isSub:true}
+      phase:1,star:true,isSub:true},
+     {id:'e12',n:5,name:'Execution',pain:'med',sev:'Trung bình',
+      painTxt:'Bộ hồ sơ qua review đa bên (TCPH / Pháp chế DCM / Risk / Investor / TVL) — mỗi bên track-change + comment riêng. Tổng hợp tay redline nhiều bản, dễ bỏ sót xung đột điều khoản + khó truy ai sửa gì, vòng review kéo dài.',
+      tool:{ic:'🔀',name:'Review Reconciliation',type:'Claude Skill · Tổng hợp redline đa bên (Tier B — phụ thuộc workflow chốt)',
+        desc:'<b>Reconciliation review đa bên</b>: gộp track-changes + comment từ TCPH + Pháp chế DCM + Risk + Investor + TVL trên cùng bộ doc → phát hiện <b>xung đột điều khoản</b> giữa các bên + đề xuất compromise wording. Giải Pain 04 (multi-party review). Khác e3.9 (đối soát bản ký đã ký, Phase 5) + E9 (nhất quán số liệu cross-doc) — E12 tập trung hoà giải <b>comment/redline ở khâu review</b> trước khi chốt bản ký.',
+        inp:'Các bản redline/comment từ nhiều bên (TCPH/Pháp chế/Risk/Investor/TVL) trên cùng doc + bản gốc + KB YK-TVL (rationale pháp lý từ e3.7)',
+        out:'Bảng tổng hợp redline hợp nhất + danh sách xung đột điều khoản + đề xuất compromise per điểm + audit trail ai đề xuất gì',
+        kv:[['Loại','Claude Skill (Tier B)'],['Phase','Phase 4 Execution — khâu review redline'],['Phân biệt','E12 = comment/redline review · e3.9 = đối soát bản ký · E9 = nhất quán số liệu'],['Phụ thuộc','Workflow review đa bên chốt + KB YK-TVL (e3.7) cho rationale']]},
+      phase:2,star:false,isSub:true}
    ]},
   {n:6,name:'Executed',pain:'med',sev:'Trung bình',
    painTxt:'Sau khi user ký xong hồ sơ + scan upload → DCM cần phân loại + soạn checklist bàn giao + CBTT + đăng ký GDTT đúng deadline. Manual: nhiều thao tác lặp lại, gen input cho hệ thống (Backend/TCSmart/HNX/VSDC), dễ sai sót thời hạn + lỡ format. Sau khi đủ hồ sơ cần luồng nhắc việc + auto-gen input.',
@@ -519,10 +527,21 @@ const multiPhaseEngines=[
      {subCol:5, tag:'e3.6', name:'Rà dẫn chiếu PL',cls:''},
      {subCol:5, tag:'e3.7', name:'Rà wording',cls:''},
      {subCol:7, tag:'e3.9', name:'Đối soát bản ký (Cops)',cls:''},
-     {subCol:9, tag:'e3.8', name:'State trigger',cls:'scaffold'}
+     {subCol:9, tag:'e3.8', name:'Governance + cảnh báo sớm',cls:''}
    ],
    utilityBar:{tag:'e3.5', name:'VBPL Monitoring + MCP KTNB (xử phạt/vi phạm/blacklist/warning) — utility cross-phase (auto-called by e3.1-e3.9 + cross-engine)', cls:'utility'},
    linkSubId:'e3-multi'},
+  {id:'e14',code:'E14',ic:'🧭',name:'Deal Orchestration',star:false,
+   startCol:1,endCol:12,phaseTag:'Cross-all-phase orchestration (PM bot) · Tier B',color:'mp-violet',layout:'inline',
+   chips:[
+     {tag:'e14.1', name:'Theo dõi tiến độ deal',cls:'',desc:'Trạng thái deal theo Phase 0-6 + % hoàn thành + bước đang chờ — pull state từ mọi engine E1-E16'},
+     {tag:'e14.2', name:'Phân công + RACI',cls:'',desc:'Phân công task per stakeholder (Maker/Checker/Pháp chế/Risk/C.Ops) + validate RACI theo loại tác vụ'},
+     {tag:'e14.3', name:'Next action đề xuất',cls:'',desc:'Đề xuất bước kế tiếp dựa state hiện tại + dependency giữa các engine (vd e2.2 xong → trigger e3.3)'},
+     {tag:'e14.4', name:'Cảnh báo deadline T1-T11',cls:'',desc:'Cảnh báo mốc pháp lý T1-T11 (NLV) sắp đến hạn — CBTT/BC KQPH/GDTT/khung phí — escalate khi sắp trễ'},
+     {tag:'e14.5', name:'Cross-engine state',cls:'',desc:'Điều phối state dùng chung giữa các engine (Deal Model + Master Checklist) — kế thừa ý tưởng "state trigger"'},
+     {tag:'e14.6', name:'Dashboard pipeline',cls:'',desc:'Dashboard tổng các deal active + deal nào sắp deadline + bottleneck — giải Pain 06 tracking'}
+   ],
+   note:'<b>Giải Pain 06</b> (tracking xuyên vòng đời). PM bot điều phối cross-engine — <b>Tier B</b>: phụ thuộc cross-engine integration + workflow state chốt. Tiếp nhận chức năng "state trigger" (gỡ khỏi E3 e3.8 — e3.8 nay chỉ giữ governance Phase 6).'},
   {id:'e15',code:'E15',ic:'🗂️',name:'Knowledge Base Foundation',star:true,
    startCol:1,endCol:12,phaseTag:'Cross-all-phase foundation · ⭐ chủ lực',color:'mp-deep-violet',layout:'inline',
    chips:[
@@ -539,7 +558,7 @@ const multiPhaseEngines=[
    note:'<b>MVP1</b>: Claude Project (không tốn token tiền) → <b>V2</b>: KB RAG (vector search + caching) khi scale. KB foundation feed mọi engine — e15.* mặc định auto-loaded khi engine kích hoạt.'}
 ];
 
-const CODE={s0:'E0',s1:'E1',fs:'E2',e3:'E3',e4:'E4',s2:'E5',e6:'E6',e10:'E10',e11:'E11',s3:'E7',e8:'E8',e9:'E9',s4:'E13',s5:'E16'};
+const CODE={s0:'E0',s1:'E1',fs:'E2',e3:'E3',e4:'E4',s2:'E5',e6:'E6',e10:'E10',e11:'E11',s3:'E7',e8:'E8',e9:'E9',e12:'E12',s4:'E13',s5:'E16'};
 
 const units={};
 steps.forEach((s,i)=>{units['s'+i]=Object.assign({},s,{_idx:i});
@@ -548,11 +567,11 @@ steps.forEach((s,i)=>{units['s'+i]=Object.assign({},s,{_idx:i});
 // E3 standalone unit (multi-phase engine, not in steps[].subs — render via mp track)
 units['e3-multi']={_idx:1,name:'Legal Entity Intelligence (E3 multi-phase)',pain:'crit',sev:'Rất cao',isSub:true,star:true,phase:1,
   painTxt:'Thẩm định pháp lý đa lớp xuyên Phase 2 DD → Phase 6 Sau phát hành. Phase 2 rà hợp lý/hợp lệ hồ sơ + điều kiện PH tài chính + phi-tài chính. Phase 3 audit termsheet sau E5. Cross-phase utility e3.5 VBPL monitoring. MOVED từ E1 v2.0.0 e1.4 + E2 v2.0.0 e2.2 compliance scope per paradigm shift PM 02/06/2026.',
-  tool:{ic:'⚖️',name:'Legal Entity Intelligence',type:'Plugin v1.0.0 NEW BUILD · 5 sub-skill VN MULTI-PHASE (chips aligned phase columns)',
-    desc:'Plugin v1.0.0 convert standalone v0.1 → plugin 5 sub-skill multi-phase. <b>Phase 2 DD</b>: e3.1-tham-dinh-ho-so-phi-tai-chinh (rà hợp lý/hợp lệ hồ sơ phi-tài chính) + e3.2-dieu-kien-ph-phi-tai-chinh (deal-level ĐK PH phi-tài chính NĐ 65/245/PL chuyên ngành) + e3.3-dieu-kien-ph-tai-chinh (deal-level ĐK PH tài chính consume E2.2 computed). <b>Phase 3 Deal Structuring</b>: e3.4-audit-termsheet (SCAFFOLD post-E5, KB YK-TVL chờ PM approval). <b>Cross-phase utility</b>: e3.5-vbpl-monitoring (Layer 1+2+3 + cache realtime + Source Priority 10 nguồn, auto-called by e3.x + cross-engine).',
+  tool:{ic:'⚖️',name:'Legal Entity Intelligence',type:'Plugin v1.0.0 NEW BUILD · 9 sub-skill VN MULTI-PHASE (e3.5 = utility cross-phase · chips aligned phase columns)',
+    desc:'Plugin v1.0.0 convert standalone v0.1 → plugin multi-phase, <b>9 sub-skill (e3.1-e3.9)</b> trải Bước 2 → 6. <b>Phase 2 DD</b>: e3.1-tham-dinh-ho-so-phi-tai-chinh (rà hợp lý/hợp lệ hồ sơ phi-tài chính) + e3.2-dieu-kien-ph-phi-tai-chinh (deal-level ĐK PH phi-tài chính NĐ 65/245/PL chuyên ngành) + e3.3-dieu-kien-ph-tai-chinh (deal-level ĐK PH tài chính consume E2.2 computed). <b>Phase 3 Deal Structuring</b>: e3.4-audit-termsheet (SCAFFOLD post-E5, KB YK-TVL chờ PM approval). <b>Phase 4 Execution</b> (post-E7 gen docs): e3.6-ra-dan-chieu-phap-ly (rà dẫn chiếu VBPL còn hiệu lực) + e3.7-ra-wording (rà wording 3 nhánh QPL/cross-clause/comment các bên). <b>Phase 5 Executed</b>: e3.9-doi-soat-ban-ky (đối soát bản ký scan vs bản phát hành — Cops). <b>Phase 6 Sau phát hành</b>: e3.8-governance-post-issuance (governance + cảnh báo sớm bond default). <b>Cross-phase utility</b>: e3.5-vbpl-monitoring (Layer 1+2+3 + cache realtime + Source Priority 10 nguồn, auto-called by e3.x + cross-engine).',
     inp:'<b>Phase 2 Input</b>: outputs từ E1 (folder K3 + checklist hồ sơ thu thập + Deal Model JSON) + E2 (computed ratios 60+ chỉ tiêu) + Điều lệ TCPH + Index VBPL 73 unique + 4 KB chuyên ngành. <b>Phase 3 Input</b>: term sheet draft từ E5 + JSON e3.2 + e3.3 + KB YK-TVL.',
     out:'<b>Phase 2 Output (paradigm new)</b>: KHÔNG sinh file độc lập — bổ sung vào file E1+E2 hiện tại: (a) <b>1 cột "Đánh giá hợp lệ + citation"</b> bổ sung vào checklist hồ sơ thu thập của E1 (file Excel E1 mở rộng); (b) <b>1 sheet Eligibility Gap Analysis</b> bổ sung vào file E1 hoặc E2 (PM quyết định JSON hay chỉ Excel để user rà tay bổ sung); (c) <b>1 sheet Audit Legal</b> bổ sung vào file Excel output E2 (rà compliance cite VBPL cho 60+ chỉ tiêu tài chính). <b>Phase 3 Output</b>: Excel e3.4_termsheet_audit 5 sheet (cycle sau khi PM approval YK-TVL).',
-    kv:[['Build','3 sub-skill production Phase 2 (e3.1+e3.2+e3.3) + 1 SCAFFOLD Phase 3 (e3.4) + 1 utility cross-phase (e3.5)'],['Multi-phase span','Bước 2 DD → Bước 6 Sau phát hành','good'],['Output integration','Bổ sung sheet vào file E1+E2 hiện tại (KHÔNG sinh file độc lập)'],['KB tổng','51 VBPL taxonomy + 10 nguồn priority Tier A/B/C + Cache layer + 4 KB chuyên ngành + compliance check matrix (carry E2 v0.1) + YK-TVL placeholder']],
+    kv:[['Build','Phase 2: e3.1+e3.2+e3.3 production · Phase 3: e3.4 SCAFFOLD · Phase 4: e3.6+e3.7 NEW · Phase 5: e3.9 NEW (Cops) · Phase 6: e3.8 deploy KB sẵn · Utility: e3.5 cross-phase'],['Multi-phase span','Bước 2 DD → Bước 6 Sau phát hành','good'],['Output integration','Bổ sung sheet vào file E1+E2 hiện tại (KHÔNG sinh file độc lập)'],['KB tổng','51 VBPL taxonomy + 10 nguồn priority Tier A/B/C + Cache layer + 4 KB chuyên ngành + compliance check matrix (carry E2 v0.1) + YK-TVL placeholder']],
     features:[
       {tag:'e3.1-tham-dinh-ho-so-phi-tai-chinh',name:'Hợp lệ hồ sơ phi-tài chính (Phase 2)',ic:'📋',
        desc:'<b>Phase 2 DD</b>. Verify per-doc: <b>Module A Validity</b> (chữ ký + dấu + thời hạn hiệu lực + cấp ban hành đúng thẩm quyền + format quy chuẩn) · <b>Module B Approval Authority</b> (cơ quan QLNN cấp: NHNN/UBCKNN/Sở KH-ĐT/UBND/Bộ chuyên ngành; nội bộ TCPH: NQ ĐHĐCĐ/HĐQT/QĐ BGĐ/UQ phù hợp Điều lệ + ngưỡng giá trị Luật DN). MOVED từ E1 v2.0.0 e1.4 Module A.',
@@ -601,7 +620,13 @@ units['e3-multi']={_idx:1,name:'Legal Entity Intelligence (E3 multi-phase)',pain
        input:'Bond đã PH + lịch trả gốc/lãi + tài liệu post-issuance + KB governance + KB early warning + KB chất lượng tín dụng (KTRRTD)',
        output:'Cycle này: governance scoring + early warning flag. Cycle sau: TSBĐ adjust monitoring + BC tổ chức tư vấn gửi CQQL + bond outstanding metrics.',
        kb:'KB governance post-issuance (sẵn có) + KB early warning + KB chất lượng tín dụng KTRRTD. Cycle sau: KB TSBĐ adjust + BC CQQL templates + bond outstanding schema',
-       note:'<b>Deploy dev từ KB hiện có cycle này</b>. Defer cycle sau: TSBĐ adjustment workflow + báo cáo sau PH gửi CQQL + bond outstanding tracking. PM finetune theo deal thực tế.'}
+       note:'<b>Deploy dev từ KB hiện có cycle này</b>. Defer cycle sau: TSBĐ adjustment workflow + báo cáo sau PH gửi CQQL + bond outstanding tracking. PM finetune theo deal thực tế.'},
+      {tag:'e3.9-doi-soat-ban-ky',name:'Đối soát bản ký — Cops (Phase 5 Executed)',ic:'🖋️',
+       desc:'<b>Phase 5 Executed — NEW</b>. Sau khi user ký + scan upload bộ hồ sơ → đối soát <b>bản ký scan vs bản phát hành/bản chốt</b>: verify đủ chữ ký + đúng người có thẩm quyền + đúng bản cuối (không lệch version) + đủ trang/phụ lục. "Cops" = phối hợp TCBS-C.Ops review. Phát hiện sai lệch → flag trước khi CBTT / đăng ký GDTT. Auto-called bởi E13 Post-execution Auto-flow (confirm gate trước expose hồ sơ).',
+       input:'Bản ký scan upload (Phase 5) + bản phát hành/bản chốt từ E7 + checklist bàn giao (E13)',
+       output:'Báo cáo đối soát: danh sách lệch (thiếu chữ ký/sai thẩm quyền/lệch version/thiếu trang) + verdict đủ điều kiện đẩy CBTT/GDTT hay không',
+       kb:'Naming Convention D062 + e15.6 Stakeholder KB (thẩm quyền ký) + e15.7 Workflow & Schema (bản chốt reference)',
+       note:'Kế thừa chức năng reconciliation đa bên — đối soát bản ký ở khâu execution. Khác E12 (reconciliation comment/redline ở khâu review Phase 4). Cung cấp confirm gate cho E13 trước khi expose hồ sơ.'}
     ],
     next:'Cycle sau: (a) PM review Coverage Audit Report E2 → extend Workflow Sheet 0.4 → build e2.2 + e3.3 full; (b) PM nhận YK-TVL approval → extend e3.4 full; (c) ratify Decision Log + MasterPlan + downstream MIGRATION (E5/E6/E7/E9/E10/E11 đọc e3.x thay e1.4 + e2.2); (d) PM quyết Sheet Eligibility Gap có JSON hay Excel-only; (e) HTML iterate full multi-phase grid layout cho engine khác (E4 Phase 3, E14/E15/E16 cross-phase).'}};
 
