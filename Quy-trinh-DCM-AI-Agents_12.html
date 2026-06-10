@@ -145,24 +145,35 @@
   .col-lbl .pip{width:8px;height:8px;border-radius:2px}
   .col.pain .pip{background:var(--rose);box-shadow:0 0 10px var(--rose)}.col.tool .pip{background:var(--blue);box-shadow:0 0 10px var(--blue)}
   .sev{display:inline-flex;align-items:center;gap:7px;font-weight:800;font-size:13px;padding:6px 13px;border-radius:8px;margin-bottom:13px}
-  .pain-txt{color:#cdd6e8;font-size:14.5px;line-height:1.55}
+  /* === Font đồng nhất 12.5px cho TẤT CẢ element trong detail panel + feature cards === */
+  /* Apply universally to .detail và descendants để override mọi inheritance/default */
+  .detail, .detail *,
+  .detail p, .detail div, .detail span, .detail ul, .detail li,
+  .fcard, .fcard *, .fcard p, .fcard div, .fcard span, .fcard ul, .fcard li{font-size:12.5px;line-height:1.55}
+  /* Trừ vài exception: header tiêu đề + badge + label nhỏ */
+  .detail .ttl{font-size:23px !important;line-height:1.2}
+  .detail .num{font-size:20px !important}
+  .detail .tool-name{font-size:21px !important;line-height:1.2}
+  .detail .ecode-lg{font-size:12px !important}
+  .detail .sev{font-size:13px !important}
+  .detail .chip{font-size:11px !important}
+  .detail .col-lbl{font-size:11px !important}
+  .detail .io-lbl{font-size:9.5px !important}
+  .detail .next-lbl{font-size:9.5px !important}
+  .detail .kv .k{font-size:12.5px !important}
+  .detail .kv .v{font-size:12.5px !important}
+  .fcard .fcard-name{font-size:15.5px !important;line-height:1.2}
+  .fcard .fcard-tag{font-size:9.5px !important}
+  .fcard .fcard-ic{font-size:18px !important}
+  .fcard b{color:#fcd34d;font-weight:700}
+  /* Bullet styling */
+  .detail ul, .fcard ul{margin:6px 0 0 0;padding-left:18px;list-style:disc}
+  .detail ul ul, .fcard ul ul{margin:3px 0;padding-left:18px;list-style:circle}
+  .detail ul li, .fcard ul li{margin-bottom:4px}
   .tool-name{font-family:'Bricolage Grotesque';font-weight:800;font-size:21px;display:flex;align-items:center;gap:11px;margin-bottom:5px}
   .tool-name .ic{font-size:23px}
   .tool-type{font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--violet);text-transform:uppercase;margin-bottom:13px}
-  .tool-desc{color:#cdd6e8;font-size:14px;line-height:1.55;margin-bottom:14px}
-  .eng-section{margin-bottom:14px;padding:10px 12px;background:rgba(255,255,255,.025);border-radius:9px;border-left:3px solid var(--blue)}
-  .eng-section h4{font-family:'Bricolage Grotesque';font-weight:700;font-size:13px;color:#fff;margin:0 0 7px 0;letter-spacing:.01em}
-  .eng-section ul{margin:0;padding-left:18px;list-style:disc}
-  .eng-section ul ul{margin:4px 0;padding-left:18px}
-  .eng-section li{font-size:12.5px;line-height:1.55;color:#cdd6e8;margin-bottom:3px}
-  .eng-section li b{color:#fcd34d;font-weight:700}
-  .eng-section:nth-child(2){border-left-color:var(--violet)}
-  .eng-section:nth-child(3){border-left-color:var(--amber)}
-  .eng-section:nth-child(4){border-left-color:var(--emerald)}
-  .eng-section:nth-child(5){border-left-color:#8ec5ff}
-  .eng-section:nth-child(6){border-left-color:#6ee7b7}
-  .eng-section:nth-child(7){border-left-color:#fda4b4}
-  .eng-section:nth-child(8){border-left-color:#c4b1ff}
+.tool-desc{color:#cdd6e8;font-size:14px;line-height:1.55;margin-bottom:14px}
 
   .io{display:grid;grid-template-columns:1fr 32px 1fr;align-items:stretch;margin:4px 0 16px}
   .io-box{border:1px solid var(--line-strong);border-radius:11px;padding:11px 13px}
@@ -173,9 +184,13 @@
   .io-box p{font-size:12px;line-height:1.5;color:#cdd6e8}
   .io-arrow{display:grid;place-items:center;color:var(--blue);font-size:15px}
 
-  .kv{display:flex;gap:10px;font-size:13px;margin-top:9px}
-  .kv .k{color:var(--faint);font-weight:700;min-width:88px;flex:none}
-  .kv .v{color:#dbe3f2}.kv .v.good{color:var(--emerald);font-weight:700}
+  .kv{display:flex;gap:10px;margin-top:9px;align-items:flex-start}
+  .kv .k{color:var(--faint);font-weight:700;min-width:140px;flex:none;padding-top:2px}
+  .kv .v{color:#dbe3f2;flex:1;min-width:0}
+  .kv .v.good{color:var(--emerald);font-weight:700}
+  .kv .v ul{margin:0;padding-left:18px;list-style:disc}
+  .kv .v ul ul{margin:3px 0;padding-left:18px;list-style:circle}
+  .kv .v ul li{margin-bottom:3px;line-height:1.55}
   .nextbox{margin-top:16px;border:1px dashed rgba(77,159,255,.4);border-radius:11px;background:rgba(77,159,255,.06);padding:12px 14px}
   .next-lbl{display:block;font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#8ec5ff;margin-bottom:6px}
   .nextbox p{font-size:12.5px;line-height:1.55;color:#cdd6e8}
@@ -350,174 +365,196 @@ const SEVTX={low:'#6ee7b7',med:'#fcd34d',high:'#fda4b4',crit:'#ff8a9c'};
 
 const steps=[
   {n:1,name:'Nhu cầu KH',pain:'high',sev:'Cao',
-   painTxt:'Mất thời gian tìm KH + liên hệ kết nối (177 DN watchlist × 22 ngành) · Cơ hội mis-match khi xác định không đúng nhu cầu (DN captive ecosystem khép kín NH+CTCK nội bộ → lãng phí origination effort) · Thiếu insights + know-how DCM để priority theo lead time 6-18 tháng → cơ hội lỡ deal trong cửa sổ refi 2026-2027 (~210 nghìn tỷ TPDN đáo hạn). TCBS thị phần ~45,8% nửa đầu 2025 (VBMA) — cần engine systematic.',
-   tool:{ic:'🎯',name:'DCM Bond Engine — Customer Origination & Screening',type:'Claude Skill · E0 — NA (Chị Ngọc Anh, Senior Expert DCM TCBS) owner · Framework + cấu trúc xong, chờ data thực M2-M5',
-     desc:'<b>E0 = DCM Bond Engine</b> do Chị Ngọc Anh (Senior Expert DCM TCBS) build trong Cowork 01-02/06/2026. Methodology canonical: <b>2 trục độc lập A × B + Ma trận 2×2</b> (KHÔNG gộp 11 tiêu chí thành 1 điểm — mỗi DN có 2 điểm độc lập). <b>Trục A Propensity & Urgency</b> (6 tiêu chí thang 1-5): A1 áp lực đáo hạn ≤18 tháng (30%) · A2 dư địa cấu trúc vốn + D/E ≤5x NĐ 245 (15%) · A3 pipeline đầu tư (20%) · A4 tín hiệu pháp lý NQ HĐQT/ĐHĐCĐ/XHTN (20%) · A5 khoảng trống CFO (10%) · A6 chu kỳ ngành (5%). <b>Trục B Winnability</b> (5 tiêu chí): <b>B1 Captive Ecosystem 35% (CHẤM NGƯỢC — factor CRITICAL nhất)</b> · B2 Quan hệ TCBS/TCB (20%) · B3 Chất lượng + đủ ĐK PH (20%) · B4 Phù hợp quy mô + tệp NĐT TCBS (15%) · B5 Tiếp cận CFO/Chủ tịch (10%). <b>4 ô ma trận</b>: ① Tấn công ngay (A≥3+B≥3) · ② Nuôi quan hệ (A<3+B≥3) · ③ Theo dõi captive - chờ cơ hội (A≥3+B<3) · ④ Bỏ qua (A<3+B<3). <b>Logic ngược ECM</b>: tín hiệu càng sớm điểm càng cao (DCM lead time 6-18 tháng vs ECM 24-72h). <b>Cadence Weekly</b> (không daily — chu kỳ PH dài 3-6 tháng).',
-     inp:'<b>4 nguồn input chính</b>: (1) RM đề xuất KH tiềm năng; (2) Watchlist 177 DN × 22 ngành (BĐS nhà ở/nghỉ dưỡng/KCN · NLTT · Hạ tầng BOT · FMCG · Bán lẻ · Y tế · Holding chưa NY...); (3) Lịch đáo hạn TPDN 6-18 tháng (HNX cbonds — chỉ tranche ≥6 tháng, <6 tháng quá muộn); (4) Tín hiệu công khai (NQ HĐQT/ĐHĐCĐ, QĐ duyệt dự án ≥1.000 tỷ Cổng Chính phủ, ký HĐ XHTN, CBTT HOSE/HNX). <b>Tools</b>: <b>TCBS TCAnalysis MCP (44 tools)</b> — getCompanyOverview · getBalanceSheet · getCashFlowAnalyze · getFinancialRatio · getKeyOfficers · getLargeShareHolders · getGeneralRating · getTickerActivityNews · getTickerEventNews + HNX cbonds (TPDN lịch đáo hạn + tổ chức tư vấn) + FiinRatings/VIS (XHTN) + VBMA (chu kỳ ngành) + Cổng Chính phủ. <b>Exclusion criteria</b>: leverage e15.8 Sàng lọc KB + <b>Drop_List</b> DN nhạy cảm uy tín TCBS (Novaland, R&H, Helios, BOT Ninh Thuận, BCG Land, Saigon Glory, Hưng Thịnh, Tân Hoàng Minh, cụm Trung Nam). <b>Captive_Ecosystem_Map</b> (B1 critical input): 18 ecosystem NH-CTCK (SHB-SHS/VPB-VPBankS/MB-MBS/TPB-TPS/CTG-CTS/BIDV-BSC/VCB-VCBS/ACB-ACBS/HDBank-HDS/ABBank-ABS) → DN trục chính = captive (B1=1, ô ③ Theo dõi).',
-     out:'<b>3 deliverables chính</b>: <b>(1) Watchlist Excel 10 sheets</b> — README + Dashboard (ma trận 2×2 4 ô action) + Watchlist_Main 177 DN × cột Điểm A + Điểm B + Ô ma trận + Bond_Issuers_2024_2026 (chia Hạng I/II/III/Loại trừ) + Bond_Maturity_2026_2027 + Large_Projects_2026_2028 + Priority_Matrix (output chính) + Captive_Ecosystem_Map + Drop_List + Sources. <b>(2) Weekly Brief 7 sections</b> cadence hàng tuần: Tóm tắt điều hành + Top 5 Tấn công + Top 5 Nuôi quan hệ + Tín hiệu tuần + Lịch đáo hạn 6-18T + Dự án mới phê duyệt + XHTN update + Tin tức ngành. <b>(3) Pitch memo Việt 5 sections</b> per deal: context + value prop TCBS + vai trò (Joint Bookrunner/Tư vấn chính/Đại lý) + lợi ích DN (fee saving + tệp NĐT VN + time-to-market) + next step (Chairman-to-Chairman meeting + term sheet timeline). <b>Status</b>: framework + cấu trúc xong, đã reconcile 185 DN từ 8 file Deep Research (M1 done). Chờ M2-M5 chấm điểm thực tế 30-40 DN trọng tâm → Production.',
-     kv:[['Owner','Chị Ngọc Anh (NA) — Senior Expert DCM TCBS'],['Methodology','2 trục A×B + Ma trận 2×2 + 11 tiêu chí (6+5)'],['Cadence','Weekly Brief (không daily — chu kỳ PH 3-6 tháng)'],['Lead time','6-18 tháng (logic ngược ECM 24-72h)'],['Build probability','Cao — framework + 10 sheets + 185 DN reconciled M1 ✅'],['Tái sử dụng','TCA MCP 44 tools + HNX cbonds + e15.8 Exclusion KB + 18 ecosystem Captive Map'],['Status hiện tại','Framework xong · M1 done · M2-M5 pending'],['Reference docs','PROJECT_JOURNEY.md + DCM_Engine_Methodology.md + DCM_Watchlist.xlsx + DCM_Weekly_Brief_Mockup_2026-06-02.docx + 8 Deep Research files'],['Nguyên tắc cứng','Chỉ DN lành mạnh · Source-grounded có cite VBPL · Việt hoá thuật ngữ · Mọi tín hiệu phải gắn DN cụ thể']],
-     next:'<b>5 Milestones còn lại</b>: <b>M2</b> Captive Ecosystem mapping qua TCA getLargeShareHolders (30-40 DN trọng tâm) — verify 18 ecosystem NH-CTCK · <b>M3</b> Chấm Trục A (A1-A6) thang 1-5 + tính Điểm A weighted · <b>M4</b> Chấm Trục B (B1-B5; B2/B5 = TBD chờ CRM TCBS) + tính Điểm B · <b>M5</b> Phân bổ vào 4 ô + update Watchlist_Main + Priority_Matrix + Dashboard + Weekly Brief. <b>Lắp ghép DCM AI OS Phase 1</b> sau M5: hookup e15.8 Sàng lọc + e15.2 TCPH KB (profile lookup TCA) + e15.3 Industry KB (Offering recommendation) + handoff E1 Document Intelligence (Phase 2 DD pipeline) + handoff E5 Deal Structuring. <b>Automation</b>: Scheduled Task chạy 1 lần/tuần thứ Hai 07:30 — cần engineer build pipeline + tích hợp CRM TCBS cho B2/B5. <b>CAN DO Cowork ngay sau M5</b>: pitch memo cho 5 DN ô Tấn công ngay (VHM, BCM, HPG, IDC, DGC) + memo VIC Vienna MTF Đợt 2 350tr USD + memo BCM tái cấu trúc 5.066 tỷ + Board TCBS report phương pháp luận.'},
+   painTxt:'Tìm và sàng lọc khách hàng doanh nghiệp tiềm năng cho phát hành trái phiếu — làm thủ công, tốn thời gian, dễ lỡ cơ hội.',
+   painDetail:'<ul><li>Mất thời gian tìm + kết nối khách hàng: 177 doanh nghiệp trong danh sách theo dõi, trải 22 ngành</li><li>Dễ chọn nhầm khách hàng không đúng nhu cầu — doanh nghiệp trong hệ sinh thái khép kín (đã có ngân hàng + công ty chứng khoán nội bộ) làm lãng phí công sức tiếp cận</li><li>Thiếu dữ liệu + hiểu biết để xếp ưu tiên theo thời gian dẫn dắt 6-18 tháng → lỡ cơ hội trong cửa sổ tái cấu trúc nợ 2026-2027 (~210 nghìn tỷ trái phiếu đáo hạn)</li><li>TCBS đang giữ thị phần ~45,8% nửa đầu 2025 — cần một engine làm việc có hệ thống thay cho thủ công</li></ul>',
+   tool:{ic:'🎯',name:'Customer Origination & Screening',type:'Engine E0 — Chủ trì Chị Ngọc Anh (Senior Expert DCM TCBS) · Khung phương pháp đã xong, chờ chấm điểm thực tế',
+     desc:'<ul><li>Engine giúp DCM <b>tìm + sàng lọc + xếp ưu tiên</b> khách hàng doanh nghiệp tiềm năng cho phát hành trái phiếu, thay cho cách làm thủ công.</li><li>Cách chấm điểm dùng <b>2 trục độc lập + ma trận 2×2</b> (mỗi doanh nghiệp có 2 điểm riêng, không gộp thành 1 điểm):<ul><li><b>Trục A — Nhu cầu &amp; mức độ cấp thiết</b> (6 tiêu chí): áp lực đáo hạn nợ, dư địa vay thêm, kế hoạch đầu tư, tín hiệu pháp lý, khoảng trống nhân sự tài chính, chu kỳ ngành</li><li><b>Trục B — Khả năng thắng deal</b> (5 tiêu chí): quan trọng nhất là <b>hệ sinh thái khép kín</b> — doanh nghiệp đã có ngân hàng + công ty chứng khoán riêng thì TCBS khó chen vào</li></ul></li><li><b>4 ô hành động</b>: ① Tấn công ngay ② Nuôi quan hệ ③ Theo dõi chờ cơ hội ④ Bỏ qua</li><li>Điểm khác biệt: bắt <b>tín hiệu càng sớm điểm càng cao</b> (trái phiếu cần chuẩn bị 6-18 tháng, khác cổ phiếu chỉ vài ngày). Rà soát theo nhịp <b>hàng tuần</b>.</li></ul>',
+     inp:'<ul><li>Đề xuất khách hàng tiềm năng từ đội quan hệ khách hàng (RM).</li><li>Danh sách theo dõi 177 doanh nghiệp × 22 ngành + lịch đáo hạn trái phiếu 6-18 tháng.</li><li>Tín hiệu công khai: nghị quyết HĐQT/ĐHĐCĐ, quyết định duyệt dự án lớn, ký hợp đồng xếp hạng tín nhiệm.</li><li>Dữ liệu tài chính qua bộ công cụ phân tích TCBS + danh sách loại trừ doanh nghiệp nhạy cảm uy tín.</li></ul>',
+     out:'<ul><li>Bảng theo dõi Excel 10 sheet: bảng chính 177 doanh nghiệp đã chấm 2 điểm + ô ma trận + bản đồ hệ sinh thái khép kín + danh sách loại trừ.</li><li>Bản tin tuần: top 5 tấn công, top 5 nuôi quan hệ, tín hiệu trong tuần, lịch đáo hạn, dự án mới được duyệt.</li><li>Bản ghi nhớ chào deal cho từng doanh nghiệp: bối cảnh + giá trị TCBS mang lại + vai trò + lợi ích + bước tiếp theo.</li></ul>',
+     kv:[['Kế hoạch','<ul><li>Hoàn thiện khung phương pháp + cấu trúc bảng theo dõi (đã xong)</li><li>Chấm điểm thực tế 30-40 doanh nghiệp trọng tâm qua 5 mốc M1-M5</li><li>Lắp ghép vào DCM AI OS Phase 1 + tự động hoá chạy hàng tuần</li></ul>'],['Trạng thái hiện tại','<ul><li>✅ Khung phương pháp + 10 sheet + cấu trúc đã xong</li><li>✅ Đã gom 185 doanh nghiệp từ 8 file nghiên cứu (mốc M1 xong)</li><li>⏳ Đang chờ chấm điểm thực tế 30-40 doanh nghiệp (M2-M5)</li><li>⚠️ Hai tiêu chí khả năng thắng deal cần dữ liệu CRM TCBS</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách (PIC)</b>: anh Dũng</li><li><b>Phương pháp</b>: chị Ngọc Anh — Senior Expert DCM TCBS</li><li><b>Dữ liệu + công cụ</b>:<ul><li>Bộ công cụ phân tích TCBS (TCAnalysis, 44 công cụ)</li><li>Lịch đáo hạn trái phiếu HNX + xếp hạng tín nhiệm FiinRatings/VIS</li><li>Bản đồ 18 hệ sinh thái ngân hàng - chứng khoán</li></ul></li></ul>']],
+     next:'<ul><li><b>Việc cần làm ngay</b>: xin 1 buổi demo cho đội Miền Nam — thứ 5 (anh Dũng).</li><li><b>5 mốc còn lại</b>: M2 lập bản đồ hệ sinh thái khép kín (30-40 doanh nghiệp) → M3 chấm Trục A → M4 chấm Trục B → M5 phân bổ vào 4 ô + cập nhật bảng theo dõi + bản tin tuần.</li><li><b>Sau M5</b>: lắp ghép vào DCM AI OS Phase 1 — nối với sàng lọc KB + tra cứu hồ sơ doanh nghiệp + chuyển tiếp sang Engine 1 thẩm định hồ sơ.</li><li><b>Tự động hoá</b>: chạy 1 lần/tuần sáng thứ Hai — cần kỹ sư dựng pipeline + nối dữ liệu CRM TCBS.</li><li><b>Làm được ngay sau M5</b>: bản ghi nhớ chào deal cho 5 doanh nghiệp ô Tấn công ngay + báo cáo phương pháp luận cho Ban lãnh đạo TCBS.</li></ul>'},
    phase:1,star:false},
   {n:2,name:'Due Diligence',pain:'crit',sev:'Rất cao',
-   painTxt:'Đọc 20-50 tài liệu mỗi deal: điều lệ, BCTC 3 năm, hồ sơ dự án, phương án sử dụng vốn, hồ sơ TSBĐ. Ngốn 40-60% thời gian deal và dễ bỏ sót cờ đỏ pháp lý / tài chính.',
-   tool:{ic:'🤖',name:'Document Intelligence',type:'Plugin v2.2.0 BREAKING PPTX-aligned · 3 sub-skill PPTX order (Checklist → Filing → OCR) · AUTO-PROCEED + 2 user gates ở e1.1+e1.3',
-     desc:'<div class="eng-section"><h4>🔥 Vấn đề thực tế (Painpoints)</h4><ul><li>Mỗi deal phải đọc 20-50 tài liệu pháp lý + tài chính, ngốn 40-60% thời gian</li><li>Dễ bỏ sót cờ đỏ (NQ HĐQT thiếu, ĐKKD hết hạn, BCTC chưa kiểm toán)</li><li>Phải gửi checklist hồ sơ cho KH nhiều lần vì thiếu rõ từ đầu</li><li>OCR thủ công Backend Document Portal mất thời gian + dễ sai meta data</li></ul></div><div class="eng-section"><h4>📋 Mô tả engine</h4><ul><li>Engine xử lý hồ sơ TPDN tự động, gồm 3 bước nối tiếp:<ul><li><b>Bước 1 — Sinh checklist:</b> Từ thông tin sơ bộ deal (loại DN, hình thức PH, TSBĐ, ngành, quy mô) → tự động tạo 2 checklist (KH cung cấp + DCM soạn)</li><li><b>Bước 2 — Nhận và phân loại hồ sơ:</b> KH gửi hồ sơ → engine tự đặt tên chuẩn, xếp folder, so sánh checklist, đánh dấu thiếu/lỗi/hết hạn</li><li><b>Bước 3 — Đọc thông tin từ hồ sơ:</b> Tự động trích 4 nhóm thông tin vào Excel: thông tin doanh nghiệp, tài chính, dự án/tài sản, dữ liệu Backend Portal</li></ul></li><li>2 lần PM kiểm tra giữa chừng (sau bước 1 + bước 3) để verify trước khi sang bước tiếp</li></ul></div><div class="eng-section"><h4>📥 Input (đầu vào)</h4><ul><li><b>Thông tin sơ bộ deal</b> từ E0 (loại DN/hình thức PH/TSBĐ/ngành/quy mô) — dùng cho Bước 1</li><li><b>Hồ sơ KH upload</b> (PDF, Word, Excel, scan) — dùng cho Bước 2 và 3</li><li><b>Knowledge Base nền</b>: thư viện tên tài liệu chuẩn (115 mã), cấu trúc folder, quy tắc đặt tên, OCR rules</li></ul></div><div class="eng-section"><h4>📤 Output (đầu ra)</h4><ul><li><b>1 file Excel Master Checklist 8 sheet</b>:<ul><li>Sheet 1: Thông tin chung deal</li><li>Sheet 2: Checklist hồ sơ KH cung cấp</li><li>Sheet 3: Checklist hồ sơ DCM soạn</li><li>Sheet 4: Cảnh báo (thiếu/lỗi/hết hạn)</li><li>Sheet 5: Doc Meta Data (chuẩn Backend Portal)</li><li>Sheet 6: Thông tin doanh nghiệp (pháp lý/lãnh đạo/cổ đông)</li><li>Sheet 7: Số liệu tài chính (BCTC raw)</li><li>Sheet 8: Tài sản/dự án (nếu có TSBĐ)</li></ul></li><li><b>Folder hồ sơ chuẩn</b>: 9 nhóm theo K3 Schema, hồ sơ đặt tên canonical, file không liên quan vào archive, file không nhận diện vào unknown</li><li><b>JSON dữ liệu</b> cho 8 engines khác đọc (E2, E3, E4, E5, E6, E7, E9, E11)</li></ul></div><div class="eng-section"><h4>🗺️ Kế hoạch (Plan)</h4><ul><li><b>MVP1 (đang làm)</b>: KB + 3 sub-skill + Master Checklist Excel</li><li><b>MVP2 (giai đoạn 2)</b>: tích hợp MCP TCBS để tự đẩy data sang hệ thống (Global Accounts, Financial Projection, PAM, Document Portal) → KHÔNG nằm trong E1, chia ra các engine khác (E13/E6/E2/E4/E3.1/E16)</li></ul></div><div class="eng-section"><h4>✅ Trạng thái hiện tại</h4><ul><li>Đã đóng gói pack v2.2.0 (135KB, 35 files) — deployed `_packages/`</li><li>Đã chuyển hết function pháp lý compliance sang E3 (paradigm v5.7)</li><li>Đã chuyển hết delegation tài chính + tài sản sang E2/E4 hoạt động riêng (KHÔNG còn delegate)</li><li>HTML masterplan đã cập nhật I/O đầy đủ</li></ul></div><div class="eng-section"><h4>🚀 Việc cần làm tiếp theo</h4><ul><li>PM crowdsource KB 3 file placeholder (checklist attributes Requesting + Bond + Master Checklist template) từ DCM team + deal lịch sử</li><li>Test thử với 2-3 deal pilot, đo độ chính xác phân loại + OCR + bắt cờ đỏ</li><li>Cập nhật 8 engines downstream để đọc Master Checklist 8 sheet thay schema cũ</li><li>Ghi Decision Log Dxxx + bump MasterPlan SST-1 v2.1.0 → v2.2.0</li></ul></div><div class="eng-section"><h4>🤝 Nguồn lực hỗ trợ cần</h4><ul><li><b>My Võ (DCM South)</b> — audit engine + finetune cycle tiếp theo</li><li><b>DCM team + deal lịch sử</b> — crowdsource KB checklist attributes</li><li><b>AI Team</b> — build engine code Python + test pipeline</li><li><b>Pioneer DCM</b> — test user gates workflow (2-3 deal pilot)</li></ul></div>',
-     inp:'<b>2 input streams</b>: (1) <b>Deal attributes từ E0</b> Customer Origination (loại DN NH/Non-bank · hình thức PH RL/CC · TSBĐ Y/N + loại · ngành nghề · quy mô volume + tenor + coupon structure · pattern wording X1 nếu có) — INPUT cho e1.1 sinh Master Checklist TRƯỚC; (2) <b>Hồ sơ KH upload</b> (PDF · Word · Excel · scan) — INPUT cho e1.2 intake & filing SAU. KB foundation: e15.7 Workflow & Schema (K1 115 mã + K2 117 doc + K3 + K4) + e15.4 Template KB + e15.1 Pháp luật KB (cho compliance verify GP-01).',
-     out:'<b>Master Checklist Excel 8 sheet</b> (đơn output canonical sau pipeline): <b>Cover</b> (Issuer + Deal Info) · <b>Requesting Docs</b> (KH cung cấp checklist) · <b>Bond Docs</b> (DCM soạn checklist) · <b>Flag</b> (auto thiếu/lỗi/expire/wrong-authority) · <b>Doc Meta Data</b> (Backend Portal schema) · <b>Company Overview</b> (pháp lý/lãnh đạo/cổ đông) · <b>Financial</b> (BCTC raw) · <b>PAM</b> (tài sản/dự án). + <b>3 JSON canonical</b> per sub-skill + <b>Folder K3 Adaptive 9 nhóm</b> (chỉ mkdir folder cần theo pattern) + <b>99_UNKNOWN/</b> + <b>_old_versions/</b>. Output cho downstream: E2 Financial (read Sheet Financial nếu compute) · E3 Phase 2 (read 8 sheet compliance) · E4 Collateral (read Sheet PAM nếu định giá) · E5 Deal Structuring · E6 Stakeholders (read Sheet Company Overview lãnh đạo+cổ đông) · E7 Doc Gen (read Bond Docs checklist) · E9 Consistency · E11 Risk.',
-     kv:[['Version','v2.2.0 BREAKING PPTX-aligned (rebuild per DCM_Document_Intel_Overview)'],['Build','5-7 ngày + KB crowdsource e1.1 checklist attributes'],['Tiết kiệm','~70-80% thời gian đọc tay + tự động checklist gen','good'],['MVP scope','MVP1 — KB + 3 skills + Master Checklist Excel'],['MVP2 distribute','Doc Portal MCP → E13 Phase 5 · CRM GA → E6 · Financial Projection → E2 · PAM → E4 · Approval → E3.1 · Hard copy → E16'],['KB tổng','K1 115 mã · K2 117 doc IO · K3 Folder Schema 9 nhóm · K4 Pattern→Required Mapping · DMS Schema W1-W9/X1-X4 · OCR rules + Backend Meta Data schema · Master Checklist template (PLACEHOLDER e1.1 cycle sau crowdsource) · Vision-first PDF · Confidence 4-level VN'],['Owner audit','My Võ (DCM South) — audit cycle finetune E1 v2.2.0'],['Compliance pháp luật','MOVED sang E3 v1.0.0 (paradigm v5.7) — E3.1 thẩm định + E3.2/E3.3 eligibility + E3.4 termsheet audit + E3.6 dẫn chiếu PL post-E7']],
+   painTxt:'Đọc 20-50 tài liệu mỗi deal, ngốn 40-60% thời gian. Dễ sót cờ đỏ pháp lý/tài chính, phải gửi checklist nhiều lần do thiếu rõ.',
+   painDetail:'<ul><li>Mỗi deal phải đọc 20-50 tài liệu pháp lý + tài chính, ngốn 40-60% thời gian</li><li>Dễ bỏ sót cờ đỏ (NQ HĐQT thiếu, ĐKKD hết hạn, BCTC chưa kiểm toán)</li><li>Phải gửi checklist hồ sơ cho KH nhiều lần vì thiếu rõ từ đầu</li><li>OCR thủ công Backend Document Portal mất thời gian + dễ sai meta data</li></ul>',
+   tool:{ic:'🤖',name:'Document Intelligence',type:'Plugin v3.0.0 BREAKING MV-aligned · 3 sub-skill MV-style · Owner My Võ (Senior Expert DCM South) · KB-01 v1.0 ratified · KB-02→KB-07 đang build',
+     desc:'<ul><li>Engine giúp DCM xử lý hồ sơ phát hành trái phiếu doanh nghiệp <b>tự động</b>, thay thế việc đọc + sắp xếp + nhập liệu thủ công.</li><li>Quy trình gồm <b>3 bước nối tiếp</b>:<ul><li>Sinh checklist hồ sơ ngay từ đầu deal — để gửi yêu cầu khách hàng cung cấp đúng từ đầu.</li><li>Nhận hồ sơ khách hàng gửi — tự đặt tên + xếp folder + so sánh checklist.</li><li>Đọc và trích thông tin quan trọng từ hồ sơ — vào bảng dữ liệu chuẩn.</li></ul></li><li>Phần kiểm tra pháp lý tuân thủ đã <b>tách sang Engine 3</b> (Legal Engine) — Engine 1 chỉ xử lý văn bản.</li><li>Bản thiết kế theo Senior Expert My Võ (DCM South) — chi tiết từng bước xem ở 3 tính năng e1.1 → e1.3 bên dưới.</li></ul>',
+     inp:'<ul><li>Thông tin sơ bộ về deal (do team origination cung cấp).</li><li>Hồ sơ khách hàng gửi (PDF, Word, Excel, file scan).</li><li>Kho kiến thức gồm 8 bộ KB chuẩn (KB-00 → KB-07).</li></ul>',
+     out:'<ul><li>2 file Excel checklist (1 gửi khách hàng yêu cầu cung cấp, 1 theo dõi tình trạng nhận hồ sơ).</li><li>Folder hồ sơ sắp xếp theo cấu trúc chuẩn của TCBS DCM.</li><li>Bảng dữ liệu (4 nhóm thông tin chính: thông tin doanh nghiệp, tài chính, dự án/tài sản, metadata).</li><li>Dữ liệu kỹ thuật để 8 engine khác sử dụng tiếp.</li></ul>',
+     kv:[['Kế hoạch','<ul><li>Tái thiết kế phiên bản 3.0.0 theo bản Senior Expert My Võ.</li><li>Hoàn thiện 8 bộ KB nền (KB-00 đến KB-07) qua từng vòng review.</li><li>Xây dựng engine theo lộ trình 10 bước: chuẩn hoá KB → 3 sub-skill → đóng gói → triển khai cho các engine downstream.</li></ul>'],['Trạng thái hiện tại','<ul><li>✅ Đã chốt kế hoạch v3.0.0 (05/06/2026)</li><li>✅ Đã hoàn thành KB-01 Document Dictionary Master (06/06/2026)</li><li>⏳ Đang xây dựng KB-02 → KB-07</li><li>⚠️ Phiên bản v2.2.0 sẽ ngừng dùng khi v3.0.0 đóng gói xong</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Chủ trì</b>: My Võ — Senior Expert DCM South</li><li><b>Reviewer KB</b>:<ul><li>Đỗ Thị Ngọc Anh — Folder tree + Filename rule + TSBĐ + UoP</li><li>My — Dictionary doc + Bộ mã hồ sơ</li><li>Lương Thị Minh Phương — HSPL/HSTC + Quy tắc nhóm VVIP</li><li>Trần Thị Quỳnh Anh — Pháp lý dự án + Bond docs</li><li>Hiền Đoàn + Chinh — Thể thức hồ sơ (e1.2 Intake)</li></ul></li></ul>']],
      features:[
-       {tag:'e1.1-checklist-generation',name:'Checklist Generation (NEW BUILD PPTX)',ic:'📋',
-        desc:'<b>NEW BUILD v2.2.0 per PPTX Skill 01</b>. Gen 2 checklist TRƯỚC khi nhận hồ sơ KH: <b>(a) Requesting Docs checklist</b> (KH cung cấp — gửi KH yêu cầu thu thập) + <b>(b) Bond Docs checklist</b> (DCM soạn — Prospectus + HĐPL + điều khoản TP + đăng ký GDTT). Input deal attributes từ E0 (loại DN/PH/TSBĐ/ngành/quy mô). Output Master Checklist Excel 4 sheet (Cover + Requesting + Bond + Flag) + JSON. ⚠️ USER GATE: PM review trước khi gửi KH.',
-        input:'Deal attributes từ E0 Customer Origination (DCM Bond Engine NA): loại DN + hình thức PH + TSBĐ + ngành + quy mô + tenor + coupon structure',
-        output:'<b>Master Checklist Excel 4 sheet</b>: Cover (Issuer/Deal Info) + Requesting Docs + Bond Docs + Flag (auto). + JSON e1.1 cho downstream. ⚠️ USER GATE bắt buộc.',
-        kb:'checklist_attributes_requesting.md + checklist_attributes_bond.md + master_checklist_template.md (PLACEHOLDER cycle sau crowdsource từ PM + DCM team)',
-        note:'<b>NEW timing</b>: gen checklist TRƯỚC khi nhận hồ sơ (PPTX logic) thay vì SAU filing (v2.1.0 cũ). Cho phép gửi KH yêu cầu thu thập đúng từ đầu.'},
-       {tag:'e1.2-document-intake-filing',name:'Document Intake & Filing (renamed)',ic:'📂',
-        desc:'<b>Renamed từ e1.1-phan-loai v2.1.0</b> per PPTX Skill 02. Nhận hồ sơ KH upload → rename canonical 115 mã K1 + K3 9 nhóm Adaptive + <b>mapping vs Master Checklist từ e1.1</b> + flag (thiếu/lỗi/expire/wrong-authority). Keep: Co-format pair + Content-verify 5 high-stakes (BBH-PH/NQ-PH/PAPH/TnC/OC) + Vision-first PDF + TCTD GP=ĐKKD.',
-        input:'Hồ sơ KH upload vào Deals_Active/{deal}/ + JSON e1.1 Master Checklist',
-        output:'Update Master Checklist Excel — Sheet Flag refresh per upload + folder K3 9 nhóm Adaptive (chỉ mkdir folder cần theo pattern) + 99_UNKNOWN + _old_versions. JSON e1.2.',
-        kb:'K1 115 mã · K2 117 doc · K3 Folder Schema · K4 Pattern→Required Mapping · DMS Schema · Naming Convention D062 · GP-01 D091 R94',
-        note:'Scope unchanged từ v2.1.0 e1.1-phan-loai. Chỉ rename + add mapping logic vs Master Checklist e1.1.'},
-       {tag:'e1.3-ocr-data-extraction',name:'OCR & Data Extraction (REWRITE 4 sheet)',ic:'🔬',
-        desc:'<b>REWRITE scope BREAKING từ e1.3-trich-xuat v2.1.0</b> per PPTX Skill 03. OCR + extract <b>4 sheet vào Master Checklist Excel</b>: (1) <b>Doc Meta Data</b> chuẩn Backend Portal schema · (2) <b>Company Overview</b> (pháp lý + lãnh đạo + cổ đông) · (3) <b>Financial</b> (BCTC raw: doanh thu + LN + nợ + VCSH) · (4) <b>PAM (Project-Asset Management)</b> (tài sản + dự án nếu có TSBĐ). <b>KHÔNG delegate E2/E4 nữa</b> — self-contained extract. Downstream E2/E4 read sheet nếu cần compute riêng. ⚠️ USER GATE: PM review 4 sheet trước save JSON cuối.',
-        input:'Hồ sơ đã filed (e1.2 output) + Master Checklist JSON',
-        output:'Update Master Checklist Excel — add 4 sheet: Doc_Meta + Company_Overview + Financial + PAM. JSON e1.3. Final Excel 8 sheet sau pipeline.',
-        kb:'OCR rules + Backend Meta Data schema + Vision-first PDF Read tool + Confidence 4-level VN (CAO/TRUNG_BÌNH/CẦN_XÁC_NHẬN/THIẾU)',
-        note:'<b>BREAKING vs v2.1.0</b>: schema đổi từ Deal Model 6 nhóm A-F + delegate E2/E4 → 4 sheet self-contained Master Checklist. Downstream E2/E4 read riêng nếu compute. E3 Phase 2 consume Master Checklist 8 sheet thay Deal Model JSON cũ.'}
+       {tag:'e1.1-checklist-generation',name:'Sinh checklist (MV-aligned)',ic:'📋',
+        desc:'Sinh <b>2 loại checklist</b> Excel business-friendly + JSON ngầm:<ul><li><b>Loại 1 Requesting</b>: yêu cầu KH cung cấp, format Cover + Checklist 6 nhóm I-VI + Tổng hợp — driven by deal pattern + nhóm TCPH (VVIP1-10)</li><li><b>Loại 2 Bond docs</b>: DCM soạn (50 mã HS DCM), format STT + Số hiệu + Nội dung + Ký giữa + Trạng thái soạn/review</li></ul>',
+        input:'Thông tin sơ bộ deal từ E0 + nhóm TCPH (X1 VVIP) — trigger khi user nói "tạo checklist cho deal của KH nhóm X"',
+        output:'2 file Excel checklist + JSON ngầm. KB-03 Requesting (HSPL/HSTC/TSBĐ/UoP/Pháp lý DA) + KB-04 Bond docs',
+        kb:'KB-03 Checklist Requesting + KB-04 Checklist Bond docs + KB-07 Cross-reference K1 bridge',
+        note:'Reviewers KB-03: Lương Thị Minh Phương (HSPL/HSTC) + Đỗ Thị Ngọc Anh (TSBĐ, UoP) + Trần Thị Quỳnh Anh (Pháp lý DA). Reviewer KB-04: Trần Thị Quỳnh Anh.'},
+       {tag:'e1.2-document-intake',name:'Nhận + phân loại (MV 6 bước + folder lai)',ic:'📂',
+        desc:'Nhận hồ sơ KH upload, xử lý theo <b>6 bước MV</b>:<ul><li>Đặt tên chuẩn theo rule ổ K (không dấu, ngày 2026.04.20)</li><li>Phân loại qua từ điển doc MV + content-verify + vision-first PDF</li><li>Xếp folder <b>mô hình lai</b>: A–D issuer dùng chung (Pháp lý/Tài chính/Năng lực/Dự án) + E.DEALS/{deal}/ 5 nhóm pattern-driven (1.UOP + 2.HSPH 6 sub + 3.Sau PH + 4.Quyền + 5.Mua lại) + F.Khác</li><li>So sánh checklist Requesting → mark Đủ/Thiếu/Không bắt buộc/Cần xác nhận + định danh bản</li><li>Co-format pair detection + dedupe + content-verify 5 high-stakes</li><li>Output Excel Intake status + JSON ngầm</li></ul>',
+        input:'Hồ sơ KH upload + JSON e1.1 Requesting checklist + KB-05 Từ điển nhận diện',
+        output:'Excel Intake status + folder lai chuẩn + JSON e1.2 cho e1.3 đọc',
+        kb:'KB-02 Folder tree + filename rule + KB-05 Từ điển nhận diện doc + KB-07 Cross-reference K1',
+        note:'Reviewers: Đỗ Thị Ngọc Anh (KB-02 Folder tree + filename rule) + My (KB-05 Dictionary doc + bộ mã hồ sơ) + Hiền Đoàn + Chinh (Thể thức hồ sơ e1.2 Intake).'},
+       {tag:'e1.3-ocr-data-extraction',name:'Đọc thông tin (4 sheet schema giữ)',ic:'🔬',
+        desc:'Đọc + trích thông tin tự động từ hồ sơ đã filed (e1.2 output) thành <b>4 sheet</b>:<ul><li><b>Doc Meta Data</b> — chuẩn Backend Document Portal schema</li><li><b>Doanh nghiệp</b> — pháp lý + lãnh đạo + cổ đông</li><li><b>Tài chính</b> — BCTC raw (doanh thu + LN + nợ + VCSH)</li><li><b>PAM (Project-Asset Management)</b> — tài sản + dự án (nếu có TSBĐ)</li></ul>Vision-first PDF + Confidence 4-level VN (CAO/TRUNG_BÌNH/CẦN_XÁC_NHẬN/THIẾU). Schema 4 sheet giữ nguyên từ v2.2.0, chỉ đổi input đọc folder lai + JSON path mới.',
+        input:'Hồ sơ đã filed (e1.2 output theo folder lai) + JSON e1.2',
+        output:'4 sheet Excel + JSON e1.3 cho 8 engines downstream đọc (E2, E3, E4, E5, E6, E7, E9, E11)',
+        kb:'KB-06 OCR rules + Backend Meta Data schema',
+        note:'Engineering PM giữ: vision-first PDF (Read tool), content-verify, co-format pair, dedupe. Anti-fabrication guard active.'}
      ],
-     next:'<b>Cycle sau v2.2.0 finalize</b>: (1) PM crowdsource KB e1.1 — checklist_attributes_requesting + checklist_attributes_bond + master_checklist_template từ DCM team + deal lịch sử; (2) Downstream engine MIGRATION reference update — E2/E3/E4/E5/E6/E7/E9/E11 phải đọc Master Checklist 8 sheet thay Deal Model JSON cũ (chi tiết MIGRATION.md); (3) Test với 2-3 deal pilot per PPTX Lộ trình Slide 6 — calibrate KB + refine output; (4) MVP2 distribute roadmap: E13 Phase 5 build Doc Portal MCP + ECM pull + auto-notify · E6 build CRM GA import · E2 add Financial Projection push · E4 add PAM push; (5) Decision Log Dxxx + MasterPlan SST-1 row E1 bump v2.1.0 → v2.2.0; (6) Test 2 user gates (e1.1 review Master Checklist + e1.3 review 4 sheet) workflow với pioneer DCM team.'},
+     next:'<ul><li><b>Việc cần làm ngay</b>: chị Trang đóng gói E1, cả nhóm chia nhau review lại kho kiến thức + sửa lại skill.</li><li><b>Build KB-02 → KB-07</b> theo review gate từng KB (mỗi KB PM review xong mới chuyển KB tiếp)</li><li><b>Build e1.1 sinh 2 checklist</b> Excel business-friendly + JSON ngầm</li><li><b>Dựng folder lai</b>: A–D issuer + E.DEALS/{deal}/ 5 nhóm pattern-driven + F.Khác (supersede D092 K3 in-folder)</li><li><b>Nhúng từ điển nhận diện MV</b> vào e1.2 (giữ engineering PM: vision-first + content-verify + co-format + dedupe)</li><li><b>Chỉnh e1.3 OCR</b> theo folder + JSON path mới</li><li><b>Repackage `.skill` v2.2.0 → v3.0.0</b> + archive cũ + SKILL.md router + plugin.json v3.0.0</li><li><b>MIGRATION downstream</b>: 8 engines (E2/E3/E4/E5/E6/E7/E9/E11) đọc folder lai + JSON path mới (bảng MIGRATION đầy đủ — khối lớn nhất)</li><li><b>Verify TCB_DEAL_01</b> chạy lại trên v3.0.0</li><li><b>Decision Log Dxxx</b> + supersede D092 + MasterPlan SST-1 bump E1 v2.2.0 → v3.0.0 + CLAUDE.md changelog + SOP D2.2 + Phần I</li></ul>'},
    phase:1,star:true,
    subs:[
      {id:'fs',n:2,name:'Due Diligence',pain:'high',sev:'Cao',
-      painTxt:'Đọc BCTC kiểm toán 3 năm + đánh giá sức khoẻ tài chính + tính toán/tổng hợp 60+ chỉ tiêu raw + ratio + lập/audit FS dự án + định giá DCF — việc chuyên môn cao, dễ sai khi làm tay nhưng quyết định cấu trúc pricing + cash flow availability. Compliance check pháp luật MOVED sang E3.',
-      tool:{ic:'📊',name:'Financial Intelligence',type:'Plugin v2.1.0 ROLLBACK · 4 sub-skill VN (rename e2.2 drop compliance → E3) · 2 build + 2 SCAFFOLD',
-        desc:'Plugin v2.1.0 ROLLBACK — paradigm shift PM 02/06/2026 rút compliance pháp luật khỏi E2 → chuyển sang E3 v1.0.0. Pipeline <b>4 sub-skill function-based Vietnamese</b>: <b>e2.1-suc-khoe-tai-chinh</b> (NEW BUILD) Financial DD 6 phần phối hợp Phân tích team · <b>e2.2-tinh-toan-tong-hop</b> (RENAME từ e2.2-chi-tieu-phap-luat, v2.1 scope NARROW: CHỈ compute + aggregate 60+ chỉ tiêu raw + ratio, KHÔNG cite VBPL + KHÔNG verdict — output làm input E3.3) · <b>e2.3-fs-du-an</b> (SCAFFOLD) lập/audit FS dự án 2-mode AUDIT/BUILD pattern-driven · <b>e2.4-dinh-gia</b> (SCAFFOLD) định giá DCF/audit chứng thư TĐG 2-mode. Deliverable cycle này: <b>Coverage Audit Report</b> Excel 60 chỉ tiêu × Data Model gap (17 SẴN CÓ / 22 PHẢI TÍNH / 18 CẦN EXTEND / 3 BLOCKER) — PM review xong → cycle sau extend Workflow Sheet 0.4 + finalize e2.2 + E3.3 áp compliance.',
-        inp:'JSON Deal Model Nhóm B (từ e1.3-trich-xuat) + BCTC kiểm toán 3 năm + hồ sơ DA (e2.3 conditional) + chứng thư TĐG hoặc Market data (e2.4 conditional)',
-        out:'<b>e2.1</b> Excel Financial DD 6 sheet + JSON · <b>e2.2</b> SKELETON v2.1 → cycle sau Excel computed_ratios <b>6 sheet</b> (Summary + Nhóm B.1-B.6, <b>KHÔNG sheet Verdict</b>) + JSON computed values KHÔNG verdict → input cho E3.3 áp compliance · <b>e2.3</b> SCAFFOLD → cycle sau Excel 5/8 sheet AUDIT/BUILD · <b>e2.4</b> SCAFFOLD → cycle sau Excel 5/7 sheet AUDIT/BUILD DCF · Cycle này: Coverage_Audit_E2.2_Data_Model_v1.0_20260602.xlsx (3 sheet PM review) + E3 bổ sung 1 sheet Audit Legal vào file Excel E2',
-        kv:[['Build','Sub-skill e2.1 v2.0 + Coverage Audit deliverable'],['Tiết kiệm','~60-70% thời gian phân tích tài chính DD','good'],['Lộ trình','Cycle v2.0 build e2.1; cycle sau e2.2 full + e2.3/e2.4 KB crowdsource'],['KB tổng','5 nhóm B.1-B.6 + 60+ chỉ tiêu tài chính raw + công thức compute + benchmark ngành (placeholder e2.1) + giả định ngành (placeholder e2.3) + knowledge cty định giá (placeholder e2.4). Compliance check matrix NĐ 65/245/TT 41-22/Luật 56 MOVED sang E3.3 references'],['Owner align','Phân tích team TCBS align scope · Dev extend: Tin + Dũng + Huy']],
+      painTxt:'Đọc báo cáo tài chính kiểm toán 3 năm, tính hơn 60 chỉ tiêu, đánh giá sức khoẻ tài chính + định giá — chuyên môn cao, dễ sai khi làm tay.',
+      painDetail:'<ul><li>Mỗi deal phải đọc báo cáo tài chính kiểm toán 3 năm + tính hơn 60 chỉ tiêu tài chính</li><li>Đánh giá sức khoẻ tài chính + chất lượng lợi nhuận + khả năng trả nợ — quyết định cấu trúc, lãi suất và dòng tiền của deal</li><li>Lập hoặc kiểm tra mô hình tài chính dự án + định giá tài sản — việc nặng, dễ sai khi làm thủ công</li><li>Phần kiểm tra tuân thủ pháp luật đã tách sang Engine 3 — Engine 2 chỉ lo phần tính toán + phân tích tài chính</li></ul>',
+      tool:{ic:'📊',name:'Financial Intelligence',type:'Engine E2 — Chủ trì Phân tích team TCBS · 4 phần việc · 2 phần đã build, 2 phần đang ở khung sườn',
+        desc:'<ul><li>Engine phân tích <b>sức khoẻ tài chính</b> của doanh nghiệp phát hành — làm đầu vào cho việc cấu trúc deal + định lãi suất.</li><li>Gồm <b>4 phần việc</b>:<ul><li><b>Đánh giá sức khoẻ tài chính</b>: phân tích sâu khả năng trả nợ + cấu trúc vốn + chất lượng lợi nhuận, có so với chuẩn ngành</li><li><b>Tính toán + tổng hợp</b>: tính hơn 60 chỉ tiêu + tỷ số tài chính (chỉ tính số, không kết luận tuân thủ pháp luật — phần đó chuyển sang Engine 3)</li><li><b>Lập / kiểm tra mô hình tài chính dự án</b> (khi deal có tài trợ dự án)</li><li><b>Định giá</b>: kiểm tra chứng thư thẩm định giá hoặc tự dựng mô hình định giá dòng tiền</li></ul></li><li>Engine tạo bản nháp + cảnh báo điểm rủi ro → chuyên viên Phân tích review + chốt. <b>Engine không tự ký duyệt độc lập.</b></li></ul>',
+        inp:'<ul><li>Bảng dữ liệu doanh nghiệp (nhóm tài chính) từ Engine 1.</li><li>Báo cáo tài chính kiểm toán 3 năm.</li><li>Hồ sơ dự án + chứng thư thẩm định giá (khi cần).</li></ul>',
+        out:'<ul><li>File Excel đánh giá sức khoẻ tài chính 6 sheet (bảng cân đối, kết quả kinh doanh, dòng tiền, chỉ số sức khoẻ, kết luận).</li><li>Bảng tính hơn 60 chỉ tiêu + tỷ số tài chính — làm đầu vào cho Engine 3 kiểm tra tuân thủ.</li><li>File định giá / mô hình tài chính dự án (khi deal có tài trợ dự án hoặc tài sản bảo đảm).</li><li>Báo cáo rà soát mức độ phủ dữ liệu để xác định chỗ còn thiếu.</li></ul>',
+        kv:[['Kế hoạch','<ul><li>Xây phần Đánh giá sức khoẻ tài chính trước</li><li>Hoàn thiện phần Tính toán + tổng hợp sau khi chốt mô hình dữ liệu</li><li>Bồi đắp kho kiến thức cho phần Mô hình dự án + Định giá qua các deal thực tế</li></ul>'],['Trạng thái hiện tại','<ul><li>✅ Đã build phần Sức khoẻ tài chính + Báo cáo rà soát phủ dữ liệu</li><li>⏳ Phần Tính toán + tổng hợp chờ chốt mô hình dữ liệu rồi hoàn thiện</li><li>⏳ Phần Mô hình dự án + Định giá mới ở khung sườn, chờ kho kiến thức từ deal thực</li><li>⚠️ Phần kiểm tra tuân thủ pháp luật đã chuyển sang Engine 3</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Chủ trì nghiệp vụ</b>: Phân tích team TCBS — thống nhất phạm vi + review kết quả</li><li><b>Đội phát triển</b>:<ul><li><b>Phụ trách (PIC)</b>: anh Dũng + anh Tin (cùng Huy mở rộng tính toán + định giá)</li></ul></li><li><b>Phối hợp</b>: đội Phân tích / Pricing đóng góp giả định ngành + chứng thư định giá lịch sử</li></ul>']],
         features:[
           {tag:'e2.1-suc-khoe-tai-chinh',name:'Sức khoẻ tài chính (Financial DD)',ic:'🩺',
-           desc:'<b>NEW BUILD v2.0.0</b> — Đánh giá toàn diện sức khoẻ tài chính TCPH BEFORE deal structuring. KHÔNG chỉ check compliance pháp luật (đó là E3.3 — đã chuyển khỏi E2 per paradigm shift v2.1), mà phân tích sâu khả năng trả nợ + cấu trúc tài chính + chất lượng lợi nhuận + benchmarking ngành. <b>Phối hợp Phân tích team</b>: engine generate baseline draft + flag red issues → human Analyst review + finalize. Engine KHÔNG sign-off independent.',
-           input:'Deal Model Nhóm B (e1.3) + BCTC kiểm toán 3 năm + KB benchmark ngành (TCTD/BĐS/Infra/Manufacturing)',
-           output:'<b>Excel Financial DD 6 sheet</b>: Summary + Phan_tich_CDKT + Phan_tich_KQKD + Phan_tich_LCTT + Chi_so_Suc_Khoe (6 nhóm thanh khoản/đòn bẩy/hiệu suất/khả năng trả nợ/chất lượng LN/cash flow vs benchmark) + Verdict_Recommendations (red/yellow/green flags + recommendations cho E5 Deal Structuring + E11 Risk) + JSON canonical',
-           kb:'chi_so_suc_khoe_6_nhom.md · benchmark_{TCTD/BDS/Infra/Manufacturing}.md · quality_of_earnings_red_flags.md (PLACEHOLDER cycle sau crowdsource)',
-           note:'Phối hợp BẮT BUỘC với Phân tích team review — engine không sign-off độc lập. Anti-pattern: Verdict GREEN khi missing data >30%; so benchmark cross-industry (TCTD vs Manufacturing); trend analysis với <2 năm data.'},
-          {tag:'e2.2-tinh-toan-tong-hop',name:'Tính toán + Tổng hợp (Compute & Aggregate)',ic:'📐',
-           desc:'<b>v2.1.0 ROLLBACK scope</b> — RENAME từ e2.2-chi-tieu-phap-luat per paradigm shift PM 02/06/2026. SCOPE NARROW: CHỈ compute + aggregate 60+ chỉ tiêu raw + ratio. <b>KHÔNG cite VBPL + KHÔNG verdict pass/fail</b> (compliance check moved to E3 v1.0.0 sub-skill e3.3-dieu-kien-ph-tai-chinh consume output này). Carry-over references/tieu-chuan.md (5 nhóm B.1-B.5 + 50+ chỉ tiêu compute formula + D104 Nhóm B.6 + B4-11→B4-15) — Section 4 Compliance check matrix MOVED sang E3. scripts/__init__.py chưa implement (cycle sau parse_bctc + ratios_phi_tctd + ratios_tctd).',
-           input:'Deal Model Nhóm B v2 finalize (post Workflow Sheet 0.4 extend khi PM review Coverage Audit)',
-           output:'<b>Cycle này SKELETON</b>: Coverage Audit Report Excel v2.0 (3 sheet 60 chỉ tiêu × Source × Status × 19 gap) vẫn relevant. <b>Cycle sau</b>: JSON e2.2 (raw computed values + confidence per chỉ tiêu, KHÔNG verdict) + Excel computed_ratios 6 sheet (Summary + Nhóm B.1-B.6, KHÔNG sheet Verdict) → input cho e3.3.',
-           kb:'tieu-chuan.md (carry v0.1 + D104 drive PM, Section 4 compliance MOVED sang E3)',
-           note:'PM action cycle này vẫn: review Coverage Audit Report → ratify 19 field gap P0 → extend Workflow Sheet 0.4 v2.8.1 → v2.8.2. Downstream consumer thay đổi: e1.4 (đã DROP từ E1 v2.1.0) + E5+E10+E11 đọc e3.3 thay vì e2.2 cho compliance.'},
-          {tag:'e2.3-fs-du-an',name:'FS Dự án (Lập/Audit)',ic:'📈',
-           desc:'<b>v2.0.0 SCAFFOLD</b> — 2-mode: <b>AUDIT</b> verify FS model KH cung cấp (cấu trúc 3 statement + giả định reasonableness vs benchmark + sensitivity) · <b>BUILD</b> DCM tự lập FS 10-year forecast khi KH không cung cấp (W1=Tài trợ DA + W9=BĐS/Infra/Manufacturing). KB nặng: giả định cơ sở ngành + giả định quá khứ deal cùng TCPH/nhóm TCPH + FS model Excel template chuẩn TCBS.',
-           input:'Mode AUDIT: FS model KH (Excel/PDF). Mode BUILD: Hồ sơ DA + Phương án SD vốn + Term sheet + KB giả định ngành',
-           output:'<b>Cycle sau</b>: Mode AUDIT Excel 5 sheet (Summary + Cấu trúc + Giả định + Sensitivity + Red flags). Mode BUILD Excel 8 sheet (Assumptions + CĐKT + KQKD + LCTT + Sensitivity + Debt schedule + CAPEX schedule + Summary)',
-           kb:'PLACEHOLDER — gia_dinh_baseline_industry/{bds,infra,manufacturing,services}.md + deal_lich_su_{TCB,VIN,MAS}.md + FS_model_template_3statement.md + sensitivity_analysis_methodology.md (PM + Phân tích/Pricing team crowdsource cycle deal thực tế)',
-           note:'Conditional skill — chỉ kích hoạt khi deal pattern W1=Tài trợ DA + W9 ∈ {BĐS, Infra, Manufacturing}. KB crowdsource phụ thuộc deal lịch sử + Phân tích/Pricing team input.'},
-          {tag:'e2.4-dinh-gia',name:'Định giá (DCF/Audit Pricing)',ic:'💰',
-           desc:'<b>v2.0.0 SCAFFOLD</b> — 2-mode: <b>AUDIT</b> verify chứng thư TĐG/pricing report cty định giá (methodology + WACC + giả định + reasonableness vs comparable) · <b>BUILD</b> DCM tự DCF model 10-year + Terminal value + Sensitivity + Comparable analysis. KB nặng: knowledge công ty định giá lớn VN (Savills/CBRE/Cushman&Wakefield/JLL/Big4 PwC-EY-KPMG-Deloitte) — methodology preferred per asset type + discount rate baseline + terminal value approach.',
-           input:'Mode AUDIT: chứng thư TĐG (PDF) hoặc pricing report. Mode BUILD: thông số DA + FS model (e2.3) + Market data WACC components',
-           output:'<b>Cycle sau</b>: Mode AUDIT Excel 5 sheet (Summary + Methodology + Assumptions + Comparable + Red flags). Mode BUILD Excel 7 sheet (Assumptions + Cash flow + WACC + DCF + Sensitivity + Comparable + Summary) + range valuation Low/Base/High',
-           kb:'PLACEHOLDER — cty_dinh_gia/{savills,cbre,cushman_wakefield,jll,big4_consulting}.md + dcf_methodology.md + wacc_buildup.md + comparable_deals_history.md + valuation_red_flags.md (PM + Pricing team crowdsource chứng thư lịch sử)',
-           note:'Conditional skill — kích hoạt khi cần độc lập định giá DA / TSBĐ (E4 Collateral handoff) hoặc audit chứng thư > 12 tháng (BĐS) hay > 6 tháng (ĐS). Anti-pattern: WACC <8% VN; terminal growth >5%; <3 comparable deal lịch sử.'}
+           desc:'<ul><li>Đánh giá toàn diện sức khoẻ tài chính của doanh nghiệp <b>trước khi</b> cấu trúc deal.</li><li>Phân tích sâu khả năng trả nợ + cấu trúc vốn + chất lượng lợi nhuận, so với chuẩn ngành (ngân hàng / bất động sản / hạ tầng / sản xuất).</li><li>Engine tạo bản nháp + đánh dấu điểm rủi ro (đỏ/vàng/xanh) → chuyên viên Phân tích review + chốt.</li></ul>',
+           input:'Bảng dữ liệu tài chính (từ Engine 1) + báo cáo tài chính kiểm toán 3 năm + chuẩn so sánh ngành',
+           output:'File Excel đánh giá sức khoẻ tài chính 6 sheet + kết luận (cờ đỏ/vàng/xanh) + khuyến nghị cho Engine 5 cấu trúc deal và Engine 11 rủi ro',
+           kb:'Chỉ số sức khoẻ 6 nhóm + bộ chuẩn ngành (ngân hàng/BĐS/hạ tầng/sản xuất) + dấu hiệu chất lượng lợi nhuận kém',
+           note:'Bắt buộc phối hợp Phân tích team review — engine không tự ký duyệt độc lập.'},
+          {tag:'e2.2-tinh-toan-tong-hop',name:'Tính toán + Tổng hợp',ic:'📐',
+           desc:'<ul><li>Tính + tổng hợp hơn 60 chỉ tiêu + tỷ số tài chính từ báo cáo tài chính.</li><li><b>Chỉ tính số liệu</b> — không kết luận đạt/không đạt theo pháp luật. Phần kết luận tuân thủ do Engine 3 làm, dùng số liệu của Engine 2.</li><li>Kho công thức tính sẵn theo 6 nhóm chỉ tiêu (thanh khoản, đòn bẩy, hiệu suất, khả năng trả nợ...).</li></ul>',
+           input:'Bảng dữ liệu tài chính sau khi chốt mô hình dữ liệu',
+           output:'Bảng tính 60+ chỉ tiêu (kèm độ tin cậy từng chỉ tiêu) → làm đầu vào cho Engine 3 kiểm tra tuân thủ',
+           kb:'Bộ tiêu chuẩn + công thức tính 60+ chỉ tiêu tài chính (phần kiểm tra tuân thủ pháp luật đã chuyển sang Engine 3)',
+           note:'Việc cần PM: duyệt 19 chỗ còn thiếu trong Báo cáo phủ dữ liệu để mở rộng mô hình dữ liệu.'},
+          {tag:'e2.3-fs-du-an',name:'Mô hình tài chính dự án',ic:'📈',
+           desc:'<ul><li>2 chế độ: <b>Kiểm tra</b> mô hình do khách hàng cung cấp, hoặc <b>Tự lập</b> mô hình dự báo 10 năm khi khách hàng không có.</li><li>Chỉ dùng khi deal có tài trợ dự án (bất động sản / hạ tầng / sản xuất).</li><li>Kho kiến thức nặng: giả định ngành + deal lịch sử cùng doanh nghiệp + mẫu mô hình chuẩn TCBS.</li></ul>',
+           input:'Chế độ Kiểm tra: mô hình của khách hàng. Chế độ Tự lập: hồ sơ dự án + phương án dùng vốn + kho giả định ngành',
+           output:'File Excel mô hình tài chính dự án (cấu trúc + giả định + phân tích độ nhạy + cờ rủi ro)',
+           kb:'Giả định ngành (BĐS/hạ tầng/sản xuất) + deal lịch sử + mẫu mô hình 3 báo cáo (đang gom dần qua deal thực)',
+           note:'Mới ở khung sườn — kho kiến thức cần đội Phân tích / Pricing đóng góp qua deal thực tế.'},
+          {tag:'e2.4-dinh-gia',name:'Định giá (DCF / Kiểm tra chứng thư)',ic:'💰',
+           desc:'<ul><li>2 chế độ: <b>Kiểm tra</b> chứng thư thẩm định giá / báo cáo định giá của công ty định giá, hoặc <b>Tự dựng</b> mô hình định giá dòng tiền 10 năm.</li><li>Kho kiến thức về các công ty định giá lớn (Savills, CBRE, JLL, nhóm Big4) — phương pháp ưu tiên theo từng loại tài sản.</li></ul>',
+           input:'Chế độ Kiểm tra: chứng thư thẩm định giá. Chế độ Tự dựng: thông số dự án + dữ liệu thị trường',
+           output:'File Excel định giá (phương pháp + giả định + so sánh + cờ rủi ro) + khoảng giá trị Thấp/Cơ sở/Cao',
+           kb:'Kiến thức công ty định giá lớn + phương pháp DCF + cách dựng lãi suất chiết khấu (đang gom dần qua chứng thư lịch sử)',
+           note:'Dùng khi cần định giá độc lập dự án/tài sản bảo đảm, hoặc kiểm tra chứng thư đã quá hạn (12 tháng với bất động sản, 6 tháng với động sản).'}
         ],
-        next:'Cycle build sau khi PM finalize: (a) review Coverage Audit Report → ratify 19 field gap → extend Workflow Sheet 0.4 v2.8.2 → cycle sau full build e2.2 (CHỈ compute, no compliance); (b) crowdsource KB e2.3 (giả định ngành + deal lịch sử) + e2.4 (knowledge cty định giá) qua deal thực tế; (c) implement scripts/parse_bctc.py + ratios_phi_tctd.py + ratios_tctd.py + tests/test_ratios.py (compliance_check.py MOVED sang E3.3). Pending downstream sync: E5 Deal Structuring + E11 Risk + E3.3 đọc JSON e2.2 computed (xem MIGRATION.md).'},
+        next:'<ul><li><b>Việc cần làm ngay</b>: anh Dũng xem lại; tuần sau ngồi với anh Tài, bám sát mục đích của DCM.</li><li>Sau khi chốt mô hình dữ liệu: rà 19 chỗ còn thiếu trong Báo cáo phủ dữ liệu → bổ sung → hoàn thiện phần Tính toán (chỉ tính số, không kết luận pháp luật).</li><li>Bồi đắp kho kiến thức cho phần Mô hình dự án (giả định ngành + deal lịch sử) + phần Định giá (kiến thức công ty định giá) qua deal thực.</li><li>Các engine dùng tiếp số liệu này: Engine 5 cấu trúc deal, Engine 11 đánh giá rủi ro, Engine 3 kiểm tra tuân thủ.</li></ul>'},
       phase:1,star:true,isSub:true},
    ]},
   {n:3,name:'Deal Structure',pain:'low',sev:'Thấp',
-   painTxt:'Vừa cấu trúc giao dịch (loại TP · kỳ hạn · lãi suất · thẩm quyền) vừa là điểm chốt "GO": rà soát tuân thủ NĐ65/08/153/155 và đánh giá rủi ro trước khi sang execution.',
-   tool:{ic:'📝',name:'Deal Structuring',type:'Claude Skill · Automation',
-     desc:'Nhận DD Memo + thông tin deal, đề xuất cấu trúc giao dịch phù hợp và so sánh với 3-5 deal tương tự gần đây.',
-     inp:'DD Memo + data model deal (từ Document Intelligence) + đánh giá FS (từ Financial Data Extraction) + tham số: kỳ hạn · lãi suất · mệnh giá · TSBĐ · đối tượng phân phối',
-     out:'Draft term sheet (VI / EN) + đề xuất cấu trúc giao dịch + bảng so sánh 3-5 deal tương tự',
-     kv:[['Phụ thuộc','Cần Document Intelligence trước'],['Lộ trình','Tuần 2']]},
+   painTxt:'Vừa cấu trúc giao dịch (loại trái phiếu, kỳ hạn, lãi suất, thẩm quyền) vừa là điểm chốt "GO" trước khi sang thực thi.',
+   painDetail:'<ul><li>Phải quyết loại trái phiếu + kỳ hạn + lãi suất + mệnh giá + tài sản bảo đảm + đối tượng phân phối</li><li>Cần so sánh với 3-5 deal tương tự gần đây để định giá hợp lý</li><li>Là điểm chốt "GO": rà tuân thủ + đánh giá rủi ro trước khi sang khâu thực thi</li><li>Làm tay dễ thiếu nhất quán giữa đề xuất cấu trúc và quy định</li></ul>',
+   tool:{ic:'📝',name:'Deal Structuring',type:'Engine E5 — Cấu trúc giao dịch · Phụ trách anh Tin',
+     desc:'<ul><li>Engine nhận hồ sơ thẩm định + thông tin deal → <b>đề xuất cấu trúc giao dịch</b> phù hợp.</li><li>So sánh với <b>3-5 deal tương tự</b> gần đây để tham chiếu lãi suất + kỳ hạn.</li><li>Dựng bản nháp term sheet (tiếng Việt + tiếng Anh).</li><li>Engine chỉ <b>đề xuất</b> — PM / đội cấu trúc quyết định cuối cùng.</li></ul>',
+     inp:'<ul><li>Hồ sơ thẩm định + bảng dữ liệu deal (từ Engine 1).</li><li>Đánh giá tài chính (từ Engine 2).</li><li>Tham số: kỳ hạn, lãi suất, mệnh giá, tài sản bảo đảm, đối tượng phân phối.</li></ul>',
+     out:'<ul><li>Bản nháp term sheet (tiếng Việt / tiếng Anh).</li><li>Đề xuất cấu trúc giao dịch + bảng so sánh 3-5 deal tương tự.</li></ul>',
+     kv:[['Kế hoạch','<ul><li>Build engine đề xuất cấu trúc + dựng term sheet nháp</li><li>Kết nối dữ liệu thị trường để so sánh deal tương tự</li></ul>'],['Trạng thái hiện tại','<ul><li>⏳ Đang thiết kế — phụ thuộc dữ liệu thị trường + bảng dữ liệu deal từ Engine 1</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách</b>: anh Tin</li><li><b>Phụ thuộc</b>: cần Engine 1 (bảng dữ liệu deal) + Engine 2 (đánh giá tài chính) chạy trước</li></ul>']],
+     next:'<ul><li>Build engine đề xuất cấu trúc + bảng so sánh deal tương tự (anh Tin).</li><li>Kết quả chuyển sang Engine 3 rà soát term sheet + Engine 7 soạn hồ sơ.</li></ul>'},
    phase:1,star:true,
    subs:[
      {id:'e4',n:3,name:'Deal Structure',pain:'high',sev:'Cao',
-      painTxt:'TSBĐ là yếu tố quyết định mức độ bảo đảm + cấu trúc bond + coupon premium. Manual: nhận diện loại TSBĐ + đánh giá cơ sở pháp lý + quyết định mô tả TSBĐ trong termsheet + onboard TSBĐ (soạn doc) — nhiều bước, dễ sai. Chứng thư TĐG là cấu phần riêng (E2.4 định giá DCF/audit).',
-      tool:{ic:'🏛️',name:'Collateral Framework',type:'Claude Skill · Khung TSBĐ comprehensive (nhận diện + cấu trúc + onboard, trừ chứng thư TĐG → E2.4)',
-        desc:'<b>2 module</b>: <b>(A) Nhận diện + cấu trúc TSBĐ</b> — checklist TSBĐ + thông tin TSBĐ + đánh giá cơ sở pháp lý TSBĐ + quyết định mô tả TSBĐ + các điều kiện TSBĐ trong termsheet. <b>(B) Onboard TSBĐ</b> — soạn doc TSBĐ (HĐ thế chấp + HĐ AMA + Đại diện NSHTP). KB đã có (PAM trên BE + Confluence) — cần PM xin quyền access + thiết kế cấu trúc E4 (trừ cấu phần chứng thư TĐG handover E2.4). Brainstorm cùng <b>My + chị Bỉm</b> để finalize design.',
-        inp:'Hồ sơ TSBĐ KH cung cấp + term sheet draft từ E5 + KB TSBĐ PAM/Confluence + 4 nhánh TSBĐ (BĐS / Động sản-Quyền TS / GTCG-PVG / Project finance)',
-        out:'<b>Module A</b>: Checklist TSBĐ + thông tin TSBĐ structured + đánh giá pháp lý TSBĐ + recommendations mô tả + điều kiện TSBĐ vào termsheet. <b>Module B</b>: Doc TSBĐ draft (HĐ thế chấp/AMA/Đại diện NSHTP) — sẵn sàng cho công chứng + đăng ký GDBĐ NRAT.',
-        kv:[['Loại','Claude Skill — comprehensive TSBĐ framework'],['KB source','PAM (BE) + Confluence (đã có, cần xin access)'],['Brainstorm','My + chị Bỉm finalize design'],['Phase chuyển','Phase 2 → Phase 3 (paradigm shift)'],['PM action','Double check thẩm quyền truy cập PAM/Confluence + xin quyền cho team']],
-        next:'<b>Next step</b>: (1) PM xin quyền access PAM/Confluence; (2) Brainstorm session với My + chị Bỉm finalize cấu trúc E4 (Module A + B, trừ chứng thư TĐG handover E2.4); (3) Build skill iterative theo 4 nhánh TSBĐ. Integration: handoff chứng thư TĐG → E2.4 định giá/audit; output điều kiện TSBĐ → E5 termsheet; doc TSBĐ → E7 doc generation + Phase 4 đăng ký GDBĐ NRAT.'},
+      painTxt:'Tài sản bảo đảm quyết định mức an toàn + cấu trúc + lãi suất trái phiếu — nhận diện, đánh giá pháp lý, soạn hồ sơ thủ công nhiều bước, dễ sai.',
+      painDetail:'<ul><li>Tài sản bảo đảm quyết định mức bảo đảm cho nhà đầu tư + ảnh hưởng lãi suất trái phiếu</li><li>Phải nhận diện đúng loại tài sản + đánh giá cơ sở pháp lý + mô tả trong điều khoản — nhiều bước, dễ sai</li><li>Soạn hồ sơ tài sản bảo đảm (hợp đồng thế chấp, hợp đồng quản lý tài khoản) tốn thời gian</li><li>Việc định giá tài sản là phần riêng, do Engine 2 đảm nhận</li></ul>',
+      tool:{ic:'🏛️',name:'Collateral Framework',type:'Engine E4 — Khung tài sản bảo đảm · Phụ trách chị Trang + chị Ngọc Anh (Na)',
+        desc:'<ul><li>Engine xử lý toàn bộ khâu tài sản bảo đảm, gồm <b>2 phần</b>:<ul><li><b>Nhận diện + đánh giá</b>: lập danh mục tài sản + kiểm tra cơ sở pháp lý + đề xuất cách mô tả + điều kiện tài sản đưa vào điều khoản</li><li><b>Soạn hồ sơ</b>: hợp đồng thế chấp, hợp đồng quản lý tài khoản, đại diện người sở hữu trái phiếu — sẵn sàng cho công chứng + đăng ký giao dịch bảo đảm</li></ul></li><li>Áp cho <b>4 nhóm tài sản</b>: bất động sản, động sản/quyền tài sản, giấy tờ có giá, tài trợ dự án.</li><li>Phần định giá tài sản chuyển sang Engine 2.</li></ul>',
+        inp:'<ul><li>Hồ sơ tài sản bảo đảm khách hàng cung cấp.</li><li>Bản term sheet từ Engine 5.</li><li>Kho kiến thức tài sản bảo đảm (hệ thống PAM + Confluence).</li></ul>',
+        out:'<ul><li>Danh mục + đánh giá pháp lý tài sản bảo đảm + đề xuất điều kiện đưa vào điều khoản.</li><li>Bản nháp hồ sơ tài sản bảo đảm (hợp đồng thế chấp / quản lý tài khoản).</li></ul>',
+        kv:[['Kế hoạch','<ul><li>Xin quyền truy cập kho kiến thức PAM + Confluence</li><li>Thống nhất thiết kế 2 phần (nhận diện + soạn hồ sơ) cho 4 nhóm tài sản</li><li>Rà lại đầu vào, đầu ra + chốt thời điểm engine chạy trong quy trình</li></ul>'],['Trạng thái hiện tại','<ul><li>⏳ Đang ở giai đoạn thiết kế — chờ quyền truy cập kho kiến thức</li><li>⚠️ Cần rà lại đầu vào / đầu ra + chốt thời điểm engine chạy</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách</b>: chị Trang + chị Ngọc Anh (Na)</li><li><b>Brainstorm thiết kế</b>: My Võ + chị Bỉm</li><li><b>Kho kiến thức</b>: PAM + Confluence (cần xin quyền truy cập)</li></ul>']],
+        next:'<ul><li><b>Việc cần làm ngay</b>: rà lại đầu vào, đầu ra + xác định thời điểm engine nên chạy trong quy trình (chị Trang + Na).</li><li>PM xin quyền truy cập PAM + Confluence.</li><li>Buổi brainstorm với My + chị Bỉm chốt thiết kế.</li><li>Nối kết quả: định giá → Engine 2, điều kiện tài sản → Engine 5, hồ sơ tài sản → Engine 7.</li></ul>'},
       phase:1,star:true,isSub:true},
      {id:'e6',n:3,name:'Deal Structure',pain:'med',sev:'Trung bình',
-      painTxt:'Xác định đúng thẩm quyền của entity + cá nhân + bên liên quan tham gia giao dịch · Các hạn chế + điều kiện + nghĩa vụ CBTT · KB bên liên quan TCBS/TCB đang quản trị (Global Account) — phức tạp, dễ thiếu sót gây không hợp lệ deal.',
-      tool:{ic:'🏷️',name:'Stakeholders Management',type:'Claude Skill · Kế thừa hệ thống quản lý SPV NA + scale KH + KB TCPH DCM',
-        desc:'Quản trị toàn diện stakeholders deal: <b>(A) Check thẩm quyền</b> của entity + cá nhân + bên liên quan tham gia giao dịch (HĐQT/BGĐ/ĐHĐCĐ theo Điều lệ + ngưỡng giá trị theo Luật DN). <b>(B) Hạn chế + điều kiện + nghĩa vụ CBTT</b> per stakeholder role. <b>(C) KB bên liên quan</b> TCBS/TCB quản trị (Global Account/GA). <b>Skill kế thừa từ hệ thống quản lý SPV NA đã xây</b> — scale up cho KH (TCPH DCM) + bổ sung KB TCPH của DCM. Integration với e15.6 Stakeholder KB.',
-        inp:'Câu hỏi thẩm quyền + Điều lệ TCPH + Hồ sơ pháp lý entity + Danh mục stakeholders deal + GA TCBS/TCB existing + Workflow CBTT (HNX/UBCKNN/VSDC)',
-        out:'<b>Module A</b>: Verdict thẩm quyền per stakeholder (entity/cá nhân/BLQ) + trích dẫn Điều lệ + Luật DN. <b>Module B</b>: Bảng hạn chế/điều kiện/nghĩa vụ CBTT per stakeholder. <b>Module C</b>: Stakeholder registry deal-specific (kế thừa SPV NA schema + extend cho KH bond).',
-        kv:[['Loại','Claude Skill (kế thừa SPV NA)'],['Scale','SPV NA → KH DCM + KB TCPH DCM bổ sung'],['Integration','e15.6 Stakeholder KB + e3.1 Doc validity (cấp phê duyệt)'],['Lộ trình','Tuần 1-2 leverage SPV NA baseline']],
-        next:'<b>Next step</b>: (1) Audit hệ thống SPV NA hiện có (NA team) — extract reusable patterns; (2) Scale schema cho KH DCM context (TCPH thay SPV — khác governance); (3) Bổ sung KB TCPH DCM (Điều lệ + Người đại diện theo PL + danh mục BLQ + lịch sử CBTT); (4) Integration với e15.6 Stakeholder KB + e3.1 doc validity feedback.'},
+      painTxt:'Xác định đúng thẩm quyền của tổ chức + cá nhân + bên liên quan trong giao dịch — phức tạp, dễ thiếu sót làm deal không hợp lệ.',
+      painDetail:'<ul><li>Phải xác định đúng thẩm quyền của tổ chức + cá nhân + bên liên quan tham gia giao dịch</li><li>Mỗi bên có hạn chế + điều kiện + nghĩa vụ công bố thông tin riêng</li><li>Cần kho dữ liệu bên liên quan mà TCBS/TCB đang quản trị</li><li>Thiếu sót thẩm quyền có thể làm giao dịch không hợp lệ</li></ul>',
+      tool:{ic:'🏷️',name:'Stakeholders Management',type:'Engine E6 — Quản trị thẩm quyền + bên liên quan · Phụ trách chị Phương',
+        desc:'<ul><li>Engine quản trị toàn diện các bên trong deal, gồm <b>3 phần</b>:<ul><li>Kiểm tra <b>thẩm quyền</b> của tổ chức + cá nhân + bên liên quan (HĐQT/BGĐ/ĐHĐCĐ theo Điều lệ + ngưỡng giá trị theo Luật Doanh nghiệp)</li><li><b>Hạn chế + điều kiện + nghĩa vụ công bố thông tin</b> theo vai trò từng bên</li><li><b>Kho dữ liệu bên liên quan</b> mà TCBS/TCB đang quản trị</li></ul></li><li>Kế thừa hệ thống quản lý công ty dự án (SPV) đã xây của đội Ngọc Anh, mở rộng cho khách hàng phát hành trái phiếu.</li></ul>',
+        inp:'<ul><li>Câu hỏi thẩm quyền + Điều lệ doanh nghiệp + hồ sơ pháp lý.</li><li>Danh mục các bên tham gia deal + dữ liệu bên liên quan hiện có.</li></ul>',
+        out:'<ul><li>Kết luận thẩm quyền từng bên + trích dẫn Điều lệ + Luật Doanh nghiệp.</li><li>Bảng hạn chế / điều kiện / nghĩa vụ công bố thông tin theo từng bên.</li><li>Sổ đăng ký các bên liên quan của deal.</li></ul>',
+        kv:[['Kế hoạch','<ul><li>Rà soát hệ thống quản lý SPV hiện có → rút mẫu dùng lại</li><li>Mở rộng cho khách hàng phát hành trái phiếu + bổ sung kho dữ liệu doanh nghiệp</li></ul>'],['Trạng thái hiện tại','<ul><li>⏳ Đang thiết kế — tận dụng nền tảng quản lý SPV sẵn có</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách</b>: chị Phương</li><li><b>Nền tảng kế thừa</b>: hệ thống quản lý SPV của đội Ngọc Anh</li><li><b>Liên kết</b>: kho bên liên quan (Engine 15) + kiểm tra cấp phê duyệt (Engine 3)</li></ul>']],
+        next:'<ul><li>Rà soát + rút mẫu dùng lại từ hệ thống quản lý SPV (chị Phương).</li><li>Mở rộng cho khách hàng trái phiếu + bổ sung kho dữ liệu doanh nghiệp của DCM.</li></ul>'},
       phase:1,star:true,isSub:true},
      {id:'e10',n:3,name:'Deal Structure',pain:'high',sev:'Cao',
-      painTxt:'Điểm rủi ro pháp lý cao nhất và là chốt "GO" của deal. Sai một điều kiện theo NĐ65 / NĐ08 / Luật CK 2019 có thể khiến deal bị UBCKNN xử phạt.',
-      tool:{ic:'✅',name:'Compliance Validator',type:'Webapp nội bộ · Có audit trail',
-        desc:'Nhập thông tin deal → AI rà soát từng điều kiện phát hành tự động, trả về Pass / Fail / Cần kiểm tra kèm trích dẫn điều khoản cụ thể cho legal review.',
-        inp:'Thông tin deal nhập qua form: loại TP · đối tượng PH · mục đích SD vốn · TSBĐ · kỳ hạn · kênh phân phối (kèm DD Memo, term sheet)',
-        out:'Bảng checklist Pass / Fail / Cần kiểm tra theo từng điều kiện + trích dẫn điều khoản + ghi chú khắc phục + log audit',
-        kv:[['Build','5-7 ngày (webapp)'],['Lộ trình','Tuần 2']]},
+      painTxt:'Rà từng điều khoản trong hồ sơ so với quy định pháp luật — sai một điều khoản có thể khiến deal bị cơ quan quản lý xử phạt.',
+      painDetail:'<ul><li>Rà từng điều khoản (không phải toàn deal) so với quy định pháp luật chuyên ngành</li><li>Khác Engine 3: Engine 3 rà điều kiện ở cấp deal, Engine 10 đi sâu từng câu chữ điều khoản</li><li>Cần dùng cho cả bước cấu trúc (Bước 3) và bước thực thi (Bước 4)</li><li>Sai một điều khoản có thể khiến deal bị xử phạt</li></ul>',
+      tool:{ic:'✅',name:'Compliance Validator',type:'Engine E10 — Rà tuân thủ điều khoản · Phụ trách chị Trang + chị Phương',
+        desc:'<ul><li>Engine rà <b>từng điều khoản</b> trong hồ sơ (term sheet, điều khoản trái phiếu, công bố thông tin, hợp đồng) so với quy định pháp luật.</li><li>Trả về <b>Đạt / Không đạt / Cần kiểm tra</b> kèm trích dẫn điều khoản cụ thể cho pháp chế review.</li><li>Lưu vết toàn bộ quá trình rà.</li><li>Dùng cho cả bước cấu trúc deal và bước thực thi.</li></ul>',
+        inp:'<ul><li>Hồ sơ deal (term sheet, điều khoản trái phiếu, công bố thông tin, hợp đồng).</li></ul>',
+        out:'<ul><li>Bảng Đạt / Không đạt / Cần kiểm tra theo từng điều khoản + trích dẫn + ghi chú khắc phục + lưu vết.</li></ul>',
+        kv:[['Kế hoạch','<ul><li>Build engine rà điều khoản cấp câu chữ</li><li>Dùng cho cả Bước 3 (cấu trúc) và Bước 4 (thực thi)</li></ul>'],['Trạng thái hiện tại','<ul><li>⏳ Đang thiết kế</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách</b>: chị Trang + chị Phương</li><li><b>Phân biệt</b>: Engine 3 rà điều kiện cấp deal · Engine 10 rà từng câu chữ điều khoản</li></ul>']],
+        next:'<ul><li>Build engine rà điều khoản — dùng cho cả Bước 3 và Bước 4 (chị Trang + chị Phương).</li></ul>'},
       phase:1,star:false,isSub:true},
      {id:'e11',n:3,name:'Deal Structure',pain:'high',sev:'Cao',
-      painTxt:'Đánh giá rủi ro tổng thể (tài chính · thị trường · covenant) và theo dõi liên tục — quyết định điều kiện, cấu trúc và pricing cuối cùng.',
-      tool:{ic:'📉',name:'Risk Assessment',type:'Claude Skill + Webapp (monitor)',
-        desc:'Risk factor + phân tích sensitivity + báo cáo TCB-RMD + monitor news / M&A / covenant.',
-        inp:'Dữ liệu deal + dữ liệu thị trường',
-        out:'Risk factor + sensitivity + báo cáo TCB-RMD + cảnh báo news / M&A / covenant',
-        kv:[['Loại','Skill + Webapp'],['Lộ trình','Tuần 2']]},
+      painTxt:'Đánh giá rủi ro tổng thể của deal (tài chính, thị trường, cam kết) + theo dõi liên tục — quyết định điều kiện, cấu trúc và lãi suất cuối cùng.',
+      painDetail:'<ul><li>Phải đánh giá rủi ro tổng thể: tín dụng, thanh khoản, thị trường, pháp lý, cam kết</li><li>Quyết định điều kiện + cấu trúc + lãi suất cuối cùng của deal</li><li>Cần theo dõi liên tục cả sau khi phát hành (cảnh báo sớm + quản lý chất lượng tín dụng)</li></ul>',
+      tool:{ic:'📉',name:'Risk Assessment',type:'Engine E11 — Đánh giá rủi ro tổng hợp · Phụ trách đội Miền Nam + chị Ngọc Anh (Na)',
+        desc:'<ul><li>Engine chấm <b>điểm rủi ro tổng hợp</b> của deal + so sánh với chuẩn các deal khác.</li><li>Phân tích độ nhạy + đề xuất biện pháp giảm rủi ro + báo cáo cho quản trị rủi ro.</li><li><b>Bao gồm cả cảnh báo sớm + quản lý chất lượng tín dụng</b> theo dõi liên tục sau phát hành.</li></ul>',
+        inp:'<ul><li>Dữ liệu deal + đánh giá tài chính (Engine 2) + dữ liệu thị trường.</li></ul>',
+        out:'<ul><li>Điểm rủi ro tổng hợp + phân tích độ nhạy + đề xuất giảm rủi ro + cảnh báo sớm (tin tức / M&A / vi phạm cam kết).</li></ul>',
+        kv:[['Kế hoạch','<ul><li>Build engine chấm điểm rủi ro tổng hợp + so chuẩn</li><li>Gộp cả cảnh báo sớm + quản lý chất lượng tín dụng theo dõi sau phát hành</li></ul>'],['Trạng thái hiện tại','<ul><li>⏳ Đang thiết kế</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách</b>: đội Miền Nam + chị Ngọc Anh (Na)</li><li><b>Phạm vi</b>: gồm cảnh báo sớm + quản lý chất lượng tín dụng (theo dõi liên tục)</li></ul>']],
+        next:'<ul><li>Build engine rủi ro tổng hợp — gộp cả cảnh báo sớm + quản lý chất lượng tín dụng (đội Miền Nam + Na).</li></ul>'},
       phase:1,star:false,isSub:true}
    ]},
   {n:5,name:'Execution',pain:'high',sev:'Cao',
-   painTxt:'Soạn và ráp bộ hồ sơ phát hành (hợp đồng đại lý, biên bản, nghị quyết), upload lên cổng thông tin. Nhiều thao tác tay, dễ sai sót định dạng.',
-   tool:{ic:'🔧',name:'Doc Assembler',type:'Claude Skill → gộp Webapp · Phase 2',
-     desc:'Tự ráp bộ hồ sơ phát hành từ template chuẩn và dữ liệu của deal, kiểm tra tính nhất quán giữa các văn bản.',
-     inp:'Term sheet đã chốt + data model deal + template chuẩn (HĐ đại lý PH · biên bản · nghị quyết · bản CBTT)',
-     out:'Bộ hồ sơ phát hành draft đầy đủ + báo cáo kiểm tra tính nhất quán giữa các văn bản',
-     kv:[['Lộ trình','Phase 2 (sau 2 tuần)']]},
+   painTxt:'Soạn + ráp bộ hồ sơ phát hành (hợp đồng đại lý, biên bản, nghị quyết) rồi tải lên cổng thông tin — nhiều thao tác tay, dễ sai định dạng.',
+   painDetail:'<ul><li>Một bộ hồ sơ phát hành có hàng chục văn bản phải soạn + ráp lại</li><li>Phải tải lên cổng thông tin đúng định dạng + đúng deadline</li><li>Làm tay nhiều thao tác lặp, dễ sai định dạng + lệch số liệu giữa các văn bản</li></ul>',
+   tool:{ic:'🔧',name:'Doc Assembler',type:'Engine E7 — Soạn + ráp hồ sơ phát hành · Phụ trách My Võ + anh Dũng',
+     desc:'<ul><li>Engine tự <b>soạn + ráp</b> bộ hồ sơ phát hành từ mẫu chuẩn + dữ liệu của deal.</li><li>Sinh các văn bản chính: term sheet, hợp đồng đại lý phát hành, biên bản, nghị quyết, bản công bố thông tin, hợp đồng phụ trợ.</li><li>Tự kiểm tra tính nhất quán giữa các văn bản (phối hợp Engine 9).</li></ul>',
+     inp:'<ul><li>Term sheet đã chốt + bảng dữ liệu deal + bộ mẫu chuẩn.</li></ul>',
+     out:'<ul><li>Bộ hồ sơ phát hành bản nháp đầy đủ + báo cáo kiểm tra nhất quán.</li></ul>',
+     kv:[['Kế hoạch','<ul><li>Thống nhất rõ đầu vào + đầu ra mong muốn</li><li>Build engine soạn + ráp từ bộ mẫu chuẩn (chờ Pháp chế duyệt mẫu chính thức)</li></ul>'],['Trạng thái hiện tại','<ul><li>⏳ Đang thiết kế — chờ bộ mẫu chính thức được Pháp chế duyệt</li><li>⚠️ Cần chốt đầu vào / đầu ra mong muốn</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách</b>: My Võ + anh Dũng</li><li><b>Phụ thuộc</b>: bộ mẫu chuẩn (Engine 8) + kiểm tra nhất quán (Engine 9)</li></ul>']],
+     next:'<ul><li><b>Việc cần làm ngay</b>: chốt đầu vào + đầu ra mong muốn (My + Dũng).</li><li>Build engine soạn + ráp hồ sơ từ bộ mẫu chuẩn sau khi Pháp chế duyệt mẫu.</li></ul>'},
    phase:2,star:true,
    subs:[
      {id:'e8',n:5,name:'Execution',pain:'med',sev:'Trung bình',
-      painTxt:'Soạn hồ sơ cần dùng đúng phiên bản điều khoản và tuân thủ bộ quy tắc — sai version điều khoản gây rủi ro pháp lý.',
-      tool:{ic:'🧩',name:'Template Intelligence',type:'Claude Skill + Webapp (version control)',
-        desc:'Tái sử dụng cấp điều khoản (clause-level) + version control + map Sheet 0.6 Quy tắc 93 rule.',
-        inp:'Kho template + điều khoản + bộ quy tắc',
-        out:'Điều khoản tái sử dụng đúng version + map Sheet 0.6 Quy tắc 93 rule',
-        kv:[['Loại','Skill + Webapp'],['Lộ trình','Phase 2']]},
+      painTxt:'Soạn hồ sơ phải dùng đúng phiên bản điều khoản + tuân thủ bộ quy tắc — dùng sai phiên bản điều khoản gây rủi ro pháp lý.',
+      painDetail:'<ul><li>Mỗi điều khoản có nhiều phiên bản — dùng sai phiên bản gây rủi ro pháp lý</li><li>Cần quản lý phiên bản + chọn đúng điều khoản theo loại deal</li><li>Phải đối chiếu với bộ quy tắc nghiệp vụ khi tái sử dụng điều khoản</li></ul>',
+      tool:{ic:'🧩',name:'Template Intelligence',type:'Engine E8 — Quản trị bộ mẫu + điều khoản · Phụ trách My Võ + anh Dũng',
+        desc:'<ul><li>Engine quản trị <b>kho mẫu + điều khoản</b> chuẩn của TCBS DCM.</li><li>Tái sử dụng điều khoản ở cấp từng điều khoản + quản lý phiên bản (luôn chọn bản mới nhất).</li><li>Đối chiếu với bộ quy tắc nghiệp vụ khi tái sử dụng.</li><li>Phát hiện mẫu / điều khoản lỗi thời khi văn bản pháp luật thay đổi.</li></ul>',
+        inp:'<ul><li>Kho mẫu + điều khoản + bộ quy tắc nghiệp vụ.</li></ul>',
+        out:'<ul><li>Điều khoản tái sử dụng đúng phiên bản + cảnh báo mẫu lỗi thời.</li></ul>',
+        kv:[['Kế hoạch','<ul><li>Chốt đầu vào + đầu ra mong muốn</li><li>Build kho mẫu + quản lý phiên bản điều khoản (chờ Pháp chế duyệt mẫu chính thức)</li></ul>'],['Trạng thái hiện tại','<ul><li>⏳ Đang thiết kế — chờ bộ mẫu chính thức được Pháp chế duyệt</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách</b>: My Võ + anh Dũng</li><li><b>Liên kết</b>: cấp mẫu cho Engine 7 soạn hồ sơ + kho mẫu (Engine 15)</li></ul>']],
+        next:'<ul><li><b>Việc cần làm ngay</b>: chốt đầu vào + đầu ra mong muốn (My + Dũng).</li><li>Build kho mẫu + quản lý phiên bản sau khi Pháp chế duyệt mẫu chuẩn.</li></ul>'},
       phase:2,star:true,isSub:true},
      {id:'e9',n:5,name:'Execution',pain:'med',sev:'Trung bình',
-      painTxt:'Một bộ hồ sơ phát hành có 30+ văn bản; số liệu / định nghĩa / ngày tháng lệch nhau giữa các văn bản là lỗi phổ biến và rủi ro — rà soát ngay khi ráp hồ sơ.',
-      tool:{ic:'🔗',name:'Consistency Check',type:'Claude Skill',
-        desc:'Đối chiếu chéo 30+ docs đảm bảo nhất quán số liệu / định nghĩa / ngày tháng.',
-        inp:'30+ docs của deal',
-        out:'Báo cáo mâu thuẫn số liệu / định nghĩa / ngày tháng giữa các văn bản',
-        kv:[['Loại','Claude Skill'],['Lộ trình','Tuần 2']]},
+      painTxt:'Một bộ hồ sơ có hơn 30 văn bản — số liệu, định nghĩa, ngày tháng lệch nhau giữa các văn bản là lỗi phổ biến và rủi ro.',
+      painDetail:'<ul><li>Một bộ hồ sơ phát hành có hơn 30 văn bản</li><li>Số liệu / định nghĩa / ngày tháng dễ lệch nhau giữa các văn bản</li><li>Lỗi nhất quán là lỗi phổ biến, rủi ro cao, khó rà bằng tay</li></ul>',
+      tool:{ic:'🔗',name:'Consistency Check',type:'Engine E9 — Kiểm tra nhất quán hồ sơ · Phụ trách chị Trang + chị Phương',
+        desc:'<ul><li>Engine <b>đối chiếu chéo</b> toàn bộ văn bản trong một bộ hồ sơ.</li><li>Phát hiện chỗ lệch nhau về số liệu, định nghĩa, tên gọi, ngày tháng, điều khoản trùng.</li><li>Chạy ngay khi ráp hồ sơ, trước khi gửi khách hàng.</li></ul>',
+        inp:'<ul><li>Toàn bộ văn bản của deal (hơn 30 văn bản).</li></ul>',
+        out:'<ul><li>Báo cáo chỗ mâu thuẫn về số liệu / định nghĩa / ngày tháng giữa các văn bản.</li></ul>',
+        kv:[['Kế hoạch','<ul><li>Build engine đối chiếu chéo hồ sơ</li><li>Chạy thử trên deal mẫu</li></ul>'],['Trạng thái hiện tại','<ul><li>⏳ Đang thiết kế</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách</b>: chị Trang + chị Phương</li><li><b>Liên kết</b>: chạy sau Engine 7 soạn hồ sơ</li></ul>']],
+        next:'<ul><li>Build engine đối chiếu chéo + chạy thử trên deal mẫu (chị Trang + chị Phương).</li></ul>'},
       phase:1,star:true,isSub:true},
      {id:'e12',n:5,name:'Execution',pain:'med',sev:'Trung bình',
-      painTxt:'Bộ hồ sơ qua review đa bên (TCPH / Pháp chế DCM / Risk / Investor / TVL) — mỗi bên track-change + comment riêng. Tổng hợp tay redline nhiều bản, dễ bỏ sót xung đột điều khoản + khó truy ai sửa gì, vòng review kéo dài.',
-      tool:{ic:'🔀',name:'Review Reconciliation',type:'Claude Skill · Tổng hợp redline đa bên (Tier B — phụ thuộc workflow chốt)',
-        desc:'<b>Reconciliation review đa bên</b>: gộp track-changes + comment từ TCPH + Pháp chế DCM + Risk + Investor + TVL trên cùng bộ doc → phát hiện <b>xung đột điều khoản</b> giữa các bên + đề xuất compromise wording. Giải Pain 04 (multi-party review). Khác e3.9 (đối soát bản ký đã ký, Phase 5) + E9 (nhất quán số liệu cross-doc) — E12 tập trung hoà giải <b>comment/redline ở khâu review</b> trước khi chốt bản ký.',
-        inp:'Các bản redline/comment từ nhiều bên (TCPH/Pháp chế/Risk/Investor/TVL) trên cùng doc + bản gốc + KB YK-TVL (rationale pháp lý từ e3.7)',
-        out:'Bảng tổng hợp redline hợp nhất + danh sách xung đột điều khoản + đề xuất compromise per điểm + audit trail ai đề xuất gì',
-        kv:[['Loại','Claude Skill (Tier B)'],['Phase','Phase 4 Execution — khâu review redline'],['Phân biệt','E12 = comment/redline review · e3.9 = đối soát bản ký · E9 = nhất quán số liệu'],['Phụ thuộc','Workflow review đa bên chốt + KB YK-TVL (e3.7) cho rationale']]},
+      painTxt:'Bộ hồ sơ qua review của nhiều bên (doanh nghiệp, Pháp chế, Rủi ro, Nhà đầu tư, tư vấn luật) — mỗi bên sửa + góp ý riêng, tổng hợp tay dễ sót xung đột.',
+      painDetail:'<ul><li>Hồ sơ qua review của nhiều bên: doanh nghiệp, Pháp chế DCM, Rủi ro, Nhà đầu tư, tư vấn luật</li><li>Mỗi bên sửa + góp ý trên bản riêng → tổng hợp tay nhiều bản dễ sót</li><li>Khó truy ai sửa gì, dễ bỏ sót xung đột điều khoản, vòng review kéo dài</li></ul>',
+      tool:{ic:'🔀',name:'Review Reconciliation',type:'Engine E12 — Hợp nhất ý kiến review đa bên · Phụ trách chị Trang + chị Ngọc Anh + chị Quỳnh Anh',
+        desc:'<ul><li>Engine <b>gộp các bản sửa + góp ý</b> của nhiều bên trên cùng bộ hồ sơ.</li><li>Phát hiện <b>xung đột điều khoản</b> giữa các bên + đề xuất cách dung hoà.</li><li>Lưu vết ai đề xuất gì.</li><li>Khác Engine 9 (nhất quán số liệu) và phần đối soát bản ký — Engine 12 tập trung hoà giải góp ý ở khâu review trước khi chốt.</li></ul>',
+        inp:'<ul><li>Các bản sửa / góp ý từ nhiều bên trên cùng hồ sơ + bản gốc + kho ý kiến tư vấn luật.</li></ul>',
+        out:'<ul><li>Bảng tổng hợp các bản sửa + danh sách xung đột điều khoản + đề xuất dung hoà từng điểm + lưu vết.</li></ul>',
+        kv:[['Kế hoạch','<ul><li>Build engine gộp + hoà giải góp ý đa bên</li><li>Chờ quy trình review đa bên + kho ý kiến tư vấn luật chốt</li></ul>'],['Trạng thái hiện tại','<ul><li>⏳ Đang thiết kế — phụ thuộc quy trình review đa bên + kho ý kiến tư vấn luật</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách</b>: chị Trang + chị Ngọc Anh + chị Quỳnh Anh</li><li><b>Phụ thuộc</b>: quy trình review đa bên + kho ý kiến tư vấn luật (từ Engine 3)</li></ul>']],
+        next:'<ul><li>Chờ quy trình review đa bên chốt → build engine gộp + hoà giải góp ý (chị Trang + Ngọc Anh + Quỳnh Anh).</li></ul>'},
       phase:2,star:false,isSub:true}
    ]},
   {n:6,name:'Executed',pain:'med',sev:'Trung bình',
-   painTxt:'Sau khi user ký xong hồ sơ + scan upload → DCM cần phân loại + soạn checklist bàn giao + CBTT + đăng ký GDTT đúng deadline. Manual: nhiều thao tác lặp lại, gen input cho hệ thống (Backend/TCSmart/HNX/VSDC), dễ sai sót thời hạn + lỡ format. Sau khi đủ hồ sơ cần luồng nhắc việc + auto-gen input.',
-   tool:{ic:'📢',name:'Post-execution Auto-flow',type:'Claude Skill + Webapp · Phase Executed coordinator',
-     desc:'<b>Workflow Phase 5</b>: (1) <b>User scan hồ sơ đã ký lên</b> → <b>E1 nhận diện + phân loại</b> theo từng luồng (CBTT/ĐK GDTT/bàn giao). (2) <b>Soạn + lập checklist bàn giao</b> (5 cột thể thức + Metadata 100 từ — leverage e1.2 logic). (3) <b>CBTT</b> (HNX + UBCKNN + VSDC) + <b>Đăng ký GDTT</b> (VSDC LK + HNX GDTT). (4) <b>Sau khi đủ hồ sơ</b>: lập luồng nhắc việc tự động thao tác + <b>auto-gen input</b> để user nhập trên hệ thống Backend/TCSmart. (5) <b>Confirm với user trước khi đẩy hồ sơ lên expose</b>. (6) <b>Long-term</b>: MCP auto-input vào hệ thống thay user, user recheck sau khi agent tạo bản nháp + lưu lại.',
-     inp:'Hồ sơ đã ký user scan upload + Deal Model JSON (e1.3) + danh mục nghĩa vụ CBTT theo quy định + workflow templates HNX/VSDC/Backend',
-     out:'(1) Hồ sơ phân loại theo luồng (CBTT/GDTT/bàn giao) qua E1 reuse · (2) Checklist bàn giao Excel · (3) Bản CBTT draft + lịch nhắc các mốc bắt buộc (T1/T5/T6/T7 deadlines) · (4) Auto-gen input field cho user nhập Backend/TCSmart · (5) Confirm gate trước expose hồ sơ + đối soát bản ký (skill Cops qua E3 e3.9)',
-     kv:[['Reuse','E1 reuse cho phân loại scan + e1.2 logic cho checklist'],['Integration','E3 e3.9 đối soát bản ký (Cops) + e3.6+e3.7 rà legal post-doc'],['Auto-flow','Luồng nhắc việc + auto-gen input field user nhập hệ thống'],['Long-term','MCP auto-input Backend/TCSmart — user recheck draft'],['Lộ trình','Phase 2 (sau 2 tuần) — sau khi MCP architecture chốt']],
-     next:'<b>Next step</b>: (1) Cycle này — design auto-flow nhắc việc + checklist bàn giao (reuse E1 logic); (2) Cycle sau — implement MCP auto-input (cần Backend API HNX/VSDC/TCSmart finalize); (3) Integration với E3 e3.9 Đối soát bản ký (skill Cops) + e3.6 rà dẫn chiếu PL post-draft; (4) Confirm gate workflow user trước expose hồ sơ.'},
+   painTxt:'Sau khi khách hàng ký + quét hồ sơ → cần phân loại + soạn checklist bàn giao + công bố thông tin + đăng ký giao dịch đúng deadline — nhiều thao tác lặp, dễ trễ hạn.',
+   painDetail:'<ul><li>Sau khi khách hàng ký + quét hồ sơ, phải phân loại + soạn checklist bàn giao</li><li>Phải công bố thông tin + đăng ký giao dịch lên các hệ thống (HNX/VSDC/Backend) đúng deadline</li><li>Nhiều thao tác lặp, tạo dữ liệu nhập cho hệ thống — dễ trễ hạn + lỡ định dạng</li><li>Rất cần để đóng gói deal đẩy lên hệ thống</li></ul>',
+   tool:{ic:'📢',name:'Post-execution Auto-flow',type:'Engine E13 — Tự động hoá khâu sau ký · Phụ trách My Võ',
+     desc:'<ul><li>Engine điều phối <b>khâu sau ký</b>, gồm các việc:<ul><li>Nhận hồ sơ đã ký (quét tải lên) → phân loại theo từng luồng (công bố thông tin / đăng ký giao dịch / bàn giao) — dùng lại Engine 1</li><li>Soạn + lập checklist bàn giao</li><li>Công bố thông tin (HNX/UBCKNN/VSDC) + đăng ký giao dịch</li><li>Lập luồng nhắc việc + tạo sẵn dữ liệu để nhập lên hệ thống Backend/TCSmart</li><li>Xác nhận với người dùng trước khi công bố hồ sơ</li></ul></li><li>Về lâu dài: tự nhập lên hệ thống thay người dùng, người dùng chỉ kiểm lại bản nháp.</li></ul>',
+     inp:'<ul><li>Hồ sơ đã ký (quét tải lên) + bảng dữ liệu deal.</li><li>Danh mục nghĩa vụ công bố thông tin + mẫu quy trình HNX/VSDC/Backend.</li></ul>',
+     out:'<ul><li>Hồ sơ phân loại theo luồng + checklist bàn giao.</li><li>Bản công bố thông tin nháp + lịch nhắc các mốc bắt buộc.</li><li>Dữ liệu nhập sẵn cho hệ thống Backend/TCSmart.</li></ul>',
+     kv:[['Kế hoạch','<ul><li>Thiết kế luồng nhắc việc + checklist bàn giao (dùng lại Engine 1)</li><li>Về sau: tự nhập lên hệ thống khi có kết nối Backend/HNX/VSDC</li></ul>'],['Trạng thái hiện tại','<ul><li>⏳ Đang thiết kế — đây là engine "rất cần" để đóng gói deal đẩy lên hệ thống</li><li>⚠️ Phần tự nhập hệ thống chờ kết nối kỹ thuật với Backend/HNX/VSDC</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách</b>: My Võ</li><li><b>Liên kết</b>: dùng lại Engine 1 (phân loại) + Engine 3 đối soát bản ký (Bước 5)</li></ul>']],
+     next:'<ul><li><b>Việc cần làm ngay</b>: thiết kế luồng nhắc việc + checklist bàn giao, dùng lại Engine 1 (My).</li><li>Về sau: tự nhập lên hệ thống khi kết nối kỹ thuật Backend/HNX/VSDC sẵn sàng.</li><li>Nối với Engine 3 đối soát bản ký trước khi công bố hồ sơ.</li></ul>'},
    phase:2,star:false},
   {n:7,name:'Sau phát hành',pain:'med',sev:'Trung bình',
-   painTxt:'Quản lý sau phát hành: báo cáo định kỳ, theo dõi nghĩa vụ trả gốc / lãi, giám sát điều kiện cam kết sau phát hành — kéo dài suốt vòng đời trái phiếu.',
-   tool:{ic:'🔔',name:'Post-issuance Monitor',type:'Webapp + dashboard · Phase 2',
-     desc:'Theo dõi nghĩa vụ của tổ chức phát hành, tự động nhắc các mốc báo cáo định kỳ và cảnh báo khi sắp đến hạn.',
-     inp:'Dữ liệu TP đã phát hành: kỳ hạn · lịch trả gốc/lãi · điều kiện cam kết + cập nhật định kỳ từ tổ chức PH',
-     out:'Dashboard theo dõi nghĩa vụ + cảnh báo sắp đến hạn + nhắc lịch báo cáo định kỳ',
-     kv:[['Lộ trình','Phase 2 (sau 2 tuần)']]},
+   painTxt:'Quản lý sau phát hành: báo cáo định kỳ, theo dõi nghĩa vụ trả gốc/lãi, giám sát điều kiện cam kết — kéo dài suốt vòng đời trái phiếu.',
+   painDetail:'<ul><li>Phải theo dõi nghĩa vụ trả gốc/lãi của tổ chức phát hành theo lịch</li><li>Phải nhắc + nộp báo cáo định kỳ đúng hạn</li><li>Giám sát điều kiện cam kết sau phát hành — kéo dài suốt vòng đời trái phiếu</li></ul>',
+   tool:{ic:'🔔',name:'Post-issuance Monitor',type:'Engine E16 — Giám sát sau phát hành · Phụ trách chị Trang + chị Phương + My Võ',
+     desc:'<ul><li>Engine theo dõi <b>nghĩa vụ của tổ chức phát hành</b> sau khi phát hành.</li><li>Tự nhắc các mốc báo cáo định kỳ + cảnh báo khi sắp đến hạn.</li><li>Hiển thị dashboard theo dõi nghĩa vụ + tình trạng cam kết.</li></ul>',
+     inp:'<ul><li>Dữ liệu trái phiếu đã phát hành: kỳ hạn, lịch trả gốc/lãi, điều kiện cam kết + cập nhật định kỳ.</li></ul>',
+     out:'<ul><li>Dashboard theo dõi nghĩa vụ + cảnh báo sắp đến hạn + nhắc lịch báo cáo định kỳ.</li></ul>',
+     kv:[['Kế hoạch','<ul><li>Build dashboard theo dõi nghĩa vụ + nhắc lịch báo cáo</li><li>Bàn giao deal sang đội sau phát hành</li></ul>'],['Trạng thái hiện tại','<ul><li>⏳ Đang thiết kế</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách</b>: chị Trang + chị Phương + My Võ</li><li><b>Liên kết</b>: nối với giám sát sau phát hành của Engine 3 (Bước 6)</li></ul>']],
+     next:'<ul><li>Build dashboard theo dõi nghĩa vụ + nhắc lịch báo cáo (chị Trang + Phương + My).</li></ul>'},
    phase:2,star:false},
 ];
 
@@ -554,7 +591,7 @@ const multiPhaseEngines=[
      {tag:'e14.5', name:'Cross-engine state',cls:'',desc:'Điều phối state dùng chung giữa các engine (Deal Model + Master Checklist) — kế thừa ý tưởng "state trigger"'},
      {tag:'e14.6', name:'Dashboard pipeline',cls:'',desc:'Dashboard tổng các deal active + deal nào sắp deadline + bottleneck — giải Pain 06 tracking'}
    ],
-   note:'<b>Giải Pain 06</b> (tracking xuyên vòng đời). PM bot điều phối cross-engine — <b>Tier B</b>: phụ thuộc cross-engine integration + workflow state chốt. Tiếp nhận chức năng "state trigger" (gỡ khỏi E3 e3.8 — e3.8 nay chỉ giữ governance Phase 6).'},
+   note:'<b>Giải Pain 06</b> (tracking xuyên vòng đời). PM bot điều phối cross-engine — <b>Tier B</b>: phụ thuộc cross-engine integration + workflow state chốt. Tiếp nhận chức năng "state trigger" (gỡ khỏi E3 e3.8 — e3.8 nay chỉ giữ governance Phase 6). <b>Phụ trách</b>: chị Trang + chị Phương + My Võ.'},
   {id:'e15',code:'E15',ic:'🗂️',name:'Knowledge Base Foundation',star:true,
    startCol:1,endCol:12,phaseTag:'Cross-all-phase foundation · ⭐ chủ lực',color:'mp-deep-violet',layout:'inline',
    chips:[
@@ -568,7 +605,7 @@ const multiPhaseEngines=[
      {tag:'e15.8', name:'Sàng lọc KB',cls:'kb-screen',desc:'Blacklist + truy nã + xử phạt UBCKNN + tin xấu + auditor scope (KB_Auditor_UBCKNN) — feed E1 Customer Screening + e3.1 doc validity'},
      {tag:'e15.9', name:'YK-TVL KB',cls:'kb-tvl',desc:'Thư YK-TVL deal lịch sử (VILAF/PTN/LegalMax/YKVN) + gray_area_legal_flags + valuation_red_flags + quality_of_earnings_red_flags — PLACEHOLDER chờ PM approval Legal+TVL'}
    ],
-   note:'<b>MVP1</b>: Claude Project (không tốn token tiền) → <b>V2</b>: KB RAG (vector search + caching) khi scale. KB foundation feed mọi engine — e15.* mặc định auto-loaded khi engine kích hoạt.'}
+   note:'<b>MVP1</b>: Claude Project (không tốn token tiền) → <b>V2</b>: KB RAG (vector search + caching) khi scale. KB foundation feed mọi engine — e15.* mặc định auto-loaded khi engine kích hoạt. <b>Phụ trách</b>: chị Trang + chị Phương + My Võ.'}
 ];
 
 const CODE={s0:'E0',s1:'E1',fs:'E2',e3:'E3',e4:'E4',s2:'E5',e6:'E6',e10:'E10',e11:'E11',s3:'E7',e8:'E8',e9:'E9',e12:'E12',s4:'E13',s5:'E16'};
@@ -579,69 +616,70 @@ steps.forEach((s,i)=>{units['s'+i]=Object.assign({},s,{_idx:i});
 
 // E3 standalone unit (multi-phase engine, not in steps[].subs — render via mp track)
 units['e3-multi']={_idx:1,name:'Legal Entity Intelligence (E3 multi-phase)',pain:'crit',sev:'Rất cao',isSub:true,star:true,phase:1,
-  painTxt:'Thẩm định pháp lý đa lớp xuyên Phase 2 DD → Phase 6 Sau phát hành. Phase 2 rà hợp lý/hợp lệ hồ sơ + điều kiện PH tài chính + phi-tài chính. Phase 3 audit termsheet sau E5. Cross-phase utility e3.5 VBPL monitoring. MOVED từ E1 v2.0.0 e1.4 + E2 v2.0.0 e2.2 compliance scope per paradigm shift PM 02/06/2026.',
-  tool:{ic:'⚖️',name:'Legal Entity Intelligence',type:'Plugin v1.0.0 NEW BUILD · 9 sub-skill VN MULTI-PHASE (e3.5 = utility cross-phase · chips aligned phase columns)',
-    desc:'Plugin v1.0.0 convert standalone v0.1 → plugin multi-phase, <b>9 sub-skill (e3.1-e3.9)</b> trải Bước 2 → 6. <b>Phase 2 DD</b>: e3.1-tham-dinh-ho-so-phi-tai-chinh (rà hợp lý/hợp lệ hồ sơ phi-tài chính) + e3.2-dieu-kien-ph-phi-tai-chinh (deal-level ĐK PH phi-tài chính NĐ 65/245/PL chuyên ngành) + e3.3-dieu-kien-ph-tai-chinh (deal-level ĐK PH tài chính consume E2.2 computed). <b>Phase 3 Deal Structuring</b>: e3.4-audit-termsheet (SCAFFOLD post-E5, KB YK-TVL chờ PM approval). <b>Phase 4 Execution</b> (post-E7 gen docs): e3.6-ra-dan-chieu-phap-ly (rà dẫn chiếu VBPL còn hiệu lực) + e3.7-ra-wording (rà wording 3 nhánh QPL/cross-clause/comment các bên). <b>Phase 5 Executed</b>: e3.9-doi-soat-ban-ky (đối soát bản ký scan vs bản phát hành — Cops). <b>Phase 6 Sau phát hành</b>: e3.8-governance-post-issuance (governance + cảnh báo sớm bond default). <b>Cross-phase utility</b>: e3.5-vbpl-monitoring (Layer 1+2+3 + cache realtime + Source Priority 10 nguồn, auto-called by e3.x + cross-engine).',
-    inp:'<b>Phase 2 Input</b>: outputs từ E1 (folder K3 + checklist hồ sơ thu thập + Deal Model JSON) + E2 (computed ratios 60+ chỉ tiêu) + Điều lệ TCPH + Index VBPL 73 unique + 4 KB chuyên ngành. <b>Phase 3 Input</b>: term sheet draft từ E5 + JSON e3.2 + e3.3 + KB YK-TVL.',
-    out:'<b>Phase 2 Output (paradigm new)</b>: KHÔNG sinh file độc lập — bổ sung vào file E1+E2 hiện tại: (a) <b>1 cột "Đánh giá hợp lệ + citation"</b> bổ sung vào checklist hồ sơ thu thập của E1 (file Excel E1 mở rộng); (b) <b>1 sheet Eligibility Gap Analysis</b> bổ sung vào file E1 hoặc E2 (PM quyết định JSON hay chỉ Excel để user rà tay bổ sung); (c) <b>1 sheet Audit Legal</b> bổ sung vào file Excel output E2 (rà compliance cite VBPL cho 60+ chỉ tiêu tài chính). <b>Phase 3 Output</b>: Excel e3.4_termsheet_audit 5 sheet (cycle sau khi PM approval YK-TVL).',
-    kv:[['Build','Phase 2: e3.1+e3.2+e3.3 production · Phase 3: e3.4 SCAFFOLD · Phase 4: e3.6+e3.7 NEW · Phase 5: e3.9 NEW (Cops) · Phase 6: e3.8 deploy KB sẵn · Utility: e3.5 cross-phase'],['Multi-phase span','Bước 2 DD → Bước 6 Sau phát hành','good'],['Output integration','Bổ sung sheet vào file E1+E2 hiện tại (KHÔNG sinh file độc lập)'],['KB tổng','51 VBPL taxonomy + 10 nguồn priority Tier A/B/C + Cache layer + 4 KB chuyên ngành + compliance check matrix (carry E2 v0.1) + YK-TVL placeholder']],
+  painTxt:'Thẩm định pháp lý xuyên suốt deal — từ rà hồ sơ + điều kiện phát hành (Bước 2) đến rà dẫn chiếu, từ ngữ, đối soát bản ký và giám sát sau phát hành (Bước 6).',
+  painDetail:'<ul><li>Sai một điều kiện theo Nghị định 65 / 08 / Luật Chứng khoán có thể khiến deal bị cơ quan quản lý xử phạt — đây là điểm rủi ro pháp lý cao nhất</li><li>Phải rà tính hợp lệ của từng hồ sơ + điều kiện phát hành (cả tài chính lẫn phi tài chính) ở khâu thẩm định</li><li>Tài liệu sinh từ mẫu cũ dễ dẫn chiếu văn bản pháp luật đã hết hiệu lực, hoặc dùng sai từ ngữ pháp lý</li><li>Sau khi ký, cần đối soát bản ký với bản chốt + giám sát nghĩa vụ sau phát hành — kéo dài suốt vòng đời trái phiếu</li></ul>',
+  tool:{ic:'⚖️',name:'Legal Entity Intelligence',type:'Engine E3 — Engine pháp lý chạy xuyên Bước 2 → Bước 6 · 9 phần việc · Chủ trì Pháp chế DCM + PM',
+    desc:'<ul><li>Engine pháp lý <b>chạy xuyên nhiều giai đoạn</b> của deal (Bước 2 đến Bước 6), gồm <b>9 phần việc</b>:<ul><li><b>Bước 2 — Thẩm định</b>: rà tính hợp lệ hồ sơ phi tài chính + kiểm tra điều kiện phát hành phi tài chính + kiểm tra điều kiện phát hành tài chính (dùng số liệu từ Engine 2)</li><li><b>Bước 3 — Cấu trúc deal</b>: rà soát điều khoản (term sheet) sau khi Engine 5 dựng xong</li><li><b>Bước 4 — Thực thi</b>: rà dẫn chiếu pháp luật còn hiệu lực + rà từ ngữ pháp lý trong tài liệu sau khi Engine 7 soạn</li><li><b>Bước 5 — Đã ký</b>: đối soát bản ký với bản chốt (phối hợp đội Ops)</li><li><b>Bước 6 — Sau phát hành</b>: giám sát + cảnh báo sớm rủi ro vỡ nợ trái phiếu</li></ul></li><li><b>Phần dùng chung</b>: theo dõi cập nhật văn bản pháp luật theo thời gian thực — các phần khác + engine khác tự gọi đến.</li><li>Engine này nhận chức năng kiểm tra tuân thủ chuyển từ Engine 1 + Engine 2 sang (theo định hướng PM 02/06/2026) vì bản chất là pháp lý.</li></ul>',
+    inp:'<ul><li><b>Bước 2</b>: hồ sơ + checklist + bảng dữ liệu deal từ Engine 1, số liệu tài chính từ Engine 2, Điều lệ doanh nghiệp + danh mục văn bản pháp luật + 4 kho kiến thức chuyên ngành.</li><li><b>Bước 3</b>: bản term sheet từ Engine 5 + kho ý kiến tư vấn luật.</li></ul>',
+    out:'<ul><li>Cách làm mới: <b>không tạo file riêng</b>, mà bổ sung kết quả vào file của Engine 1 + Engine 2:<ul><li>Thêm 1 cột "Đánh giá hợp lệ + căn cứ pháp lý" vào checklist hồ sơ của Engine 1</li><li>Thêm 1 sheet "Phân tích chỗ thiếu điều kiện phát hành"</li><li>Thêm 1 sheet "Rà soát pháp lý" (kiểm tra tuân thủ cho 60+ chỉ tiêu tài chính) vào file Engine 2</li></ul></li><li>Các bước sau (rà term sheet, rà từ ngữ, đối soát bản ký) sinh báo cáo riêng theo từng khâu.</li></ul>',
+    kv:[['Kế hoạch','<ul><li>Bước 2: xây 3 phần thẩm định (hợp lệ hồ sơ + điều kiện phi tài chính + điều kiện tài chính)</li><li>Bước 3-6: dựng dần các phần rà term sheet, rà dẫn chiếu/từ ngữ, đối soát bản ký, giám sát sau phát hành</li><li>Phần theo dõi văn bản pháp luật dùng chung cho mọi engine</li></ul>'],['Trạng thái hiện tại','<ul><li>✅ Khung 9 phần + kho 51 văn bản pháp luật + 10 nguồn tra cứu ưu tiên đã có</li><li>⏳ Bước 2 đang xây phần thẩm định chính</li><li>⏳ Bước 3 rà term sheet ở khung sườn — chờ kho ý kiến tư vấn luật</li><li>⚠️ Cần PM xin duyệt bộ ý kiến tư vấn luật (4 hãng luật) làm kho kiến thức</li></ul>','good'],['Nguồn lực hỗ trợ','<ul><li><b>Phụ trách (PIC)</b>: chị Trang</li><li><b>Phối hợp</b>: Pháp chế DCM + PM</li><li><b>Kho kiến thức</b>:<ul><li>4 kho pháp lý chuyên ngành (ngân hàng / bất động sản / doanh nghiệp thường / chính quyền địa phương)</li><li>Danh mục 73 văn bản pháp luật + 10 nguồn tra cứu ưu tiên</li><li>Ý kiến tư vấn luật từ 4 hãng VILAF / PTN / LegalMax / YKVN (đang xin duyệt)</li></ul></li></ul>']],
     features:[
-      {tag:'e3.1-tham-dinh-ho-so-phi-tai-chinh',name:'Hợp lệ hồ sơ phi-tài chính (Phase 2)',ic:'📋',
-       desc:'<b>Phase 2 DD</b>. Verify per-doc: <b>Module A Validity</b> (chữ ký + dấu + thời hạn hiệu lực + cấp ban hành đúng thẩm quyền + format quy chuẩn) · <b>Module B Approval Authority</b> (cơ quan QLNN cấp: NHNN/UBCKNN/Sở KH-ĐT/UBND/Bộ chuyên ngành; nội bộ TCPH: NQ ĐHĐCĐ/HĐQT/QĐ BGĐ/UQ phù hợp Điều lệ + ngưỡng giá trị Luật DN). MOVED từ E1 v2.0.0 e1.4 Module A.',
-       input:'Hồ sơ phi-tài chính từ e1.1 (folder K3 9 nhóm) + Điều lệ TCPH + Index VBPL',
-       output:'Bổ sung <b>1 cột "Đánh giá hợp lệ + citation"</b> vào checklist E1 (file Excel E1 mở rộng, KHÔNG sinh file riêng)',
-       kb:'cap_phe_duyet_co_quan_qlnn.md + cap_phe_duyet_noi_bo_tcph.md + dieu_le_thresholds.md (PLACEHOLDER cycle sau crowdsource)',
-       note:'PM action parallel: provide Điều lệ TCPH lịch sử + define mapping cấp phê duyệt nội bộ per loại hình DN.'},
-      {tag:'e3.2-dieu-kien-ph-phi-tai-chinh',name:'ĐK PH Phi-Tài Chính (Phase 2)',ic:'⚖️',
-       desc:'<b>Phase 2 DD</b>. DEAL-LEVEL non-financial eligibility: NĐ 65/245 chung + NĐ 08/2023 hoán đổi/cơ cấu nợ + TCTD exemption D022 + Luật 56/2024 NĐT CN + BĐS 3 Luật khung 31/27/29 + Luật ĐT 143/2025 + Luật QH 112/2025. MOVED từ E1 v2.0.0 e1.4 Module B/C/D.',
-       input:'JSON e3.1 + Deal Model Nhóm A/C/D/E/F (e1.3) + hồ sơ phi-tài chính',
-       output:'<b>1 sheet "Eligibility Gap Analysis"</b> bổ sung vào file E1 Excel (chưa rõ có cần JSON hay chỉ Excel — PM quyết định cycle sau)',
-       kb:'eligibility_nd65_245 + tctd_exemption_luat56 + nd08_2023_swap + bds_luat_31_27_29 + 4 KB chuyên ngành shared',
-       note:'Phase 2 DD. Anti-fabrication VBPL guard. Cite Điều/Khoản/Điểm cụ thể.'},
-      {tag:'e3.3-dieu-kien-ph-tai-chinh',name:'ĐK PH Tài Chính (Phase 2)',ic:'💼',
-       desc:'<b>Phase 2 DD</b>. DEAL-LEVEL financial eligibility. <b>CONSUME</b> output E2.2 (60+ chỉ tiêu computed, KHÔNG verdict) → áp compliance check matrix → verdict pass/fail + cite VBPL. 5 Module A-E. MOVED từ E2 v2.0.0 e2.2 compliance scope.',
-       input:'JSON e2.2 (computed) + JSON e1.3 (Deal Model Nhóm B + tcph type + pattern)',
-       output:'<b>1 sheet "Audit Legal"</b> bổ sung vào file Excel output E2 (rà compliance + verdict + cite VBPL cho 60+ chỉ tiêu tài chính)',
-       kb:'compliance_check_matrix.md (CARRY từ E2 v0.1 Section 4) + edge_cases_financial.md + 4 KB chuyên ngành shared',
-       note:'Demonstrate paradigm shift: 1 function (compliance tài chính) tách khỏi E2 → chuyển E3 vì bản chất pháp lý.'},
-      {tag:'e3.4-audit-termsheet',name:'Audit Termsheet (Phase 3)',ic:'🔍',
-       desc:'<b>Phase 3 Deal Structuring — SCAFFOLD</b>. Post-E5 audit cấu trúc deal: Module A Structure + B Covenant + C Wording + D Gray Area. KB YK-TVL placeholder chờ PM approval Legal + 4 TVL.',
-       input:'Term sheet draft từ E5 + JSON e3.2 + e3.3 + KB YK-TVL (cycle sau khi PM approval)',
-       output:'<b>Cycle sau</b>: JSON e3.4 + Excel 5 sheet (Summary + Module_A/B/C/D_Gray_Area)',
-       kb:'PLACEHOLDER — yk_tvl_history/{vilaf/ptn/legalmax/ykvn}_yk_sample.md + precedent_termsheet_dcm.md + gray_area_legal_flags.md',
-       note:'PM action parallel: xin Legal/Compliance + TVL approval 5-10 thư YK-TVL diverse deal type (mask deal-specific data per D062).'},
-      {tag:'e3.5-vbpl-monitoring',name:'VBPL Monitoring (Cross-phase utility)',ic:'🔄',
-       desc:'<b>Carry-over E3 v0.1</b>. Layer 1+2+3 monitoring + cache realtime. Layer 1 Pre-flight per-query. Layer 2 Monthly TVL review. Layer 3 Reactive Protocol Sync. Source Priority 10 nguồn Tier A/B/C. Cache TTL 24h/6h/1h.',
-       input:'VBPL ID/citation cần verify hoặc scheduled scan period',
-       output:'JSON <deal>_e3.5_verify + 07_Outputs/legal_cache/ (cross-deal: realtime fetch + Layer 2 scan)',
-       kb:'tieu-chuan.md (CARRY E3 v0.1 — 51 VBPL taxonomy + Source Priority + Cache layer schema)',
-       note:'<b>AUTO-CALLED</b> by e3.1-e3.4/6/7/8 + cross-engine (E1.x, E5, E7, E9, E10, E11). Anti-fabrication VBPL guard D102.'},
-      {tag:'e3.6-ra-dan-chieu-phap-ly',name:'Rà dẫn chiếu pháp lý post-E7 (Phase 4 Execution)',ic:'🔗',
-       desc:'<b>Phase 4 Execution — NEW</b>. Sau khi E7 gen docs (TnC/PAPH/CBTT/OC/HĐ phụ trợ) → rà từng dẫn chiếu VBPL trong doc → check còn hiệu lực không. Lý do: E7 gen từ template/doc lịch sử → VBPL cite có thể đã bị thay thế/sửa đổi (Out-Of-Date risk). Auto-call e3.5 verify realtime per VBPL ID. Nếu có thay đổi → highlight diff.',
-       input:'Docs từ E7 (TnC/PAPH/CBTT/OC/HĐ AMA/BSA/SMA/CA) + Index VBPL realtime (qua e3.5)',
-       output:'<b>OPEN — PM defer quyết format</b>: Option (a) report file DOCX riêng list VBPL OOD + suggested replacement; Option (b) track-change comment trực tiếp vào từng doc highlight section bị ảnh hưởng',
-       kb:'Index VBPL 73 unique + e3.5 cache layer + KB diff VBPL (lịch sử sửa đổi)',
-       note:'PM defer output format quyết định cycle sau (DOCX report vs track-change inline).'},
-      {tag:'e3.7-ra-wording-3-nhanh',name:'Rà wording compliance 3 nhánh (Phase 4 Execution)',ic:'📐',
-       desc:'<b>Phase 4 Execution — NEW</b>. Rà wording trong docs sau E7 gen, 3 nhánh check: <b>(a) Wording đúng QPL hướng dẫn</b> (vd Luật DN quy định loại hình "CTCP/CTCN/TNHH" — nếu doc điền "NHTMCP" là sai; QPL yêu cầu liệt kê đầy đủ ngành nghề, doc chỉ liệt kê chính là sai). <b>(b) Chặt chẽ pháp lý giữa các điều khoản trong cùng 1 doc</b> (cross-clause consistency, dựa KB YK-TVL sẽ xây). <b>(c) Check comment các bên</b> nếu có (TCPH/TVL/Pháp chế DCM track-change) → đối chiếu QPL làm rationale cho user quyết accept/reject (chỉ vấn đề pháp lý, không phải nghiệp vụ).',
-       input:'Docs từ E7 (đã có comment các bên review) + KB QPL hướng dẫn wording + KB YK-TVL (chờ approval) + KB precedent doc TCBS',
-       output:'<b>Excel/JSON 3 sheet</b>: (1) Sheet "Wording vs QPL" (mismatch list + cite QPL); (2) Sheet "Cross-clause consistency" (mâu thuẫn nội bộ doc); (3) Sheet "Comment review rationale" (per comment: pháp lý analysis + recommendation accept/reject)',
-       kb:'KB QPL wording (Luật DN 76/2025 + Luật CK + Luật TCTD + Luật DDDT...) + KB YK-TVL (chờ approval) + KB precedent doc TCBS',
-       note:'Quan trọng — bridge giữa engine sinh docs (E7) và việc gửi KH/Legal review. Phụ thuộc KB YK-TVL PM xin approval song song.'},
-      {tag:'e3.8-governance-post-issuance',name:'Post-issuance governance + early warning (Phase 6 Sau phát hành)',ic:'🔁',
-       desc:'<b>Phase 6 Sau phát hành — DEPLOY từ KB sẵn có</b>. KB scope đã có: governance post-issuance + early warning bond default + chất lượng tín dụng (KTRRTD scoring). Deploy dev từ KB này. <b>Chưa cover cycle sau</b>: điều chỉnh TSBĐ (topup/topdown collateral) + báo cáo sau PH của tổ chức tư vấn gửi CQQL (BC SDV/BC định kỳ) + bond outstanding tracking — defer cycle sau finetune.',
-       input:'Bond đã PH + lịch trả gốc/lãi + tài liệu post-issuance + KB governance + KB early warning + KB chất lượng tín dụng (KTRRTD)',
-       output:'Cycle này: governance scoring + early warning flag. Cycle sau: TSBĐ adjust monitoring + BC tổ chức tư vấn gửi CQQL + bond outstanding metrics.',
-       kb:'KB governance post-issuance (sẵn có) + KB early warning + KB chất lượng tín dụng KTRRTD. Cycle sau: KB TSBĐ adjust + BC CQQL templates + bond outstanding schema',
-       note:'<b>Deploy dev từ KB hiện có cycle này</b>. Defer cycle sau: TSBĐ adjustment workflow + báo cáo sau PH gửi CQQL + bond outstanding tracking. PM finetune theo deal thực tế.'},
-      {tag:'e3.9-doi-soat-ban-ky',name:'Đối soát bản ký — Cops (Phase 5 Executed)',ic:'🖋️',
-       desc:'<b>Phase 5 Executed — NEW</b>. Sau khi user ký + scan upload bộ hồ sơ → đối soát <b>bản ký scan vs bản phát hành/bản chốt</b>: verify đủ chữ ký + đúng người có thẩm quyền + đúng bản cuối (không lệch version) + đủ trang/phụ lục. "Cops" = phối hợp TCBS-C.Ops review. Phát hiện sai lệch → flag trước khi CBTT / đăng ký GDTT. Auto-called bởi E13 Post-execution Auto-flow (confirm gate trước expose hồ sơ).',
-       input:'Bản ký scan upload (Phase 5) + bản phát hành/bản chốt từ E7 + checklist bàn giao (E13)',
-       output:'Báo cáo đối soát: danh sách lệch (thiếu chữ ký/sai thẩm quyền/lệch version/thiếu trang) + verdict đủ điều kiện đẩy CBTT/GDTT hay không',
-       kb:'Naming Convention D062 + e15.6 Stakeholder KB (thẩm quyền ký) + e15.7 Workflow & Schema (bản chốt reference)',
-       note:'Kế thừa chức năng reconciliation đa bên — đối soát bản ký ở khâu execution. Khác E12 (reconciliation comment/redline ở khâu review Phase 4). Cung cấp confirm gate cho E13 trước khi expose hồ sơ.'}
+      {tag:'e3.1-tham-dinh-ho-so-phi-tai-chinh',name:'Hợp lệ hồ sơ phi tài chính (Bước 2)',ic:'📋',
+       desc:'<ul><li><b>Bước 2 — Thẩm định.</b> Kiểm tra từng hồ sơ: chữ ký + con dấu + còn thời hạn hiệu lực + đúng cấp ban hành + đúng thể thức.</li><li>Kiểm tra cấp phê duyệt: cơ quan nhà nước cấp phép (NHNN/UBCKNN/Sở KH-ĐT/UBND) + nội bộ doanh nghiệp (nghị quyết ĐHĐCĐ/HĐQT/quyết định BGĐ đúng Điều lệ + đúng ngưỡng giá trị).</li></ul>',
+       input:'Hồ sơ phi tài chính từ Engine 1 + Điều lệ doanh nghiệp + danh mục văn bản pháp luật',
+       output:'Thêm 1 cột "Đánh giá hợp lệ + căn cứ pháp lý" vào checklist hồ sơ của Engine 1 (không tạo file riêng)',
+       kb:'Kho cấp phê duyệt cơ quan nhà nước + cấp phê duyệt nội bộ + ngưỡng giá trị theo Điều lệ',
+       note:'Việc cần PM: cung cấp Điều lệ doanh nghiệp lịch sử + quy định cấp phê duyệt nội bộ theo từng loại hình doanh nghiệp.'},
+      {tag:'e3.2-dieu-kien-ph-phi-tai-chinh',name:'Điều kiện phát hành phi tài chính (Bước 2)',ic:'⚖️',
+       desc:'<ul><li><b>Bước 2 — Thẩm định.</b> Kiểm tra deal có đủ điều kiện phát hành phi tài chính không, theo Nghị định 65/245, Nghị định 08 (hoán đổi/cơ cấu nợ), quy định nhà đầu tư cá nhân (Luật 56/2024), và quy định riêng ngành bất động sản.</li></ul>',
+       input:'Kết quả phần hợp lệ hồ sơ + bảng dữ liệu deal + hồ sơ phi tài chính',
+       output:'Thêm 1 sheet "Phân tích chỗ thiếu điều kiện phát hành" vào file Engine 1',
+       kb:'Điều kiện theo Nghị định 65/245, Nghị định 08, Luật 56/2024 + 4 kho chuyên ngành dùng chung',
+       note:'Trích dẫn rõ Điều/Khoản/Điểm. Có cơ chế chống bịa căn cứ pháp lý.'},
+      {tag:'e3.3-dieu-kien-ph-tai-chinh',name:'Điều kiện phát hành tài chính (Bước 2)',ic:'💼',
+       desc:'<ul><li><b>Bước 2 — Thẩm định.</b> Kiểm tra điều kiện phát hành về mặt tài chính. <b>Dùng số liệu</b> từ Engine 2 (60+ chỉ tiêu đã tính, chưa có kết luận) → đối chiếu quy định → kết luận đạt/không đạt + dẫn chiếu văn bản pháp luật.</li></ul>',
+       input:'Số liệu tài chính đã tính (Engine 2) + bảng dữ liệu deal (Engine 1)',
+       output:'Thêm 1 sheet "Rà soát pháp lý" vào file Excel của Engine 2 (kết luận tuân thủ + dẫn chiếu cho 60+ chỉ tiêu)',
+       kb:'Ma trận kiểm tra tuân thủ (chuyển từ Engine 2) + các tình huống đặc biệt + 4 kho chuyên ngành',
+       note:'Minh hoạ định hướng mới: chức năng kiểm tra tuân thủ tài chính tách khỏi Engine 2 → chuyển sang Engine 3 vì bản chất là pháp lý.'},
+      {tag:'e3.4-audit-termsheet',name:'Rà soát term sheet (Bước 3)',ic:'🔍',
+       desc:'<ul><li><b>Bước 3 — Cấu trúc deal (khung sườn).</b> Sau khi Engine 5 dựng xong term sheet → rà cấu trúc + cam kết + từ ngữ + vùng xám pháp lý. Kho ý kiến tư vấn luật đang chờ PM duyệt.</li></ul>',
+       input:'Term sheet từ Engine 5 + kết quả Bước 2 + kho ý kiến tư vấn luật',
+       output:'Báo cáo rà soát term sheet (làm ở chu kỳ sau khi có duyệt ý kiến tư vấn luật)',
+       kb:'Ý kiến tư vấn luật của 4 hãng luật + term sheet mẫu + danh sách vùng xám pháp lý (đang gom)',
+       note:'Việc cần PM: xin duyệt 5-10 thư ý kiến tư vấn luật từ nhiều loại deal (che số liệu nhạy cảm).'},
+      {tag:'e3.5-vbpl-monitoring',name:'Theo dõi văn bản pháp luật (dùng chung)',ic:'🔄',
+       desc:'<ul><li><b>Phần dùng chung mọi giai đoạn.</b> Theo dõi cập nhật văn bản pháp luật theo 3 lớp: kiểm tra trước mỗi lần tra cứu, rà định kỳ hàng tháng cùng tư vấn luật, và rà lại khi phát hiện sai lệch. Có 10 nguồn tra cứu ưu tiên + bộ nhớ đệm thời gian thực.</li></ul>',
+       input:'Mã văn bản pháp luật cần kiểm tra, hoặc lịch rà soát định kỳ',
+       output:'Kết quả kiểm tra hiệu lực văn bản + bộ nhớ đệm dùng chung cho mọi deal',
+       kb:'Danh mục 51 văn bản pháp luật + 10 nguồn ưu tiên + sơ đồ bộ nhớ đệm',
+       note:'Tự động được gọi bởi các phần khác của Engine 3 + nhiều engine khác. Có cơ chế chống bịa căn cứ pháp lý.'},
+      {tag:'e3.6-ra-dan-chieu-phap-ly',name:'Rà dẫn chiếu pháp luật (Bước 4)',ic:'🔗',
+       desc:'<ul><li><b>Bước 4 — Thực thi (mới).</b> Sau khi Engine 7 soạn tài liệu → rà từng dẫn chiếu văn bản pháp luật xem còn hiệu lực không. Lý do: tài liệu soạn từ mẫu cũ dễ dẫn chiếu văn bản đã bị thay thế. Tự gọi phần theo dõi văn bản pháp luật để kiểm tra thời gian thực.</li></ul>',
+       input:'Tài liệu từ Engine 7 + danh mục văn bản pháp luật thời gian thực',
+       output:'Đang chờ PM quyết: báo cáo riêng liệt kê văn bản hết hiệu lực + đề xuất thay thế, hoặc ghi chú trực tiếp vào tài liệu',
+       kb:'Danh mục 73 văn bản pháp luật + bộ nhớ đệm + lịch sử sửa đổi văn bản',
+       note:'PM quyết định cách xuất kết quả ở chu kỳ sau (báo cáo riêng hay ghi chú trong tài liệu).'},
+      {tag:'e3.7-ra-wording-3-nhanh',name:'Rà từ ngữ pháp lý (Bước 4)',ic:'📐',
+       desc:'<ul><li><b>Bước 4 — Thực thi (mới).</b> Rà từ ngữ trong tài liệu theo 3 hướng:<ul><li>Đúng quy định pháp luật (ví dụ loại hình doanh nghiệp, liệt kê đủ ngành nghề)</li><li>Chặt chẽ giữa các điều khoản trong cùng một tài liệu</li><li>Đối chiếu ý kiến các bên (doanh nghiệp/tư vấn luật/Pháp chế) với quy định để đề xuất chấp nhận hay từ chối — chỉ về mặt pháp lý</li></ul></li></ul>',
+       input:'Tài liệu từ Engine 7 (đã có ý kiến các bên) + kho quy định + kho ý kiến tư vấn luật',
+       output:'Báo cáo 3 phần: từ ngữ so với quy định, mâu thuẫn nội bộ tài liệu, phân tích ý kiến các bên + đề xuất',
+       kb:'Kho quy định về từ ngữ (Luật DN / Luật CK / Luật TCTD) + ý kiến tư vấn luật + tài liệu mẫu TCBS',
+       note:'Cầu nối giữa khâu soạn tài liệu (Engine 7) và việc gửi khách hàng / pháp chế review. Phụ thuộc kho ý kiến tư vấn luật PM đang xin duyệt.'},
+      {tag:'e3.8-governance-post-issuance',name:'Giám sát sau phát hành (Bước 6)',ic:'🔁',
+       desc:'<ul><li><b>Bước 6 — Sau phát hành (triển khai từ kho có sẵn).</b> Giám sát + cảnh báo sớm rủi ro vỡ nợ trái phiếu + chấm chất lượng tín dụng. Chưa làm chu kỳ này: theo dõi điều chỉnh tài sản bảo đảm + báo cáo định kỳ gửi cơ quan quản lý.</li></ul>',
+       input:'Trái phiếu đã phát hành + lịch trả gốc/lãi + tài liệu sau phát hành + kho giám sát + cảnh báo sớm',
+       output:'Chu kỳ này: điểm giám sát + cờ cảnh báo sớm. Chu kỳ sau: theo dõi điều chỉnh tài sản bảo đảm + báo cáo gửi cơ quan quản lý',
+       kb:'Kho giám sát sau phát hành + cảnh báo sớm + chất lượng tín dụng (đã có). Chu kỳ sau: kho điều chỉnh tài sản bảo đảm + mẫu báo cáo cơ quan quản lý',
+       note:'Triển khai từ kho hiện có. Chu kỳ sau bổ sung theo dõi tài sản bảo đảm + báo cáo gửi cơ quan quản lý. PM tinh chỉnh theo deal thực tế.'},
+      {tag:'e3.9-doi-soat-ban-ky',name:'Đối soát bản ký (Bước 5)',ic:'🖋️',
+       desc:'<ul><li><b>Bước 5 — Đã ký (mới).</b> Sau khi khách hàng ký + quét tải lên → đối soát bản ký với bản chốt: đủ chữ ký + đúng người có thẩm quyền + đúng bản cuối + đủ trang/phụ lục. Phối hợp đội Ops. Phát hiện sai lệch → cảnh báo trước khi công bố thông tin / đăng ký giao dịch.</li></ul>',
+       input:'Bản ký đã quét + bản chốt từ Engine 7 + checklist bàn giao từ Engine 13',
+       output:'Báo cáo đối soát: danh sách lệch (thiếu chữ ký / sai thẩm quyền / lệch bản / thiếu trang) + kết luận đủ điều kiện công bố hay chưa',
+       kb:'Quy tắc đặt tên + kho thẩm quyền ký + bản chốt tham chiếu',
+       note:'Đối soát bản ký ở khâu thực thi — khác Engine 12 (đối soát ý kiến / redline ở khâu review). Là chốt kiểm tra cho Engine 13 trước khi công bố hồ sơ.'}
     ],
-    next:'Cycle sau: (a) PM review Coverage Audit Report E2 → extend Workflow Sheet 0.4 → build e2.2 + e3.3 full; (b) PM nhận YK-TVL approval → extend e3.4 full; (c) ratify Decision Log + MasterPlan + downstream MIGRATION (E5/E6/E7/E9/E10/E11 đọc e3.x thay e1.4 + e2.2); (d) PM quyết Sheet Eligibility Gap có JSON hay Excel-only; (e) HTML iterate full multi-phase grid layout cho engine khác (E4 Phase 3, E14/E15/E16 cross-phase).'}};
+    next:'<ul><li><b>Việc cần làm ngay</b>: chị Trang kiểm tra lại với cô Thảo (cố vấn pháp lý).</li><li>Bước 2: sau khi PM duyệt Báo cáo phủ dữ liệu của Engine 2 → xây xong phần kiểm tra điều kiện tài chính.</li><li>Bước 3: sau khi có duyệt ý kiến tư vấn luật → hoàn thiện phần rà term sheet.</li><li>PM quyết định: sheet "Phân tích chỗ thiếu" xuất ra dữ liệu kỹ thuật hay chỉ Excel để rà tay.</li><li>Các engine dùng kết quả pháp lý này: Engine 5, 6, 7, 9, 10, 11.</li></ul>'}};
 
 
 let active='s1';
@@ -783,21 +821,21 @@ function render(){
         <div class="col pain">
           <div class="col-lbl"><span class="pip"></span>PP</div>
           <span class="sev" style="background:${SEVBG[u.pain]};color:${SEVTX[u.pain]}">● ${u.sev}</span>
-          <p class="pain-txt">${u.painTxt}</p>
+          <div class="pain-txt">${u.painDetail||u.painTxt}</div>
         </div>
         <div class="col tool">
           <div class="col-lbl"><span class="pip"></span>AI Agent đề xuất</div>
           <div class="tool-name"><span class="ic">${u.tool.ic}</span>${u.tool.name}${CODE[active]?`<span class="ecode-lg">${CODE[active]}</span>`:''}</div>
           <div class="tool-type">${u.tool.type}</div>
-          <p class="tool-desc">${u.tool.desc}</p>
+          <div class="tool-desc">${u.tool.desc}</div>
           <div class="io">
-            <div class="io-box in"><span class="io-lbl">▸ Input</span><p>${u.tool.inp}</p></div>
+            <div class="io-box in"><span class="io-lbl">▸ Input</span><div>${u.tool.inp}</div></div>
             <div class="io-arrow">▶</div>
-            <div class="io-box out"><span class="io-lbl">Output ▸</span><p>${u.tool.out}</p></div>
+            <div class="io-box out"><span class="io-lbl">Output ▸</span><div>${u.tool.out}</div></div>
           </div>
           ${kvs}
           ${u.tool.features?`<div class="features"><div class="features-lbl">${u.tool.features.length} tính năng chính</div>${u.tool.features.map(f=>`<div class="fcard"><div class="fcard-head"><span class="fcard-ic">${f.ic}</span><span class="fcard-tag${f.tag==='NEW'?' new':''}">${f.tag}</span><span class="fcard-name">${f.name}</span></div><p class="fcard-desc">${f.desc}</p><div class="fcard-io"><div class="fin"><b>▸ Input</b><p>${f.input}</p></div><div class="fout"><b>Output ▸</b><p>${f.output}</p></div></div><p class="fcard-kb"><b>KB:</b> ${f.kb}</p>${f.note?`<p class="fcard-note"><b>⚠</b> ${f.note}</p>`:''}</div>`).join('')}</div>`:''}
-          ${u.tool.next?`<div class="nextbox"><span class="next-lbl">▶ Next step (${CODE[active]||''})</span><p>${u.tool.next}</p></div>`:''}
+          ${u.tool.next?`<div class="nextbox"><span class="next-lbl">▶ Next step (${CODE[active]||''})</span><div>${u.tool.next}</div></div>`:''}
         </div>
       </div>`;
     d.style.transition='opacity .35s, transform .35s';d.style.opacity=1;d.style.transform='translateY(0)';
